@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">OurDiaryApplication</string>
+
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="calendar">Calendar</string>
+    <string name="friendlist">Friend list</string>
+    <string name="mypage">My page</string>
+</resources>
