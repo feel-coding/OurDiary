@@ -9,10 +9,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".PasswordSettingActivity"></activity>
-        <activity
-            android:name=".mypage.LockActivity"
-            android:label="@string/title_activity_lock" />
+        <activity android:name=".mypage.LockSettingActivity"></activity>
+        <activity android:name=".PasswordSettingActivity" />
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
