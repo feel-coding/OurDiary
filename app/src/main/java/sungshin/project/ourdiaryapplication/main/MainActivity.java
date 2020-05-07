@@ -10,6 +10,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
 import sungshin.project.ourdiaryapplication.PasswordSettingActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
@@ -29,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent i = new Intent(this, PasswordSettingActivity.class);
+        startActivity(i);
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);
         mainViewPager = findViewById(R.id.main_viewpager);
         mainViewPager.setAdapter(mainViewPagerAdapter);
