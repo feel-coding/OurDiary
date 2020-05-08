@@ -29,7 +29,7 @@ public class HomeFriendFragment extends Fragment {
         recyclerView = v.findViewById(R.id.diaryBook);
         diaryList = new ArrayList<>();
         diaryList.add(new Diary("김효은", "홍대 간 날", "2020-05-07","오늘은 오랜만에 홍대를 갔다. 패션피플들이 정말 많았다. 맛있는 것도 먹고 정말 재미있게 놀았다."));
-        diaryList.add(new Diary("이땡땡", "효은이와 홍대 간 날", "2020-05-07","어쩌구 저쩌구"));
+        diaryList.add(new Diary("박수영", "효은이와 홍대 간 날", "2020-05-07","어쩌구 저쩌구"));
         diaryList.add(new Diary("김효은", "버스 놓친 날", "2020-05-07","집 가다가 버스를 놓쳤는데 그게 막차였다. 그래서 집까지 걸어갔다"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));

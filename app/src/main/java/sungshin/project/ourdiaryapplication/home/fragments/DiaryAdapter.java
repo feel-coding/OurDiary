@@ -32,10 +32,17 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
         String writer = list.get(position).writer;
         String date = list.get(position).date;
         String content = list.get(position).content;
+        String withWhom = list.get(position).withWhom;
         holder.title.setText(title);
         holder.writer.setText(writer);
         holder.date.setText(date);
         holder.content.setText(content);
+        if(!withWhom.equals("")) {
+            holder.withWhom.setText("함께 하는 친구: " + withWhom);
+        }
+        else {
+            holder.withWhom.setVisibility(View.GONE);
+        }
     }
 
     @Override

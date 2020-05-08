@@ -6,11 +6,19 @@ public class Diary {
     String title;
     String date;
     String content;
-
+    String withWhom;
     public Diary(String writer, String title, String date, String content) {
         this.writer = writer;
         this.title = title;
         this.date = date;
         this.content = content;
+        withWhom = "";
+    }
+    public Diary(String writer, String title, String date, String content, String withWhom) {
+        this.writer = writer;
+        this.title = title;
+        this.date = date;
+        this.content = content;
+        this.withWhom = withWhom;
     }
 }

@@ -13,6 +13,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
     public TextView writer;
     public TextView date;
     public TextView content;
+    public TextView withWhom;
 
     public MyViewHolder(@NonNull View itemView) {
         super(itemView);
@@ -20,5 +21,6 @@ public class MyViewHolder extends RecyclerView.ViewHolder {
         writer = itemView.findViewById(R.id.diaryWriter);
         date = itemView.findViewById(R.id.diaryDate);
         content = itemView.findViewById(R.id.diaryContent);
+        withWhom = itemView.findViewById(R.id.withWhom);
     }
 }

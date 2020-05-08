@@ -36,4 +36,8 @@
         android:layout_width="match_parent"
         android:fontFamily="@font/namu_gulim_light"
         android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/withWhom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
