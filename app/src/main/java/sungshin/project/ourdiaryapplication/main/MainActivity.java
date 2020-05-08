@@ -15,6 +15,9 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
 import sungshin.project.ourdiaryapplication.DocumentActivity;
+import sungshin.project.ourdiaryapplication.FrdlistActivity;
+import sungshin.project.ourdiaryapplication.FrdrequestActivity;
+import sungshin.project.ourdiaryapplication.FrdsearchActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 import sungshin.project.ourdiaryapplication.mypage.LockSettingActivity;
