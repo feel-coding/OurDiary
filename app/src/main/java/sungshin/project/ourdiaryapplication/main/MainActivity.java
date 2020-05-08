@@ -1,7 +1,10 @@
 package sungshin.project.ourdiaryapplication.main;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -14,6 +17,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 import sungshin.project.ourdiaryapplication.mypage.LockSettingActivity;
+import sungshin.project.ourdiaryapplication.mypage.PasswordSettingActivity;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +32,10 @@ public class MainActivity extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
+        String p = sharedPref.getString("2000", "-1");
+        Log.d("pwpwpw", p);
 
         Intent i = new Intent(this, LockSettingActivity.class);
         startActivity(i);

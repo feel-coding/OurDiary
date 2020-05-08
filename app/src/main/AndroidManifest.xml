@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
         <activity android:name=".mypage.LockSettingActivity"></activity>
-        <activity android:name=".PasswordSettingActivity" />
+        <activity android:name=".mypage.PasswordSettingActivity" />
         <activity android:name=".main.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

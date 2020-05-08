@@ -1,14 +1,20 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.mypage;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.util.Log;
 import android.view.View;
+import android.widget.Toast;
+
+import sungshin.project.ourdiaryapplication.R;
 
 public class PasswordSettingActivity extends AppCompatActivity {
+
+    final String SHARED_PREF_PASSWORD = "2000";
 
     StringBuilder firstPassword = new StringBuilder();
     StringBuilder secondPassword = new StringBuilder();
@@ -74,7 +80,6 @@ public class PasswordSettingActivity extends AppCompatActivity {
                     }
                     break;
             }
-            Log.d("lengthlength", "첫번째 비번 길이 : " + firstPassword.length());
             switch (firstPassword.length()) {
                 case 1:
                     findViewById(R.id.first).setBackground(getDrawable(R.drawable.full_round));
@@ -93,7 +98,6 @@ public class PasswordSettingActivity extends AppCompatActivity {
                     findViewById(R.id.fourth).setBackground(getDrawable(R.drawable.radio_button_unchecked));
                     tryCount++;
 
-                    Log.d("lengthlength", firstPassword.toString());
             }
         }
         else if(tryCount == 1) {
@@ -140,7 +144,6 @@ public class PasswordSettingActivity extends AppCompatActivity {
                     }
                     break;
             }
-            Log.d("lengthlength", "두번째 비번 길이 : " + secondPassword.length());
             switch (secondPassword.length()) {
                 case 1:
                     findViewById(R.id.first).setBackground(getDrawable(R.drawable.full_round));
@@ -167,10 +170,11 @@ public class PasswordSettingActivity extends AppCompatActivity {
                     findViewById(R.id.fourth).setBackground(getDrawable(R.drawable.radio_button_unchecked));
                     Log.d("lengthlength", secondPassword.toString());
                     if(firstPassword.toString().equals(secondPassword.toString())) {
-                        SharedPreferences sharedPreferences = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putString("stringPassword", firstPassword.toString());
+                        SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
+                        SharedPreferences.Editor editor = sharedPref.edit();
+                        editor.putString(SHARED_PREF_PASSWORD, firstPassword.toString());
                         editor.apply();
+                        Toast.makeText(this,"비밀번호 설정이 완료되었습니다",Toast.LENGTH_LONG).show();
                         finish();
                     }
                     else {

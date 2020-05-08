@@ -76,6 +76,7 @@
         android:textColor="@color/black"
         android:gravity="center_vertical"
         android:clickable="true"
+        android:onClick="changePassword"
         android:paddingLeft="20dp"
         android:id="@+id/changePwTv"
         android:text="비밀번호 변경"/>
