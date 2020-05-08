@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+import sungshin.project.ourdiaryapplication.DocumentActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 import sungshin.project.ourdiaryapplication.mypage.LockSettingActivity;
@@ -33,6 +34,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        Intent doci = new Intent(this, DocumentActivity.class);
+        startActivity(doci);
         SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
         String p = sharedPref.getString("2000", "-1");
         Log.d("pwpwpw", p);

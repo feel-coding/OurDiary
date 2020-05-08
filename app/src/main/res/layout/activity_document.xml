@@ -65,10 +65,11 @@
         android:layout_height="41dp"
         android:layout_marginStart="40dp"
         android:layout_marginEnd="6dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="608dp"
-        android:background="#00FFFFFF"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/location_textView"
+        app:layout_constraintTop_toBottomOf="@+id/home_tb"
         app:layout_constraintHorizontal_bias="0.439"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_bias="0.202"
@@ -79,10 +80,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginEnd="229dp"
-        android:layout_marginBottom="619dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginBottom="650dp"
         android:layout_marginLeft="5dp"
         app:layout_constraintRight_toLeftOf="@+id/location_img"
         android:text="서울특별시 강남구"
+        app:layout_constraintTop_toBottomOf="@+id/home_tb"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/location_img" />
@@ -95,24 +98,24 @@
         android:layout_marginEnd="13dp"
         android:layout_marginTop="5dp"
         android:layout_marginBottom="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/editText"
+        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_img"
         android:src="@drawable/docimg" />
 
-    <EditText
-        android:id="@+id/editText"
+    <TextView
+        android:id="@+id/TextView_doc"
         android:layout_width="384dp"
         android:layout_height="269dp"
         android:layout_marginStart="13dp"
         android:layout_marginEnd="13dp"
+        android:layout_marginTop="15dp"
         android:layout_marginBottom="157dp"
         android:gravity="start"
         android:ems="10"
-        android:inputType="textPersonName"
-        android:hint=" 글 쓰기"
         android:background="@drawable/document_edittext"
+        android:inputType="textLongMessage"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +131,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
         app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
     <TextView
@@ -144,7 +147,7 @@
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintRight_toRightOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
 
     <ImageView
         android:id="@+id/chat_img"
@@ -154,11 +157,12 @@
         android:layout_marginTop="12dp"
         android:layout_marginEnd="13dp"
         android:gravity="center"
+        android:onClick="chatonClick"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintRight_toRightOf="@+id/chat_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
         app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
 
     <TextView
@@ -174,7 +178,7 @@
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintRight_toRightOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editText" />
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
