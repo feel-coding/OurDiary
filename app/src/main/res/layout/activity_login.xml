@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".LoginActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:text="회원가입"
+        android:fontFamily="@font/namu_gulim_regular"
+        android:textSize="50sp"
+        android:layout_marginBottom="50dp"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:hint="아이디"
+        android:background="@drawable/frd_request_edittext"
+        android:layout_gravity="center"/>
+
+    <EditText
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:paddingLeft="15dp"
+        android:hint="비밀번호"
+        android:background="@drawable/frd_request_edittext"
+        android:layout_gravity="center"/>
+    <TextView
+        android:layout_marginTop="15dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="회원이 아니십니까? 회원가입"/>
+    <LinearLayout
+        android:layout_marginTop="10dp"
+        android:layout_width="250dp"
+        android:background="@color/kakaoYellow"
+        android:layout_height="50dp">
+
+        <ImageView
+            android:layout_margin="10dp"
+            android:layout_width="57dp"
+            android:layout_height="wrap_content"
+            android:src="@drawable/kakao_talk_logo" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginTop=""
+            android:text="카카오톡으로 로그인하기"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+</LinearLayout>

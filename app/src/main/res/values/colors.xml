@@ -9,4 +9,5 @@
     <color name="black">#000000</color>
     <color name="colorDark">#333333</color>
     <color name="colorLightGray">#CCCCCC</color>
+    <color name="kakaoYellow">#ffeb33</color>
 </resources>
