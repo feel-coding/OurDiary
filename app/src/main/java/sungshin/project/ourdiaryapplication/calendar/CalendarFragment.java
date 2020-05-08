@@ -1,4 +1,4 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.calendar;
 
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -20,6 +20,14 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 import java.util.concurrent.Executors;
+
+import sungshin.project.ourdiaryapplication.DiaryTitle;
+import sungshin.project.ourdiaryapplication.DiaryTitleAdapter;
+import sungshin.project.ourdiaryapplication.EventDecorator;
+import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.SaturdayDecorator;
+import sungshin.project.ourdiaryapplication.SundayDecorator;
+import sungshin.project.ourdiaryapplication.oneDayDecorator;
 
 
 public class CalendarFragment extends Fragment {
