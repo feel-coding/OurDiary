@@ -16,13 +16,16 @@
         <activity android:name=".FrdlistActivity" />
         <activity android:name=".FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
-        <activity android:name=".main.MainActivity">
+        <activity
+            android:name=".SplashActivity"
+            android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".main.MainActivity"/>
     </application>
 
 </manifest>

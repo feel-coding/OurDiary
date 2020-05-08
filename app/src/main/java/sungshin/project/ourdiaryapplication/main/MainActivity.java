@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ViewPager2 mainViewPager;
     MainViewPagerAdapter mainViewPagerAdapter;
+    final String SHARED_PREF_PASSWORD = "2000";
 
     private static final String TAG = "MyTag";
 
@@ -37,14 +38,12 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Intent doci = new Intent(this, DocumentActivity.class);
-        startActivity(doci);
         SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
-        String p = sharedPref.getString("2000", "-1");
+        String p = sharedPref.getString( SHARED_PREF_PASSWORD, "-1");
         Log.d("pwpwpw", p);
 
-        Intent i = new Intent(this, LockSettingActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(this, LockSettingActivity.class);
+//        startActivity(i);
 
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);
         mainViewPager = findViewById(R.id.main_viewpager);

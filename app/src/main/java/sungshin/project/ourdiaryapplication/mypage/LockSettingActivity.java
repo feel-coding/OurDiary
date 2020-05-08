@@ -23,7 +23,7 @@ import sungshin.project.ourdiaryapplication.R;
 public class LockSettingActivity extends AppCompatActivity {
 
     private RadioGroup radioGroup;
-    String SHARED_PREF_PASSWORD = "2000";
+    final String SHARED_PREF_PASSWORD = "2000";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
