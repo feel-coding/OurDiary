@@ -10,11 +10,13 @@ import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
+import android.widget.TextView;
 
 public class DocumentActivity extends AppCompatActivity {
 
     ImageButton settingBtn;
     ImageView chat_img;
+//    TextView chat_textView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +24,13 @@ public class DocumentActivity extends AppCompatActivity {
         setContentView(R.layout.activity_document);
         settingBtn = findViewById(R.id.setting_btn);
         chat_img = findViewById(R.id.chat_img);
+
+        //말풍선 리스트 item 개수 가져오기
+        //todo:DB 댓글 개수 읽어오기
+//        int chat_num = ((CommentActivity)CommentActivity.context_comment).chat_num;
+//        chat_textView = findViewById(R.id.chat_textView);
+//        chat_textView.setText(chat_num);
+
 
         //말풍선 누르면 댓글창으로 이동
         chat_img.setOnClickListener(new View.OnClickListener() {
