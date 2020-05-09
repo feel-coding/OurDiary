@@ -17,6 +17,7 @@
         <activity android:name=".FrdlistActivity" />
         <activity android:name=".FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
+        <activity android:name=".ImageGridActivity"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
