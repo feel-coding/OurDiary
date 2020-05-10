@@ -53,7 +53,6 @@ public class MyAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Toast.makeText(mContext,"Click!",Toast.LENGTH_SHORT).show();
             }
-
         });
         return view;
     }

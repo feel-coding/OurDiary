@@ -18,6 +18,7 @@ import sungshin.project.ourdiaryapplication.DocumentActivity;
 import sungshin.project.ourdiaryapplication.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.FrdrequestActivity;
 import sungshin.project.ourdiaryapplication.FrdsearchActivity;
+import sungshin.project.ourdiaryapplication.LoginActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 import sungshin.project.ourdiaryapplication.mypage.LockSettingActivity;
@@ -42,8 +43,8 @@ public class MainActivity extends AppCompatActivity {
         String p = sharedPref.getString( SHARED_PREF_PASSWORD, "-1");
         Log.d("pwpwpw", p);
 
-//        Intent i = new Intent(this, LockSettingActivity.class);
-//        startActivity(i);
+        Intent i = new Intent(this, DocumentActivity.class);
+        startActivity(i);
 
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);
         mainViewPager = findViewById(R.id.main_viewpager);
