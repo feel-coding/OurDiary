@@ -23,7 +23,7 @@ public class HomeFragment extends Fragment {
     private HomeViewPagerAdapter homePagerAdapter;
     private ViewPager2 homeViewPager;
     private TabLayout homeTabLayout;
-    private String[] tabTitles= {"All", "My", "Friend", "Group"};
+    private String[] homeTabTitles= {"All", "My", "Friend", "Group"};
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -39,7 +39,7 @@ public class HomeFragment extends Fragment {
 
         homeTabLayout = view.findViewById(R.id.home_tablayout);
         new TabLayoutMediator(homeTabLayout, homeViewPager,
-                (tab, position) -> {tab.setText(tabTitles[position]);
+                (tab, position) -> {tab.setText(homeTabTitles[position]);
         homeViewPager.setCurrentItem(tab.getPosition(), true);}).attach();
 
     }

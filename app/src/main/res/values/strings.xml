@@ -2,8 +2,19 @@
     <string name="app_name">OurDiaryApplication</string>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    // 하단 바
     <string name="home">Home</string>
     <string name="calendar">Calendar</string>
     <string name="friendlist">Friend list</string>
     <string name="mypage">My page</string>
+
+    // FriendList
+    <string name="friendlistTitle">친구목록</string>
+    <string name="friendTab1">Friend</string>
+    <string name="friendTab2">Group</string>
+    <string name="friendRequestBtn">친구 신청</string>
+
+    // MyPage
+    <string name="mypageTitle">마이페이지</string>
 </resources>

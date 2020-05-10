@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/img_friend_profile"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginBottom="10dp"
+        android:src="@drawable/profile_image"/>
+
+    <TextView
+    android:id="@+id/tv_friend_nickname"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    app:layout_constraintStart_toEndOf="@id/img_friend_profile"
+    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintBottom_toBottomOf="parent"
+    app:layout_constraintVertical_bias="0.5"
+    android:layout_marginStart="15dp"
+    android:fontFamily="@font/apple_sd"
+    android:letterSpacing="0.1"
+    android:textColor="#000000"
+    android:text="닉네임"
+    android:textFontWeight="200"
+    android:textSize="17sp"
+    android:textAlignment="center"/>
+
+    <TextView
+        android:id="@+id/tv_friend_realname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toEndOf="@id/tv_friend_nickname"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.5"
+        android:layout_marginStart="12dp"
+        android:fontFamily="@font/apple_sd"
+        android:letterSpacing="0.1"
+        android:textColor="#000000"
+        android:text="(본명)"
+        android:textFontWeight="200"
+        android:textSize="14sp"
+        android:textAlignment="center"/>
+
+    <ImageView
+        android:id="@+id/friend_item_indicator"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginEnd="20dp"
+        android:src="@drawable/ic_more"/>
+</androidx.constraintlayout.widget.ConstraintLayout>

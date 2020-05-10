@@ -6,15 +6,273 @@
     android:layout_height="match_parent"
     tools:context=".mypage.MyPageFragment">
 
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/mypage_tb"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/mypage_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/apple_sd"
+                android:gravity="center"
+                android:letterSpacing="0.2"
+                android:text="@string/mypageTitle"
+                android:textColor="#000000"
+                android:textSize="30sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5" />
+
+
+            <ImageView
+                android:id="@+id/btn_mypage_newpost"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginStart="60dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toEndOf="@id/mypage_title_tv"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_newpost" />
+
+            <ImageView
+                android:id="@+id/btn_mypage_setting"
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:layout_marginEnd="21dp"
+                android:layout_marginStart="18dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btn_mypage_newpost"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.5"
+                app:srcCompat="@drawable/ic_settings" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypage_profile_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_tb"
+        android:layout_marginTop="28dp"
+        android:background="@drawable/border">
+
+        <ImageView
+            android:id="@+id/mypage_profile_img"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:src="@drawable/default_profile"
+            android:layout_marginStart="45dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginBottom="15dp"/>
+
+        <TextView
+            android:id="@+id/mypage_nick_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mypage_profile_img"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.5"
+            android:layout_marginStart="15dp"
+            android:text="닉네임"
+            android:fontFamily="@font/apple_sd"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:textColor="@color/colorBlack"
+            android:textSize="22sp"/>
+
+        <TextView
+            android:id="@+id/mypage_real_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toEndOf="@id/mypage_nick_tv"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintVertical_bias="0.55"
+            android:layout_marginStart="11dp"
+            android:text="아이디"
+            android:fontFamily="@font/apple_sd"
+            android:gravity="center"
+            android:letterSpacing="0.1"
+            android:textColor="@color/colorPrimary"
+            android:textSize="16sp"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
     <TextView
-        android:id="@+id/tv_mypage"
+        android:id="@+id/mypage_myaccount_tv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/mypage"
-        android:textSize="50sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_profile_container"
+        app:layout_constraintBottom_toTopOf="@id/mypage_myaccount_container"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="11dp"
+        android:text="계정"
+        android:fontFamily="@font/apple_sd"
+        android:gravity="center"
+        android:letterSpacing="0.1"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypage_myaccount_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_myaccount_tv"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/border">
+
+        <Button
+            android:id="@+id/btn_mypage_change_nick"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:fontFamily="@font/apple_sd"
+            android:letterSpacing="0.1"
+            android:text="닉네임 변경"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <Button
+            android:id="@+id/btn_mypage_withdrawal"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:fontFamily="@font/apple_sd"
+            android:letterSpacing="0.1"
+            android:text="회원 탈퇴"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_change_nick" />
+
+        <Button
+            android:id="@+id/btn_mypage_logout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="16dp"
+            android:background="@android:color/transparent"
+            android:fontFamily="@font/apple_sd"
+            android:letterSpacing="0.1"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:text="로그아웃"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_withdrawal" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <TextView
+        android:id="@+id/mypage_appsetting_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/mypage_myaccount_container"
+        app:layout_constraintBottom_toTopOf="@id/mypage_appsetting_container"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="22dp"
+        android:layout_marginStart="22dp"
+        android:layout_marginBottom="11dp"
+        android:text="앱 설정"
+        android:fontFamily="@font/apple_sd"
+        android:gravity="center"
+        android:letterSpacing="0.1"
+        android:textColor="@color/colorBlack"
+        android:textSize="15sp"/>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/mypage_appsetting_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mypage_appsetting_tv"
+        android:layout_marginTop="11dp"
+        android:background="@drawable/border">
+
+        <Button
+            android:id="@+id/btn_mypage_push_option"
+            android:layout_width="wrap_content"
+            android:layout_height="0dp"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="20dp"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:fontFamily="@font/apple_sd"
+            android:letterSpacing="0.1"
+            android:text="푸시 알림 설정"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.kyleduo.switchbutton.SwitchButton
+            android:id="@+id/switch_mypage_push"
+            style="@style/SwitchButtonStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginEnd="24dp"
+            android:layout_marginTop="17dp"/>
+
+        <Button
+            android:id="@+id/btn_mypage_app_lock"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="23dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="20dp"
+            android:background="@android:color/transparent"
+            android:minHeight="0dp"
+            android:minWidth="0dp"
+            android:fontFamily="@font/apple_sd"
+            android:letterSpacing="0.1"
+            android:text="앱 잠금"
+            android:textColor="@color/colorBlack"
+            android:textSize="15sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/btn_mypage_push_option"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
