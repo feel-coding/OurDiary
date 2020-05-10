@@ -46,6 +46,9 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, DocumentActivity.class);
         startActivity(i);
 
+//        Intent i = new Intent(this, DocumentActivity.class);
+//        startActivity(i);
+
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);
         mainViewPager = findViewById(R.id.main_viewpager);
         mainViewPager.setAdapter(mainViewPagerAdapter);

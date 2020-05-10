@@ -2,7 +2,9 @@ package sungshin.project.ourdiaryapplication;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -24,6 +26,8 @@ public class CommentActivity extends AppCompatActivity {
 
     EditText commentInput;
     ImageButton imgbtn;
+//    public static Context context_comment;
+//    public int chat_num;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +47,11 @@ public class CommentActivity extends AppCompatActivity {
         commentList.setAdapter(commentAdapter);
 
         commentAdapter.notifyDataSetChanged();
+
+        //리스트 item 개수 변수에 저장, DocumentActivity에서 액티비티 접근
+//        context_comment = this;
+//        chat_num = commentAdapter.getCount();
+//        Log.d("정보","aaa");
 
         //버튼 클릭시 내용 추가
         imgbtn = findViewById(R.id.imageButton_add);
