@@ -14,6 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
+import sungshin.project.ourdiaryapplication.CommentActivity;
 import sungshin.project.ourdiaryapplication.DocumentActivity;
 import sungshin.project.ourdiaryapplication.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.FrdrequestActivity;
@@ -46,8 +47,6 @@ public class MainActivity extends AppCompatActivity {
         Intent i = new Intent(this, DocumentActivity.class);
         startActivity(i);
 
-//        Intent i = new Intent(this, DocumentActivity.class);
-//        startActivity(i);
 
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);
         mainViewPager = findViewById(R.id.main_viewpager);
