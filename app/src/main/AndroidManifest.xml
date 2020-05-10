@@ -9,7 +9,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".LoginActivity"></activity>
+        <activity android:name=".LoginActivity"/>
         <activity android:name=".mypage.LockSettingActivity" />
         <activity android:name=".mypage.PasswordSettingActivity" />
         <activity android:name=".FrdsearchActivity" />
@@ -18,6 +18,10 @@
         <activity android:name=".FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
         <activity android:name=".ImageGridActivity"/>
+        <activity android:name=".NewPostActivity"/>
+        <activity
+            android:name=".main.MainActivity"
+            android:windowSoftInputMode="adjustPan"/>
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">
@@ -27,7 +31,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".main.MainActivity" />
     </application>
 
 </manifest>

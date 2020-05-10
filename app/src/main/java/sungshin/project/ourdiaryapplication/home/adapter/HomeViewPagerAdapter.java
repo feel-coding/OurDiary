@@ -1,6 +1,7 @@
 package sungshin.project.ourdiaryapplication.home.adapter;
 
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentActivity;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 import sungshin.project.ourdiaryapplication.home.HomeFragment;
 import sungshin.project.ourdiaryapplication.home.fragments.HomeAllFragment;
@@ -14,7 +15,7 @@ public class HomeViewPagerAdapter extends FragmentStateAdapter {
     Fragment homeAllFragment, homeMyFragment, homeFriendFragment, homeGroupFragment;
     private int mPageCount;
 
-    public HomeViewPagerAdapter( Fragment fm, int pageCount) {
+    public HomeViewPagerAdapter(Fragment fm, int pageCount) {
         super(fm);
         this.mPageCount = pageCount;
     }

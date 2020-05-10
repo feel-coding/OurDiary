@@ -4,10 +4,12 @@
     <color name="colorPrimaryDark">#ff957a</color>
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhite">#FFFFFF</color>
+    <color name="colorBlack">#000000</color>
+    <color name="colorDark">#333333</color>
+    <color name="colorLightGray">#CCCCCC</color>
     <color name="white">#FFFFFF</color>
     <color name="gray">#b8b6b2</color>
     <color name="black">#000000</color>
-    <color name="colorDark">#333333</color>
-    <color name="colorLightGray">#CCCCCC</color>
     <color name="kakaoYellow">#ffeb33</color>
+    <color name="search_background">#EAEAEA</color>
 </resources>
