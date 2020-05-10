@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/diaryWriter"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/namu_gulim_light"
+            android:textSize="18dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:id="@+id/diaryDate"
+            android:textSize="16dp"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:gravity="end"
+            android:fontFamily="@font/namu_gulim_light"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <TextView
+        android:id="@+id/diaryTitle"
+        android:fontFamily="@font/namu_gulim_regular"
+        android:layout_width="match_parent"
+        android:textSize="18dp"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:id="@+id/diaryContent"
+        android:textSize="18dp"
+        android:layout_width="match_parent"
+        android:fontFamily="@font/namu_gulim_light"
+        android:layout_height="wrap_content" />
+    <TextView
+        android:id="@+id/withWhom"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>

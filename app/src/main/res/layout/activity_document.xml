@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DocumentActivity">
+
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/home_tb"
+        android:layout_width="match_parent"
+        android:layout_height="73dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="85dp"
+                android:layout_height="69dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginBottom="59dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_chevron_left_black_24dp"
+                app:layout_constraintEnd_toStartOf="@+id/date_textView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/date_textView"
+                android:layout_width="0dp"
+                android:layout_height="30dp"
+                android:layout_marginEnd="26dp"
+                android:gravity="center"
+                android:text="2018.10.25"
+                android:textSize="20dp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="@+id/back_btn"
+                app:layout_constraintEnd_toStartOf="@+id/setting_btn"
+                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintTop_toTopOf="@+id/back_btn"
+                app:layout_constraintVertical_bias="0.52" />
+
+            <ImageButton
+                android:id="@+id/setting_btn"
+                android:layout_width="85dp"
+                android:layout_height="69dp"
+                android:background="#00FFFFFF"
+                android:onClick="onClick"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/date_textView"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_more_vert_black_24dp" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.appcompat.widget.Toolbar>
+
+    <ImageView
+        android:id="@+id/location_img"
+        android:layout_width="0dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="6dp"
+        android:layout_marginBottom="608dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/location_textView"
+        app:layout_constraintHorizontal_bias="0.439"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/home_tb"
+        app:layout_constraintVertical_bias="0.202"
+        app:srcCompat="@drawable/ic_room_black_24dp" />
+
+    <TextView
+        android:id="@+id/location_textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="5dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="229dp"
+        android:layout_marginBottom="650dp"
+        android:text="서울특별시 강남구"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintRight_toLeftOf="@+id/location_img"
+        app:layout_constraintStart_toEndOf="@+id/location_img"
+        app:layout_constraintTop_toBottomOf="@+id/home_tb" />
+
+    <GridView
+        android:id="@+id/doc_img"
+        android:layout_width="390dp"
+        android:layout_height="196dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="16dp"
+        android:numColumns="3"
+        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/location_img" />
+
+    <View
+        android:id="@+id/view1"
+        android:layout_width="390dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#B9B0B0"
+        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
+        app:layout_constraintEnd_toEndOf="@+id/view2"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doc_img"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/TextView_doc"
+        android:layout_width="384dp"
+        android:layout_height="269dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="157dp"
+        android:ems="10"
+        android:gravity="start"
+        android:text="글 내용.."
+        android:inputType="textLongMessage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/doc_img" />
+
+    <View
+        android:id="@+id/view2"
+        android:layout_width="390dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#B9B0B0"
+        app:layout_constraintBottom_toTopOf="@+id/like_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+
+    <ImageView
+        android:id="@+id/like_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="13dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.06"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
+        app:srcCompat="@drawable/ic_favorite_black_24dp" />
+
+    <TextView
+        android:id="@+id/like_textView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.18"
+        app:layout_constraintRight_toRightOf="@+id/like_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+
+    <ImageView
+        android:id="@+id/chat_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.36"
+        app:layout_constraintRight_toRightOf="@+id/chat_textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
+        app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
+
+    <TextView
+        android:id="@+id/chat_textView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintRight_toRightOf="@+id/like_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

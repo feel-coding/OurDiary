@@ -1,6 +1,10 @@
 package sungshin.project.ourdiaryapplication.main;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
 
 import androidx.annotation.NonNull;
@@ -9,8 +13,16 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+
+import sungshin.project.ourdiaryapplication.DocumentActivity;
+import sungshin.project.ourdiaryapplication.FrdlistActivity;
+import sungshin.project.ourdiaryapplication.FrdrequestActivity;
+import sungshin.project.ourdiaryapplication.FrdsearchActivity;
+import sungshin.project.ourdiaryapplication.LoginActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
+import sungshin.project.ourdiaryapplication.mypage.LockSettingActivity;
+import sungshin.project.ourdiaryapplication.mypage.PasswordSettingActivity;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
@@ -18,6 +30,7 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     ViewPager2 mainViewPager;
     MainViewPagerAdapter mainViewPagerAdapter;
+    final String SHARED_PREF_PASSWORD = "2000";
 
     private static final String TAG = "MyTag";
 
@@ -26,6 +39,15 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
+        String p = sharedPref.getString( SHARED_PREF_PASSWORD, "-1");
+        Log.d("pwpwpw", p);
+
+        Intent i = new Intent(this, DocumentActivity.class);
+        startActivity(i);
+
+//        Intent i = new Intent(this, DocumentActivity.class);
+//        startActivity(i);
 
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);
         mainViewPager = findViewById(R.id.main_viewpager);
