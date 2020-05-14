@@ -15,6 +15,7 @@
         android:layout_marginBottom="50dp"
         android:layout_height="wrap_content" />
 
+
     <EditText
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -31,11 +32,21 @@
         android:hint="비밀번호"
         android:background="@drawable/frd_request_edittext"
         android:layout_gravity="center"/>
+
+    <Button
+        android:text="로그인하기"
+        android:id="@+id/loginBtn"
+        android:textSize="17sp"
+        android:layout_marginTop="20dp"
+        android:layout_width="250dp"
+        android:layout_height="50dp" />
+
     <TextView
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="회원이 아니십니까? 회원가입"/>
+
     <LinearLayout
         android:layout_marginTop="10dp"
         android:layout_width="250dp"

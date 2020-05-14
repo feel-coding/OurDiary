@@ -7,6 +7,7 @@ public class Diary {
     String date;
     String content;
     String withWhom;
+    String location;
     public Diary(String writer, String title, String date, String content) {
         this.writer = writer;
         this.title = title;
