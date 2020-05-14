@@ -3,6 +3,7 @@
     package="sungshin.project.ourdiaryapplication">
 
     <uses-permission android:name="android.permission.INTERNET" />
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".LoginActivity"/>
+        <activity android:name=".Login.SignupActivity"></activity>
+        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".mypage.LockSettingActivity" />
         <activity android:name=".mypage.PasswordSettingActivity" />
         <activity android:name=".FrdsearchActivity" />
@@ -18,11 +20,11 @@
         <activity android:name=".FrdlistActivity" />
         <activity android:name=".FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
-        <activity android:name=".ImageGridActivity"/>
-        <activity android:name=".NewPostActivity"/>
+        <activity android:name=".ImageGridActivity" />
+        <activity android:name=".NewPostActivity" />
         <activity
             android:name=".main.MainActivity"
-            android:windowSoftInputMode="adjustPan"/>
+            android:windowSoftInputMode="adjustPan" />
         <activity
             android:name=".SplashActivity"
             android:theme="@style/SplashTheme">

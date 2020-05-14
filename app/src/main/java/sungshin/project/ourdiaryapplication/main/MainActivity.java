@@ -14,16 +14,10 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-import sungshin.project.ourdiaryapplication.CommentActivity;
 import sungshin.project.ourdiaryapplication.DocumentActivity;
-import sungshin.project.ourdiaryapplication.FrdlistActivity;
-import sungshin.project.ourdiaryapplication.FrdrequestActivity;
-import sungshin.project.ourdiaryapplication.FrdsearchActivity;
-import sungshin.project.ourdiaryapplication.LoginActivity;
+import sungshin.project.ourdiaryapplication.Login.SignupActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
-import sungshin.project.ourdiaryapplication.mypage.LockSettingActivity;
-import sungshin.project.ourdiaryapplication.mypage.PasswordSettingActivity;
 
 @SuppressWarnings("deprecation")
 public class MainActivity extends AppCompatActivity {
@@ -44,8 +38,8 @@ public class MainActivity extends AppCompatActivity {
         String p = sharedPref.getString( SHARED_PREF_PASSWORD, "-1");
         Log.d("pwpwpw", p);
 
-//        Intent i = new Intent(this, DocumentActivity.class);
-//        startActivity(i);
+        Intent i = new Intent(this, SignupActivity.class);
+        startActivity(i);
 
 
         mainViewPagerAdapter = new MainViewPagerAdapter(this, 4);

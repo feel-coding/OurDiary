@@ -8,9 +8,9 @@ import retrofit2.http.PUT;
 
 public interface ServerApi {
 
-    String BASE_URL = "http://www.ourdiary.site:8081";
+    String BASE_URL = "http://www.ourdiary.site:8081"; //서버 url
 
-    @PUT("/api/v1/users/fcmtoken")
+    @PUT("/api/v1/users/fcmtoken") //저 base url 뒤에 붙을 url
     Call<Void> updateUserFcm();
 
     @GET("/api/v1/users/me")
