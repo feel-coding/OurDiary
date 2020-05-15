@@ -11,8 +11,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
+
         <activity android:name=".DocwriteActivity"></activity>
-        <activity android:name=".LoginActivity" />
+
+        <activity android:name=".Login.SignupActivity"></activity>
+        <activity android:name=".Login.LoginActivity" />
         <activity android:name=".mypage.LockSettingActivity" />
         <activity android:name=".mypage.PasswordSettingActivity" />
         <activity android:name=".FrdsearchActivity" />
