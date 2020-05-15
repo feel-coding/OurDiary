@@ -1,9 +1,12 @@
 package sungshin.project.ourdiaryapplication.calendar;
 
+import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.util.Log;
@@ -36,6 +39,8 @@ public class CalendarFragment extends Fragment {
     ListView titleListView;
     DiaryTitleAdapter adapter;
     ArrayList<DiaryTitle> titleList;
+    Context mContext;
+    Activity activity;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -112,7 +117,7 @@ public class CalendarFragment extends Fragment {
         protected void onPostExecute(List<CalendarDay> calendarDays) {
             super.onPostExecute(calendarDays);
 
-            if(getActivity().isFinishing()) {
+            if(activity.isFinishing()) {
                 return;
             }
 
@@ -122,5 +127,12 @@ public class CalendarFragment extends Fragment {
         }
     }
 
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+        if (context instanceof Activity)
+            activity = (Activity) context;
+    }
 
 }

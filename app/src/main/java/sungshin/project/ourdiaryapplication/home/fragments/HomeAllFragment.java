@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageButton;
 
 import java.util.ArrayList;
 
@@ -21,13 +23,14 @@ public class HomeAllFragment extends Fragment {
     RecyclerView recyclerView;
     ArrayList<Diary> diaryList;
     DiaryAdapter adapter;
+    ImageButton filterBtn;
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home_all, container, false);
         recyclerView = v.findViewById(R.id.diaryBook);
+        filterBtn = v.findViewById(R.id.filterBtn);
         diaryList = new ArrayList<>();
         diaryList.add(new Diary("김효은", "어버이날", "2020-05-08","어버이날이라 카네이션과 케이크를 준비했다. 부모님이 좋아하셨다."));
         diaryList.add(new Diary("김효은", "홍대 간 날", "2020-05-07","오늘은 오랜만에 홍대를 갔다. 패션피플들이 정말 많았다. 맛있는 것도 먹고 정말 재미있게 놀았다."));

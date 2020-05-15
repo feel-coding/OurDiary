@@ -51,14 +51,15 @@
             android:layout_width="0dp"
             android:layout_weight="4"
             android:layout_height="50dp" />
+
         <Button
-            android:background="@drawable/black_square"
-            android:layout_weight="1"
             android:id="@+id/emailCheckBtn"
             android:layout_width="0dp"
-            android:text="중복확인"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:layout_height="50dp" />
+            android:layout_weight="1"
+            android:background="@drawable/black_square"
+            android:text="중복확인" />
     </LinearLayout>
 
     <TextView
@@ -98,6 +99,7 @@
         android:layout_height="50dp" />
     <Button
         android:layout_marginTop="5dp"
+        android:id="@+id/nextBtn"
         android:layout_width="match_parent"
         android:paddingLeft="150dp"
         android:paddingRight="150dp"
