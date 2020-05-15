@@ -1,5 +1,6 @@
 package sungshin.project.ourdiaryapplication.Login;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -7,6 +8,7 @@ import androidx.appcompat.widget.Toolbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -47,7 +49,6 @@ public class SignupActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         actionBar.setHomeAsUpIndicator(R.drawable.arrow_back);
-
         nextBtn = findViewById(R.id.nextBtn);
         emailCheckBtn = findViewById(R.id.emailCheckBtn);
         alreadyExistTv = findViewById(R.id.alreadyExistTv);
@@ -107,4 +108,5 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
+    
 }
