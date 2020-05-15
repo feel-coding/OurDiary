@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import sungshin.project.ourdiaryapplication.CommentActivity;
 import sungshin.project.ourdiaryapplication.DocumentActivity;
+import sungshin.project.ourdiaryapplication.DocwriteActivity;
 import sungshin.project.ourdiaryapplication.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.FrdrequestActivity;
 import sungshin.project.ourdiaryapplication.FrdsearchActivity;
@@ -44,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         String p = sharedPref.getString( SHARED_PREF_PASSWORD, "-1");
         Log.d("pwpwpw", p);
 
-//        Intent i = new Intent(this, DocumentActivity.class);
+//        Intent i = new Intent(this, DocwriteActivity.class);
 //        startActivity(i);
 
 
