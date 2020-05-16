@@ -31,6 +31,7 @@
         android:layout_marginLeft="25dp"
         android:layout_height="wrap_content" />
     <EditText
+        android:id="@+id/nameEdit"
         android:layout_marginTop="15dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
@@ -72,31 +73,33 @@
         android:visibility="gone"
         android:layout_height="wrap_content" />
     <EditText
+        android:id="@+id/pwEdit"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:hint="     비밀번호"
         android:background="@drawable/grey_square_edittext"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
     <EditText
+        android:id="@+id/pwConfirmEdit"
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="     비밀번호 확인"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:background="@drawable/grey_square_edittext"
         android:layout_width="match_parent"
         android:layout_height="50dp" />
-    <EditText
+    <!--<EditText
         android:layout_marginTop="5dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:hint="     닉네임"
         android:background="@drawable/grey_square_edittext"
         android:layout_width="match_parent"
-        android:layout_height="50dp" />
+        android:layout_height="50dp" />-->
     <Button
         android:layout_marginTop="5dp"
         android:id="@+id/nextBtn"
