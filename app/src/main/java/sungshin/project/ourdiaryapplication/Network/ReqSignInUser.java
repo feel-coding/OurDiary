@@ -4,6 +4,7 @@ public class ReqSignInUser {
     private String id;
     private String pw;
     private String type;
+    private String name;
 
     public String getId() {
         return id;
@@ -17,6 +18,10 @@ public class ReqSignInUser {
         return type;
     }
 
+    public String getName() {
+        return name;
+    }
+
     public void setId(String id) {
         this.id = id;
     }
@@ -27,5 +32,9 @@ public class ReqSignInUser {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public void setName(String name) {
+        this.name = name;
     }
 }
