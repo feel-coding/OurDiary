@@ -25,6 +25,7 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.main.MainActivity;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -33,8 +34,9 @@ public class SignupActivity extends AppCompatActivity {
     Button emailCheckBtn;
     TextView alreadyExistTv;
     EditText emailEdit;
-    String email = "";
+    //String email = "";
     Button nextBtn;
+    EditText nameEdit, pwEdit, pwConfirmEdit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +55,12 @@ public class SignupActivity extends AppCompatActivity {
         emailCheckBtn = findViewById(R.id.emailCheckBtn);
         alreadyExistTv = findViewById(R.id.alreadyExistTv);
         emailEdit = findViewById(R.id.emailEdit);
-        email = emailEdit.getText().toString();
+        //이거 뭐에용?
+        //email = emailEdit.getText().toString();
+        nameEdit = findViewById(R.id.nameEdit);
+        pwEdit = findViewById(R.id.pwEdit);
+        pwConfirmEdit = findViewById(R.id.pwConfirmEdit);
+
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -65,19 +72,42 @@ public class SignupActivity extends AppCompatActivity {
         emailCheckBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ReqSignInUser req = new ReqSignInUser();
-                req.setType("");
-                req.setId(email);
+                //String변수명 선언
+                String name = nameEdit.getText().toString();
+                String email = emailEdit.getText().toString();
+                String pw = pwEdit.getText().toString();
+                String pwConfirm = pwConfirmEdit.getText().toString();
+
+                //여기로 옮김
+                //정규식 바꾸세요(구글링 이메일 정규식 찾아보기)
                 if(!email.contains("@") || !email.contains(".")) {
                     alreadyExistTv.setText("잘못된 형식의 이메일입니다");
                     alreadyExistTv.setVisibility(View.VISIBLE);
+                    return;
                 }
+
+                if(!pw.equals(pwConfirm)){
+                    //이렇게 해주세요(위에도)
+                    Toast.makeText(getApplicationContext(),"두 비밀번호가 다릅니다.",Toast.LENGTH_LONG).show();
+                    return;
+                }
+
+                ReqSignInUser req = new ReqSignInUser();
+                req.setType("EMAIL");//여기 채워주세요
+                req.setId(email);
+                req.setPw(pw);
+                req.setName(name);
+
                 serverApi.signInUser(req).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         //response.isSuccessful() // 200~399는 성공(true) 400~599는 실패(false)
                         if (response.isSuccessful()) {
                             alreadyExistTv.setVisibility(View.GONE);
+
+                            Intent intent = new Intent(SignupActivity.this, AuthenticationActivity.class);//이렇게 해야 로그인으로 감
+                            startActivity(intent);
+                            SignupActivity.this.finish();
                         }
                         else {
                             Log.d("loginerror", "error code: " + response.code()); //401에러인지 500 에러인지 에러 번호가 뜸
