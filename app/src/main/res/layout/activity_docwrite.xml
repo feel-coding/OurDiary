@@ -15,11 +15,47 @@
         android:layout_marginTop="100dp"
         android:text="갤러리에서 가져오기"/>
 
-    <ImageView
-        android:id="@+id/docwrite_imageview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:scaleType="centerInside"/>
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="576dp"
+        android:layout_marginTop="10dp">
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <ImageView
+                android:id="@+id/docwrite_imageview1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/docwrite_imageview2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/docwrite_imageview3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/docwrite_imageview4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside" />
+
+            <ImageView
+                android:id="@+id/docwrite_imageview5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:scaleType="centerInside" />
+
+        </LinearLayout>
+
+    </ScrollView>
 </LinearLayout>
