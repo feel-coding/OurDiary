@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 
+import sungshin.project.ourdiaryapplication.R;
+
 public class NicknameSettingActivity extends AppCompatActivity {
 
     @Override

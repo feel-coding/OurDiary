@@ -11,13 +11,12 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".home.FilterActivity"></activity>
+        <activity android:name=".Login.NicknameSettingActivity"></activity>
+        <activity android:name=".Login.SignupFinishActivity" />
+        <activity android:name=".home.FilterActivity" />
         <activity android:name=".Login.AuthenticationActivity" />
         <activity android:name=".Login.SignupActivity" />
-
-        <activity android:name=".DocwriteActivity"></activity>
-
+        <activity android:name=".DocwriteActivity" />
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".mypage.LockSettingActivity" />
         <activity android:name=".mypage.PasswordSettingActivity" />

@@ -38,4 +38,6 @@
 
     <!--Sign in & Sign out-->
     <string name="emailAlreadyExist">이미 존재하는 이메일입니다.</string>
+    <string name="signUpFinish">회원가입이 완료되었습니다.</string>
+    <string name="nicknameAlreadyExist">이미 존재하는 닉네임입니다.</string>
 </resources>
