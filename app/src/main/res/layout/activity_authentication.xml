@@ -16,6 +16,7 @@
         android:textColor="@color/colorBlack"
         android:layout_height="wrap_content" />
     <Button
+        android:id="@+id/completeBtn"
         android:layout_width="100dp"
         android:layout_marginTop="20dp"
         android:text="완료"

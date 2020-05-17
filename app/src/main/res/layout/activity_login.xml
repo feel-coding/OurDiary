@@ -17,6 +17,7 @@
 
 
     <EditText
+        android:id="@+id/idEditText"
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:paddingLeft="15dp"
@@ -25,6 +26,7 @@
         android:layout_gravity="center"/>
 
     <EditText
+        android:id="@+id/pwEditText"
         android:layout_marginTop="10dp"
         android:layout_width="250dp"
         android:layout_height="50dp"
@@ -42,6 +44,7 @@
         android:layout_height="50dp" />
 
     <TextView
+        android:id="@+id/signUpTv"
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
