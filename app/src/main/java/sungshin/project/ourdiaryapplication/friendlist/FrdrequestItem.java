@@ -1,4 +1,4 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.friendlist;
 
         import android.widget.Button;
         import android.widget.ImageButton;

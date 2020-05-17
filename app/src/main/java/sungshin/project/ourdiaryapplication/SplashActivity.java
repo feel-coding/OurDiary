@@ -19,9 +19,10 @@ public class SplashActivity extends AppCompatActivity {
             @Override
             public void run() {
                 //로그인 한적이 있는 사람인지 검사를 하는 부분(다음화면 결정)
-
-
-                Intent intent = new Intent(SplashActivity.this, LoginActivity.class);//이렇게 해야 로그인으로 감
+                Intent intent = new Intent(SplashActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
+                intent = new Intent(SplashActivity.this, LoginActivity.class);//이렇게 해야 로그인으로 감
                 startActivity(intent);
                 SplashActivity.this.finish();
             }

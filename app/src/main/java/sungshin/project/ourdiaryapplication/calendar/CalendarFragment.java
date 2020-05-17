@@ -28,9 +28,6 @@ import sungshin.project.ourdiaryapplication.DiaryTitle;
 import sungshin.project.ourdiaryapplication.DiaryTitleAdapter;
 import sungshin.project.ourdiaryapplication.EventDecorator;
 import sungshin.project.ourdiaryapplication.R;
-import sungshin.project.ourdiaryapplication.SaturdayDecorator;
-import sungshin.project.ourdiaryapplication.SundayDecorator;
-import sungshin.project.ourdiaryapplication.oneDayDecorator;
 
 
 public class CalendarFragment extends Fragment {

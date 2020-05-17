@@ -64,8 +64,16 @@ public class SignupActivity extends AppCompatActivity {
         nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(SignupActivity.this, AuthenticationActivity.class);
-                startActivity(i);
+                String name = nameEdit.getText().toString();
+                String email = emailEdit.getText().toString();
+                if (name.equals("")) {
+                    Toast.makeText(SignupActivity.this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show();
+                    nameEdit.setFocusable(View.FOCUSABLE);
+                }
+                else {
+                    Intent i = new Intent(SignupActivity.this, AuthenticationActivity.class);
+                    startActivity(i);
+                }
             }
         });
 
@@ -85,6 +93,9 @@ public class SignupActivity extends AppCompatActivity {
                     alreadyExistTv.setText("잘못된 형식의 이메일입니다");
                     alreadyExistTv.setVisibility(View.VISIBLE);
                     return;
+                }
+                else {
+                    alreadyExistTv.setVisibility(View.GONE);
                 }
 
                 if(!pw.equals(pwConfirm)){

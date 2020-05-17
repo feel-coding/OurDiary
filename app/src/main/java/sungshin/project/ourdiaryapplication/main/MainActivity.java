@@ -14,15 +14,7 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 
-import sungshin.project.ourdiaryapplication.DocumentActivity;
-
-import sungshin.project.ourdiaryapplication.DocwriteActivity;
-import sungshin.project.ourdiaryapplication.FrdlistActivity;
-import sungshin.project.ourdiaryapplication.FrdrequestActivity;
-import sungshin.project.ourdiaryapplication.FrdsearchActivity;
-
 import sungshin.project.ourdiaryapplication.Login.NicknameSettingActivity;
-import sungshin.project.ourdiaryapplication.Login.SignupActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 

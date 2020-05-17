@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Login.NicknameSettingActivity"></activity>
+        <activity android:name=".Login.NameAndNicknameSettingActivity"></activity>
+        <activity android:name=".Login.NicknameSettingActivity" />
         <activity android:name=".Login.SignupFinishActivity" />
         <activity android:name=".home.FilterActivity" />
         <activity android:name=".Login.AuthenticationActivity" />
@@ -20,10 +21,10 @@
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".mypage.LockSettingActivity" />
         <activity android:name=".mypage.PasswordSettingActivity" />
-        <activity android:name=".FrdsearchActivity" />
+        <activity android:name=".friendlist.FrdsearchActivity" />
         <activity android:name=".CommentActivity" />
-        <activity android:name=".FrdlistActivity" />
-        <activity android:name=".FrdrequestActivity" />
+        <activity android:name=".friendlist.FrdlistActivity" />
+        <activity android:name=".friendlist.FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
         <activity android:name=".ImageGridActivity" />
         <activity android:name=".NewPostActivity" />

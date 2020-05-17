@@ -1,4 +1,4 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.friendlist;
 
 public class FrdlistAcceptItem {
 

@@ -1,4 +1,4 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.friendlist.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -6,11 +6,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+
+import sungshin.project.ourdiaryapplication.friendlist.FrdlistAcceptItem;
+import sungshin.project.ourdiaryapplication.R;
 
 public class FrdlistAcceptAdapter extends BaseAdapter {
     Context mContext = null;
