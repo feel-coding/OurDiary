@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -34,6 +35,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText idEditText;
     EditText pwEditText;
     TextView signUpTv;
+    LinearLayout kakaoTalkSignInBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +47,7 @@ public class LoginActivity extends AppCompatActivity {
         idEditText = findViewById(R.id.idEditText);
         pwEditText = findViewById(R.id.pwEditText);
         signUpTv = findViewById(R.id.signUpTv);
+        kakaoTalkSignInBtn = findViewById(R.id.kakaoTalkSignInBtn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,6 +104,13 @@ public class LoginActivity extends AppCompatActivity {
                 Intent intent = new Intent(LoginActivity.this, SignupActivity.class);//이렇게 해야 로그인으로 감
                 startActivity(intent);
                 LoginActivity.this.finish();
+            }
+        });
+        kakaoTalkSignInBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(LoginActivity.this, NameAndNicknameSettingActivity.class);
+                startActivity(i);
             }
         });
     }
