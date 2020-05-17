@@ -80,7 +80,8 @@ public class SignupActivity extends AppCompatActivity {
 
                 //여기로 옮김
                 //정규식 바꾸세요(구글링 이메일 정규식 찾아보기)
-                if(!email.contains("@") || !email.contains(".")) {
+                String regExp = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";
+                if(!email.matches(regExp)) {
                     alreadyExistTv.setText("잘못된 형식의 이메일입니다");
                     alreadyExistTv.setVisibility(View.VISIBLE);
                     return;
@@ -138,5 +139,5 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
     }
-    
+
 }

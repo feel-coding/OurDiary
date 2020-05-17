@@ -21,6 +21,7 @@ import sungshin.project.ourdiaryapplication.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.FrdrequestActivity;
 import sungshin.project.ourdiaryapplication.FrdsearchActivity;
 
+import sungshin.project.ourdiaryapplication.Login.NicknameSettingActivity;
 import sungshin.project.ourdiaryapplication.Login.SignupActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
@@ -45,11 +46,9 @@ public class MainActivity extends AppCompatActivity {
         Log.d("pwpwpw", p);
 
 
-        Intent i = new Intent(this, DocwriteActivity.class);
+        Intent i = new Intent(this, NicknameSettingActivity.class);
         startActivity(i);
 
-//        Intent i = new Intent(this, SignupActivity.class);
-//        startActivity(i);
 
 
 
