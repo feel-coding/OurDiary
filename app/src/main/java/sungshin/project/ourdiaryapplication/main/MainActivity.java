@@ -16,6 +16,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import sungshin.project.ourdiaryapplication.Login.NicknameSettingActivity;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.DeligationActivity;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 
 @SuppressWarnings("deprecation")
@@ -38,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("pwpwpw", p);
 
 
-        Intent i = new Intent(this, NicknameSettingActivity.class);
+        Intent i = new Intent(this, DeligationActivity.class);
         startActivity(i);
 
 

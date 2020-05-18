@@ -46,7 +46,8 @@ public class MyPageFragment extends Fragment {
         changeNicknameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                final EditText nicknameEdit = new EditText(v.getContext());
+                EditText nicknameEdit = new EditText(v.getContext());
+                nicknameEdit.setBackground(getResources().getDrawable(R.drawable.black_square));
                 final AlertDialog.Builder nicknameEditDialog = new AlertDialog.Builder(v.getContext());
 
                 nicknameEditDialog.setTitle("닉네임 변경")
