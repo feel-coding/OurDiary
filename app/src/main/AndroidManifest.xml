@@ -11,7 +11,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".Login.NameAndNicknameSettingActivity"></activity>
+        <activity android:name=".MySettinggroupActivity"></activity>
+        <activity android:name=".Login.NameAndNicknameSettingActivity" />
         <activity android:name=".Login.NicknameSettingActivity" />
         <activity android:name=".Login.SignupFinishActivity" />
         <activity android:name=".home.FilterActivity" />
