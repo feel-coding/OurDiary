@@ -3,6 +3,7 @@ package sungshin.project.ourdiaryapplication.mypage;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -14,7 +15,7 @@ import sungshin.project.ourdiaryapplication.R;
 
 public class PasswordSettingActivity extends AppCompatActivity {
 
-    final String SHARED_PREF_PASSWORD = "2000";
+    public final String SHARED_PREF_PASSWORD = "2000";
 
     StringBuilder firstPassword = new StringBuilder();
     StringBuilder secondPassword = new StringBuilder();
@@ -168,13 +169,14 @@ public class PasswordSettingActivity extends AppCompatActivity {
                     findViewById(R.id.second).setBackground(getDrawable(R.drawable.radio_button_unchecked));
                     findViewById(R.id.third).setBackground(getDrawable(R.drawable.radio_button_unchecked));
                     findViewById(R.id.fourth).setBackground(getDrawable(R.drawable.radio_button_unchecked));
-                    Log.d("lengthlength", secondPassword.toString());
                     if(firstPassword.toString().equals(secondPassword.toString())) {
                         SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
                         SharedPreferences.Editor editor = sharedPref.edit();
                         editor.putString(SHARED_PREF_PASSWORD, firstPassword.toString());
                         editor.apply();
                         Toast.makeText(this,"비밀번호 설정이 완료되었습니다",Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent();
+                        setResult(RESULT_OK, intent);
                         finish();
                     }
                     else {

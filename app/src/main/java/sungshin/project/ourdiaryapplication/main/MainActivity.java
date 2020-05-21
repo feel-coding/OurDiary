@@ -35,12 +35,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         SharedPreferences sharedPref = getSharedPreferences("pw", Context.MODE_PRIVATE);
-        String p = sharedPref.getString( SHARED_PREF_PASSWORD, "-1");
+        String p = sharedPref.getString(SHARED_PREF_PASSWORD, "-1");
         Log.d("pwpwpw", p);
 
 
-        Intent i = new Intent(this, DeligationActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(this, DeligationActivity.class);
+//        startActivity(i);
 
 
 

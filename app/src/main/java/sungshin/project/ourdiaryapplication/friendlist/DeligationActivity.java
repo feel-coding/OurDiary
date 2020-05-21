@@ -49,12 +49,12 @@ public class DeligationActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeligationActivity.this);
                 builder.setTitle("그룹장 위임")
-                        .setMessage("그룹장을 " + members.get(i) + " 으로 넘기시겠습니까?")
+                        .setMessage("그룹장을 " + members.get(i) + "으로 넘기시겠습니까?")
                         .setIcon(android.R.drawable.ic_dialog_info)
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(DeligationActivity.this, "그룹장이 " + " 으로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(DeligationActivity.this, "그룹장이 " + members.get(i) + "으로 변경되었습니다.", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         })

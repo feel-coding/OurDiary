@@ -11,10 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-
-        <activity android:name=".MySettinggroupActivity"></activity>
-        <activity android:name=".friendlist.DeligationActivity"></activity>
-
+        <activity android:name=".main.LockActivity"></activity>
+        <activity android:name=".MySettinggroupActivity" />
+        <activity android:name=".friendlist.DeligationActivity" />
         <activity android:name=".Login.NameAndNicknameSettingActivity" />
         <activity android:name=".Login.NicknameSettingActivity" />
         <activity android:name=".Login.SignupFinishActivity" />
