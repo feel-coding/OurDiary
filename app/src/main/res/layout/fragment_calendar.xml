@@ -22,12 +22,12 @@
             android:id="@+id/calendarView"
             android:layout_width="match_parent"
             android:layout_height="380dp"
-            app:mcv_selectionColor="@color/colorAccent"
+            app:mcv_selectionColor="@color/colorPrimary"
             app:mcv_showOtherDates="defaults"/>
 
         <ListView
             android:id="@+id/titleList"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"/>
     </LinearLayout>
 
