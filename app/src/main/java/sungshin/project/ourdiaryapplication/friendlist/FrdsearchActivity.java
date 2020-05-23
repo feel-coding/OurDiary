@@ -1,10 +1,7 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.friendlist;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -12,6 +9,8 @@ import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import sungshin.project.ourdiaryapplication.R;
 
 public class FrdsearchActivity extends AppCompatActivity {
 

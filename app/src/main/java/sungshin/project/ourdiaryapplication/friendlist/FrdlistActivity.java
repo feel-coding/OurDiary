@@ -1,12 +1,14 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.friendlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.ListView;
 
 import java.util.ArrayList;
+
+import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.adapter.FrdlistAcceptAdapter;
 
 public class FrdlistActivity extends AppCompatActivity {
 

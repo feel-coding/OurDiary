@@ -1,4 +1,4 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.friendlist;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,8 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import sungshin.project.ourdiaryapplication.R;
 
 public class FrdsearchAdapter extends BaseAdapter{
 

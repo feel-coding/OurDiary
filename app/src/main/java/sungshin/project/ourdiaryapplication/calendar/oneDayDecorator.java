@@ -1,4 +1,4 @@
-package sungshin.project.ourdiaryapplication;
+package sungshin.project.ourdiaryapplication.calendar;
 
 import android.graphics.Color;
 import android.graphics.Typeface;
