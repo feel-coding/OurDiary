@@ -35,4 +35,7 @@
 
     // MyPage
     <string name="mypageTitle">마이페이지</string>
+
+    // NewPost
+    <string name="newPostTitle">새 글쓰기</string>
 </resources>
