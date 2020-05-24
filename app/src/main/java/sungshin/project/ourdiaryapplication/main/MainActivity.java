@@ -41,8 +41,8 @@ public class MainActivity extends AppCompatActivity {
         Log.d("pwpwpw", p);
 
 
-        Intent i = new Intent(this, LeaveGroupActivity.class);
-        startActivity(i);
+//        Intent i = new Intent(this, LeaveGroupActivity.class);
+//        startActivity(i);
 
 
 

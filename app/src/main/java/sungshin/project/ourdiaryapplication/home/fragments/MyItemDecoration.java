@@ -16,7 +16,7 @@ public class MyItemDecoration extends RecyclerView.ItemDecoration {
         super.getItemOffsets(outRect, view, parent, state);
         int index = parent.getChildAdapterPosition(view) + 1;
 
-        outRect.set(20, 20, 20, 20);
+        outRect.set(20, 15, 20, 15);
 
         view.setBackgroundColor(0xFFFFFFFF);
         ViewCompat.setElevation(view, 20.0f);
@@ -28,7 +28,7 @@ public class MyItemDecoration extends RecyclerView.ItemDecoration {
         int width = parent.getWidth();
         int height = parent.getHeight();
         Paint paint = new Paint();
-        paint.setColor(Color.WHITE);
+        paint.setColor(0xFFF4F4F4);
         c.drawRect(0, 0, width, height, paint);
     }
 }
