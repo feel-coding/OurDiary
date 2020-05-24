@@ -13,6 +13,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -20,6 +21,7 @@ import androidx.fragment.app.Fragment;
 
 import java.util.concurrent.locks.Lock;
 
+import sungshin.project.ourdiaryapplication.DocwriteActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
 
@@ -29,6 +31,7 @@ public class MyPageFragment extends Fragment {
     private Context mContext;
     Button toPasswordSetting;
     Button changeNicknameBtn;
+    ImageView writeButton;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -36,6 +39,14 @@ public class MyPageFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_my_page, container, false);
         toPasswordSetting = v.findViewById(R.id.btn_mypage_app_lock);
         changeNicknameBtn = v.findViewById(R.id.btn_mypage_change_nick);
+        writeButton = v.findViewById(R.id.btn_mypage_newpost);
+        writeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, DocwriteActivity.class);
+                startActivity(intent);
+            }
+        });
         toPasswordSetting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

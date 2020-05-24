@@ -100,7 +100,7 @@
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="16dp"
         android:numColumns="3"
-        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
+        app:layout_constraintBottom_toTopOf="@+id/diaryContentTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_img" />
@@ -113,14 +113,14 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#B9B0B0"
-        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
+        app:layout_constraintBottom_toTopOf="@+id/diaryContentTv"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/doc_img"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/TextView_doc"
+        android:id="@+id/diaryContentTv"
         android:layout_width="384dp"
         android:layout_height="269dp"
         android:layout_marginStart="13dp"
@@ -129,8 +129,7 @@
         android:layout_marginBottom="157dp"
         android:ems="10"
         android:gravity="start"
-        android:text="글 내용.."
-        android:inputType="textLongMessage"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -145,7 +144,7 @@
         android:background="#B9B0B0"
         app:layout_constraintBottom_toTopOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv" />
 
     <ImageView
         android:id="@+id/like_img"
@@ -157,7 +156,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv"
         app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
     <TextView
@@ -173,7 +172,7 @@
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintRight_toRightOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv" />
 
     <ImageView
         android:id="@+id/chat_img"
@@ -187,7 +186,7 @@
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintRight_toRightOf="@+id/chat_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv"
         app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
 
     <TextView
@@ -203,7 +202,7 @@
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintRight_toRightOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
