@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorWhite"
     android:layout_height="match_parent"
+    style="@style/AppTheme"
     tools:context=".home.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -85,6 +86,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="3.5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

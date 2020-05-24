@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorWhite"
     android:layout_height="match_parent"
+    style="@style/AppTheme"
     android:orientation="vertical"
     tools:context=".home.FilterActivity">
 
@@ -32,6 +33,7 @@
     <ListView
         android:id="@+id/friendSelectLv"
         android:layout_width="match_parent"
+        android:choiceMode="multipleChoice"
         android:layout_height="match_parent">
 
     </ListView>
