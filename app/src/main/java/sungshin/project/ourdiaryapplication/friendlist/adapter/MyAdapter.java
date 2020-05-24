@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import sungshin.project.ourdiaryapplication.Network.ReqCreateFriendRequest;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.FrdrequestItem;
 
@@ -52,6 +53,9 @@ public class MyAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Toast.makeText(mContext,"Click!",Toast.LENGTH_SHORT).show();
+//                String name = view.findViewById(R.id.frdrequest_frd).toString();
+//
+//                ReqCreateFriendRequest req = new ReqCreateFriendRequest();
             }
         });
         return view;
