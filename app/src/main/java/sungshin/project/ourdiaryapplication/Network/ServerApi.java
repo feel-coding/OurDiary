@@ -2,6 +2,7 @@ package sungshin.project.ourdiaryapplication.Network;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
@@ -24,4 +25,10 @@ public interface ServerApi {
 
     @POST("/api/v1/users/signup")
     Call<Void> signUpUser();
+
+    @POST("/api/v1/friends/requests") //POST의 경우 Body 사용
+    Call<Void> createFriendRequest(@Body ReqCreateFriendRequest reqCreateFriendRequest);
+
+    @DELETE("/api/v1/friends")
+    Call<Void> deleteFriend();
 }
