@@ -1,21 +1,18 @@
 package sungshin.project.ourdiaryapplication.Network;
 
+import java.math.BigInteger;
 import java.util.Date;
 
-public class User {
-    private Integer seq;
-    private String email;
+public class Group {
+    private BigInteger seq;
     private String name;
     private String nick;
-    private Date createAt;
+    private Integer userCount;
+    private Date createdAt;
     private Date updatedAt;
 
-    public Integer getSeq() {
+    public BigInteger getSeq() {
         return seq;
-    }
-
-    public String getEmail() {
-        return email;
     }
 
     public String getName() {
@@ -26,20 +23,20 @@ public class User {
         return nick;
     }
 
-    public Date getCreateAt() {
-        return createAt;
+    public Integer getUserCount() {
+        return userCount;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
     }
 
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setSeq(Integer seq) {
+    public void setSeq(BigInteger seq) {
         this.seq = seq;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
     }
 
     public void setName(String name) {
@@ -50,8 +47,12 @@ public class User {
         this.nick = nick;
     }
 
-    public void setCreateAt(Date createAt) {
-        this.createAt = createAt;
+    public void setUserCount(Integer userCount) {
+        this.userCount = userCount;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
     }
 
     public void setUpdatedAt(Date updatedAt) {
