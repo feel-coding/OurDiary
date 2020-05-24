@@ -53,6 +53,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
             public void onClick(View view) {
                 Intent intent = new Intent(mContext, DocumentActivity.class);
                 intent.putExtra("diary_content", content);
+                intent.putExtra("diary_title", title);
+                intent.putExtra("diary_date", date);
                 mContext.startActivity(intent);
             }
         });
