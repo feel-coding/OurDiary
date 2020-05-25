@@ -5,17 +5,23 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.PopupMenu;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.w3c.dom.Document;
 
 public class DocumentActivity extends AppCompatActivity {
 
@@ -24,7 +30,8 @@ public class DocumentActivity extends AppCompatActivity {
 //    ImageView like_img;
 //    TextView like_textView;
 //    TextView chat_textView;
-    TextView diaryContentTv;
+    EditText diaryContentEt;
+    Button changesave_btn1;
     ImageButton backBtn;
     TextView toolbarTitleTv;
     Intent intent;
@@ -50,7 +57,8 @@ public class DocumentActivity extends AppCompatActivity {
         backBtn = findViewById(R.id.back_btn);
         toolbarTitleTv = findViewById(R.id.toolbar_title);
         diaryTitleTv = findViewById(R.id.diary_title);
-        diaryContentTv = findViewById(R.id.diaryContentTv);
+        diaryContentEt = findViewById(R.id.diaryContentEt);
+        changesave_btn1 = findViewById(R.id.changesave_btn1);
         toolbarTitleTv.setText(intent.getStringExtra("diary_date"));
         diaryTitleTv.setText(intent.getStringExtra("diary_title"));
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -60,7 +68,7 @@ public class DocumentActivity extends AppCompatActivity {
             }
         });
         String content = intent.getStringExtra("diary_content");
-        diaryContentTv.setText(content);
+        diaryContentEt.setText(content);
 
         //GridView Adapter
         GridView doc_img = findViewById(R.id.doc_img);
@@ -106,10 +114,40 @@ public class DocumentActivity extends AppCompatActivity {
             public boolean onMenuItemClick(MenuItem menuItem) {
                 switch (menuItem.getItemId()) {
                     case R.id.edit:
-                        //todo:클릭시 이벤트 작성
+                        //편집 클릭시 이벤트 작성
+                        diaryContentEt.setEnabled(true);
+                            changesave_btn1.setVisibility(View.VISIBLE);
+                            //저장 버튼 클릭
+                            changesave_btn1.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    diaryContentEt.setEnabled(false);
+                                    Toast.makeText(DocumentActivity.this, "글이 저장되었습니다",
+                                            Toast.LENGTH_LONG).show();
+                                    changesave_btn1.setVisibility(View.INVISIBLE);
+                                }
+                            });
+
                         break;
                     case R.id.delete:
-                        //todo:클릭시 이벤트 작성
+                        //삭제 클릭시 이벤트 작성
+                        AlertDialog.Builder builder = new AlertDialog.Builder(DocumentActivity.this);
+                        builder.setMessage("글을 삭제할까요?");
+                        builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(DocumentActivity.this,"글이 삭제되었습니다",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialogInterface, int i) {
+                                Toast.makeText(DocumentActivity.this,"삭제를 취소합니다",Toast.LENGTH_LONG).show();
+                            }
+                        });
+                        AlertDialog alertDialog = builder.create();
+                        alertDialog.show();
+                        //todo:데이터베이스에서 해당 글 삭제
                         break;
                 }
                 return true;
