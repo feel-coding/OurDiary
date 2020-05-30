@@ -1,14 +1,14 @@
 package sungshin.project.ourdiaryapplication.Login;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -16,16 +16,16 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.kakao.auth.KakaoSDK;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sungshin.project.ourdiaryapplication.Network.ReqSignInUser;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignUp;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
-import sungshin.project.ourdiaryapplication.main.MainActivity;
 
 public class SignupActivity extends AppCompatActivity {
 
@@ -37,6 +37,8 @@ public class SignupActivity extends AppCompatActivity {
     //String email = "";
     Button nextBtn;
     EditText nameEdit, pwEdit, pwConfirmEdit;
+    static final String SHARED_PREF_USER_NAME = "6000";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +79,7 @@ public class SignupActivity extends AppCompatActivity {
             }
         });
 
-        emailCheckBtn.setOnClickListener(new View.OnClickListener() {
+        nextBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 //String변수명 선언
@@ -104,20 +106,24 @@ public class SignupActivity extends AppCompatActivity {
                     return;
                 }
 
-                ReqSignInUser req = new ReqSignInUser();
+                ReqUserSignUp req = new ReqUserSignUp();
                 req.setType("EMAIL");//여기 채워주세요
                 req.setId(email);
                 req.setPw(pw);
                 req.setName(name);
 
-                serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                serverApi.signUpUser(req).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         //response.isSuccessful() // 200~399는 성공(true) 400~599는 실패(false)
                         if (response.isSuccessful()) {
                             alreadyExistTv.setVisibility(View.GONE);
 
-                            Intent intent = new Intent(SignupActivity.this, AuthenticationActivity.class);//이렇게 해야 로그인으로 감
+                            Intent intent = new Intent(SignupActivity.this, AuthenticationActivity.class);
+                            SharedPreferences sharedPref = getSharedPreferences("user", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(SHARED_PREF_USER_NAME, name);
+                            editor.apply();
                             startActivity(intent);
                             SignupActivity.this.finish();
                         }
@@ -145,7 +151,9 @@ public class SignupActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {}
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.d("signuperror", "failed");
+                    }
                 });
             }
         });

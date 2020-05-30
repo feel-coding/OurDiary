@@ -1,10 +1,19 @@
 package sungshin.project.ourdiaryapplication.Network;
 
-public class ReqSignInUser {
+import com.google.gson.annotations.SerializedName;
+
+public class ReqUserSignUp {
+    @SerializedName("id")
     private String id;
-    private String pw;
-    private String type;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("pw")
+    private String pw;
+
+    @SerializedName("type")
+    private String type;
 
     public String getId() {
         return id;

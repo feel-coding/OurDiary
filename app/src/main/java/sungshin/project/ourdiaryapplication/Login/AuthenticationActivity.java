@@ -24,6 +24,8 @@ public class AuthenticationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 AuthenticationActivity.this.finish();
+                Intent intent = new Intent(AuthenticationActivity.this, NicknameSettingActivity.class);
+                startActivity(intent);
             }
         });
     }

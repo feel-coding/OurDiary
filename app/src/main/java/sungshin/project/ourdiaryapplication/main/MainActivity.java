@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("pwpwpw", p);
 
 
-//        Intent i = new Intent(this, LeaveGroupActivity.class);
+//        Intent i = new Intent(this, NicknameSettingActivity.class);
 //        startActivity(i);
 
 
@@ -73,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                 }
             }
+
         });
 
     }

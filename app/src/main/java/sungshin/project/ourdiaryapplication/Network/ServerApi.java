@@ -15,16 +15,16 @@ public interface ServerApi {
     Call<Void> updateUserFcm();
 
     @GET("/api/v1/users/me")
-    Call<User> getUser();
+    Call<User> getUserMe();
 
     @PUT("/api/v1/users/me")
     Call<User> updateUser();
 
     @POST("/api/v1/users/signin")
-    Call<Void> signInUser(@Body ReqSignInUser reqSignInUser);
+    Call<Void> signInUser(@Body ReqUserSignIn reqUserSignIn);
 
     @POST("/api/v1/users/signup")
-    Call<Void> signUpUser();
+    Call<Void> signUpUser(@Body ReqUserSignUp reqUserSignUp);
 
     @POST("/api/v1/friends/requests") //POST의 경우 Body 사용
     Call<Void> createFriendRequest(@Body ReqCreateFriendRequest reqCreateFriendRequest);
@@ -34,6 +34,9 @@ public interface ServerApi {
 
     @GET("/api/v1/friends")
     Call<Friend> getFriendList();
+
+    @PUT("/api/v1/users/me")
+    Call<User> updateUserMe(@Body ReqUserUpdateMe reqUserUpdateMe);
 
     @DELETE("/api/v1/friends")
     Call<Void> deleteFriend();
