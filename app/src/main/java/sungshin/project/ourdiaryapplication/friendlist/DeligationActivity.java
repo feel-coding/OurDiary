@@ -7,7 +7,10 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -48,6 +51,9 @@ public class DeligationActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
                 AlertDialog.Builder builder = new AlertDialog.Builder(DeligationActivity.this);
+                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+                View v = inflater.inflate(R.layout.layout, null);
+                builder.setView(v);
                 builder.setTitle("그룹장 위임")
                         .setMessage("그룹장을 " + members.get(i) + "으로 넘기시겠습니까?")
                         .setIcon(android.R.drawable.ic_dialog_info)
@@ -65,6 +71,9 @@ public class DeligationActivity extends AppCompatActivity {
                             }
                         });
                 AlertDialog alertDialog = builder.create();
+
+
+
                 alertDialog.show();
             }
         });
