@@ -5,11 +5,25 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Login.SignupActivity;
+import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.FriendRequest;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
+import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
 
 public class FrdsearchActivity extends AppCompatActivity {
@@ -19,6 +33,8 @@ public class FrdsearchActivity extends AppCompatActivity {
     ArrayList<FrdsearchItem> frdsearchItem;
     EditText editText_frdsearch;
     private ArrayList<FrdsearchItem> arrayList;
+    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private Gson gson = new Gson();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +46,42 @@ public class FrdsearchActivity extends AppCompatActivity {
 
         frdsearchItem.add(new FrdsearchItem("happy_eat","신용순"));
         frdsearchItem.add(new FrdsearchItem("silence99","김범"));
+
+        //서버에서 데이터 가져오기
+        serverApi.getFriendList().enqueue(new Callback<Friend>() {
+            @Override
+            public void onResponse(Call<Friend> call, Response<Friend> response) {
+                if(response.isSuccessful()) {
+                    Log.d("frdlist","success");
+                }
+                else {
+                    Log.d("frdlisterror","error code"+response.code());
+                    try {
+                        String jsonString = response.errorBody().string();
+                        Log.d("jsonString",jsonString);
+                        ServerError serverError = gson.fromJson(jsonString, ServerError.class);
+
+                        switch (serverError.getError()) {
+                            case "INVALID_PAGE":
+                                Toast.makeText(FrdsearchActivity.this, "Invalid page", Toast.LENGTH_SHORT).show();
+                                break;
+                            case "INVALID_PAGE_SIZE":
+                                Toast.makeText(FrdsearchActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
+                                break;
+                            default:
+                                Toast.makeText(FrdsearchActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    } catch (Exception ignored) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Friend> call, Throwable t) {
+                Log.d("정보","frdrequest failure");
+            }
+        });
 
         //frdItem 데이터 arrayList에 복사
         arrayList = new ArrayList<FrdsearchItem>();

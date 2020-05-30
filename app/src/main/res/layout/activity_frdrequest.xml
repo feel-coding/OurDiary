@@ -63,7 +63,6 @@
         android:src="@drawable/ic_chevron_left_black_24dp"
         android:hint="닉네임"
         app:layout_constraintBottom_toTopOf="@+id/doc_img"
-        app:layout_constraintEnd_toStartOf="@+id/date_textView"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 

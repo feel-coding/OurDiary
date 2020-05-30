@@ -3,11 +3,11 @@ package sungshin.project.ourdiaryapplication.Network;
 public class ReqCreateFriendRequest {
     private Integer user_seq;
 
-    public Integer getUser_seq() {
+    public Integer getUserSeq() {
         return user_seq;
     }
 
-    public void setUser_seq(Integer user_seq) {
+    public void setUserSeq(Integer user_seq) {
         this.user_seq = user_seq;
     }
 }

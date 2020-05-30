@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.concurrent.locks.Lock;
 
 import sungshin.project.ourdiaryapplication.Login.LoginActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdsearchActivity;
 import sungshin.project.ourdiaryapplication.main.LockActivity;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
 
@@ -31,7 +32,7 @@ public class SplashActivity extends AppCompatActivity {
                 //로그인 한적이 있는 사람인지 검사를 하는 부분(다음화면 결정)
                 Intent intent;
                 if(password.equals("-1")) {
-                    intent = new Intent(SplashActivity.this, MainActivity.class);
+                    intent = new Intent(SplashActivity.this, FrdsearchActivity.class);
                 }
                 else {
                     intent = new Intent(SplashActivity.this, LockActivity.class);
