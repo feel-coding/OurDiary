@@ -47,7 +47,7 @@ import com.kakao.util.exception.KakaoException;
 
 public class LoginActivity extends AppCompatActivity {
 
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi;
     private Gson gson = new Gson();
     Button loginBtn;
     EditText idEditText;
@@ -68,7 +68,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen(); //자동로그인

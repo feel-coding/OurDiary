@@ -34,7 +34,7 @@ public class NicknameSettingActivity extends AppCompatActivity {
     private Gson gson = new Gson();
     TextView nicknameAlreadyExistTv;
     EditText nickNameEdit;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

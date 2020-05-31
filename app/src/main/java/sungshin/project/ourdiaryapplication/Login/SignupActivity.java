@@ -29,7 +29,7 @@ import sungshin.project.ourdiaryapplication.R;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
     private Gson gson = new Gson();
     Button emailCheckBtn;
     TextView alreadyExistTv;
