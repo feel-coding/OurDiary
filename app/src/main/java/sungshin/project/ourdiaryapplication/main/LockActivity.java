@@ -88,7 +88,7 @@ public class LockActivity extends AppCompatActivity {
                     findViewById(R.id.lock_second).setBackground(getDrawable(R.drawable.radio_button_unchecked));
                     findViewById(R.id.lock_third).setBackground(getDrawable(R.drawable.radio_button_unchecked));
                     findViewById(R.id.lock_fourth).setBackground(getDrawable(R.drawable.radio_button_unchecked));
-                    inputPassword.delete(0, 3);
+                    inputPassword = new StringBuilder("");
                 }
 
         }

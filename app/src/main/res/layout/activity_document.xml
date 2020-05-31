@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
+    android:background="@color/colorWhite"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".DocumentActivity">
 
 
-    <androidx.appcompat.widget.Toolbar
+    <!--androidx.appcompat.widget.Toolbar
         android:id="@+id/home_tb"
         android:layout_width="match_parent"
         android:layout_height="73dp"
@@ -58,11 +60,68 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_more_vert_black_24dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </androidx.appcompat.widget.Toolbar>
+    </androidx.appcompat.widget.Toolbar-->
 
-    <ImageView
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/diary_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <ImageButton
+                android:id="@+id/back_btn"
+                android:layout_width="45dp"
+                android:layout_height="69dp"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_chevron_left_black_24dp" />
+            <TextView
+                android:id="@+id/toolbar_title"
+                android:layout_width="wrap_content"
+                android:layout_centerInParent="true"
+                android:textSize="20sp"
+                android:layout_gravity="center"
+                android:textColor="@color/colorBlack"
+                android:layout_height="wrap_content" />
+            <ImageButton
+                android:layout_width="65dp"
+                android:layout_height="50dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:background="#00FFFFFF"
+                android:src="@drawable/ic_more_vert_black_24dp"
+                android:onClick="onClick" />
+        </RelativeLayout>
+    </androidx.appcompat.widget.Toolbar>
+    <TextView
+        android:textColor="@color/colorBlack"
+        android:id="@+id/diary_title"
+        android:layout_margin="10dp"
+        android:textSize="23sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:gravity="center"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/location_img"
+            android:layout_width="wrap_content"
+            android:layout_height="41dp"
+            android:src="@drawable/ic_room_black_24dp"/>
+
+        <TextView
+            android:id="@+id/location_textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="서울특별시 강남구" />
+    </LinearLayout>
+    <!--ImageView
         android:id="@+id/location_img"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="41dp"
         android:layout_marginStart="40dp"
         android:layout_marginTop="15dp"
@@ -80,18 +139,9 @@
         android:id="@+id/location_textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="5dp"
-        android:layout_marginTop="15dp"
-        android:layout_marginEnd="229dp"
-        android:layout_marginBottom="650dp"
-        android:text="서울특별시 강남구"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintRight_toLeftOf="@+id/location_img"
-        app:layout_constraintStart_toEndOf="@+id/location_img"
-        app:layout_constraintTop_toBottomOf="@+id/home_tb" />
+        android:text="서울특별시 강남구" /-->
 
-    <GridView
+    <!--GridView
         android:id="@+id/doc_img"
         android:layout_width="390dp"
         android:layout_height="196dp"
@@ -100,12 +150,20 @@
         android:layout_marginEnd="13dp"
         android:layout_marginBottom="16dp"
         android:numColumns="3"
-        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
+        app:layout_constraintBottom_toTopOf="@+id/diaryContentTv"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/location_img" />
+        app:layout_constraintTop_toBottomOf="@+id/location_img" /-->
+    <GridView
+       android:id="@+id/doc_img"
+       android:layout_width="390dp"
+       android:layout_height="196dp"
+       android:layout_marginStart="13dp"
+       android:layout_marginTop="5dp"
+       android:layout_marginEnd="13dp"
+       android:layout_marginBottom="16dp"/>
 
-    <View
+    <!--View
         android:id="@+id/view1"
         android:layout_width="390dp"
         android:layout_height="2dp"
@@ -113,14 +171,22 @@
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
         android:background="#B9B0B0"
-        app:layout_constraintBottom_toTopOf="@+id/TextView_doc"
+        app:layout_constraintBottom_toTopOf="@+id/diaryContentTv"
         app:layout_constraintEnd_toEndOf="@+id/view2"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/doc_img"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0" /-->
+    <View
+        android:id="@+id/view1"
+        android:layout_width="390dp"
+        android:layout_height="2dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#B9B0B0" />
 
-    <TextView
-        android:id="@+id/TextView_doc"
+    <!--TextView
+        android:id="@+id/diaryContentTv"
         android:layout_width="384dp"
         android:layout_height="269dp"
         android:layout_marginStart="13dp"
@@ -129,14 +195,25 @@
         android:layout_marginBottom="157dp"
         android:ems="10"
         android:gravity="start"
-        android:text="글 내용.."
-        android:inputType="textLongMessage"
+        android:padding="10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/doc_img" />
+        app:layout_constraintTop_toBottomOf="@+id/doc_img" /-->
 
-    <View
+    <EditText
+        android:id="@+id/diaryContentEt"
+        android:layout_width="384dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="13dp"
+        android:layout_marginTop="15dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="top"
+        android:textColor="#000000"
+        android:background="#00FFFFFF"
+        android:enabled="false"/>
+
+    <!--View
         android:id="@+id/view2"
         android:layout_width="390dp"
         android:layout_height="2dp"
@@ -145,9 +222,16 @@
         android:background="#B9B0B0"
         app:layout_constraintBottom_toTopOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv" /-->
+    <View
+        android:id="@+id/view2"
+        android:layout_width="390dp"
+        android:layout_height="2dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:background="#B9B0B0" />
 
-    <ImageView
+    <!--ImageView
         android:id="@+id/like_img"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -157,7 +241,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv"
         app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
     <TextView
@@ -173,9 +257,66 @@
         app:layout_constraintHorizontal_bias="0.18"
         app:layout_constraintRight_toRightOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv" /-->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <ImageView
+            android:id="@+id/like_img"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="13dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="5dp"
+            app:srcCompat="@drawable/ic_favorite_black_24dp" />
 
-    <ImageView
+        <TextView
+            android:id="@+id/like_textView"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="13dp"
+            android:gravity="center"
+            android:text="0"/>
+        <ImageView
+        android:id="@+id/chat_img"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="5dp"
+        android:gravity="center"
+        app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
+
+    <TextView
+        android:id="@+id/chat_textView"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="12dp"
+        android:layout_marginEnd="13dp"
+        android:gravity="center"
+        android:text="0"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.485"
+        app:layout_constraintRight_toRightOf="@+id/like_img"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentEt" />
+
+        <Button
+            android:id="@+id/changesave_btn1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="70dp"
+            android:layout_marginRight="10dp"
+            android:text="저장"
+            android:visibility="gone"/>
+
+    </LinearLayout>
+
+    <!--ImageView
         android:id="@+id/chat_img"
         android:layout_width="35dp"
         android:layout_height="35dp"
@@ -187,7 +328,7 @@
         app:layout_constraintHorizontal_bias="0.36"
         app:layout_constraintRight_toRightOf="@+id/chat_textView"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc"
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv"
         app:srcCompat="@drawable/ic_chat_bubble_outline_black_24dp" />
 
     <TextView
@@ -203,7 +344,8 @@
         app:layout_constraintHorizontal_bias="0.485"
         app:layout_constraintRight_toRightOf="@+id/like_img"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/TextView_doc" />
+        app:layout_constraintTop_toBottomOf="@+id/diaryContentTv" /-->
 
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+
+</LinearLayout>

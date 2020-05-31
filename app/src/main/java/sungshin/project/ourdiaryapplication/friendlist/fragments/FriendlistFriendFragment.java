@@ -1,22 +1,27 @@
 package sungshin.project.ourdiaryapplication.friendlist.fragments;
 
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
 import sungshin.project.ourdiaryapplication.friendlist.data.FriendItem;
 
@@ -27,6 +32,7 @@ public class FriendlistFriendFragment extends Fragment {
     RecyclerView.Adapter friendListAdapter;
     RecyclerView.LayoutManager layoutManager;
     ArrayList<FriendItem> friendList = new ArrayList<FriendItem>();
+    ConstraintLayout friend_detail_container;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -38,6 +44,17 @@ public class FriendlistFriendFragment extends Fragment {
         addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
 
         initFriendList(v, getActivity());
+
+        //친구 신청 목록 클릭시 이벤트
+        friend_detail_container = v.findViewById(R.id.friend_detail_container);
+        friend_detail_container.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), FrdlistActivity.class);
+                startActivity(i);
+
+            }
+        });
         return v;
     }
 

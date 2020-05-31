@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:background="@color/colorWhite"
+    android:layout_height="match_parent"
+    tools:context=".friendlist.LeaveGroupActivity">
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/leave_group_toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorWhite">
+        <TextView
+            android:layout_width="wrap_content"
+            android:text="그룹 탈퇴"
+            android:textSize="20sp"
+            android:layout_gravity="center"
+            android:textColor="@color/colorBlack"
+            android:layout_height="wrap_content" />
+    </androidx.appcompat.widget.Toolbar>
+    <ListView
+        android:id="@+id/leaveGroupLv"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </ListView>
+
+</LinearLayout>

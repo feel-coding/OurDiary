@@ -7,10 +7,7 @@ import androidx.appcompat.widget.Toolbar;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
@@ -20,47 +17,41 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import sungshin.project.ourdiaryapplication.Login.NameAndNicknameSettingActivity;
 import sungshin.project.ourdiaryapplication.R;
 
-public class DeligationActivity extends AppCompatActivity {
+public class LeaveGroupActivity extends AppCompatActivity {
 
-    ListView membersListView;
+    ListView leaveGroupLv;
+    ArrayList<String> list = new ArrayList<>();
     ArrayAdapter<String> adapter;
-    ArrayList<String> members = new ArrayList<>();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_deligation);
-        Toolbar toolbar = findViewById(R.id.deligation_toolbar);
+        setContentView(R.layout.activity_leave_group);
+        Toolbar toolbar = findViewById(R.id.leave_group_toolbar);
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setDisplayShowCustomEnabled(true); //커스터마이징 하기 위해 필요
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         actionBar.setHomeAsUpIndicator(R.drawable.close_black);
-        membersListView = findViewById(R.id.membersLv);
-        members.add("김효은");
-        members.add("박소영");
-        members.add("이주연");
-        members.add("윤여경");
-        members.add("박설");
-        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, members);
-        membersListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        leaveGroupLv = findViewById(R.id.leaveGroupLv);
+        list.add("그룹 탈퇴하기");
+        adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
+        leaveGroupLv.setAdapter(adapter);
+        leaveGroupLv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(DeligationActivity.this);
-                LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
-                View v = inflater.inflate(R.layout.layout, null);
-                builder.setView(v);
-                builder.setTitle("그룹장 위임")
-                        .setMessage("그룹장을 " + members.get(i) + "으로 넘기시겠습니까?")
+                AlertDialog.Builder builder = new AlertDialog.Builder(LeaveGroupActivity.this);
+                builder.setTitle("그룹 탈퇴")
+                        .setMessage("그룹을 정말 탈퇴하시겠습니까?")
                         .setIcon(android.R.drawable.ic_dialog_info)
                         .setPositiveButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                Toast.makeText(DeligationActivity.this, "그룹장이 " + members.get(i) + "으로 변경되었습니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(LeaveGroupActivity.this, "탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                 finish();
                             }
                         })
@@ -71,15 +62,12 @@ public class DeligationActivity extends AppCompatActivity {
                             }
                         });
                 AlertDialog alertDialog = builder.create();
-
-
-
                 alertDialog.show();
             }
         });
-        membersListView.setAdapter(adapter);
-    }
 
+
+    }
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == android.R.id.home) {
@@ -88,5 +76,4 @@ public class DeligationActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
 }

@@ -1,10 +1,15 @@
 package sungshin.project.ourdiaryapplication.Login;
 
-import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.NetworkInfo;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -16,33 +21,62 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import java.io.IOException;
+
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sungshin.project.ourdiaryapplication.Network.ReqSignInUser;
+import retrofit2.internal.EverythingIsNonNull;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
-import sungshin.project.ourdiaryapplication.SplashActivity;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.network.ErrorResult;
+import com.kakao.usermgmt.ApiErrorCode;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.util.exception.KakaoException;
+
+
+
 
 public class LoginActivity extends AppCompatActivity {
 
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi;
     private Gson gson = new Gson();
     Button loginBtn;
     EditText idEditText;
     EditText pwEditText;
     TextView signUpTv;
     LinearLayout kakaoTalkSignInBtn;
+    private SessionCallback sessionCallback;
+    static final String SHARED_PREF_USER_NAME = "6000";
 
+
+
+
+    @Override
+    public Context getApplicationContext() {
+        return super.getApplicationContext();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
+        sessionCallback = new SessionCallback();
+        Session.getCurrentSession().addCallback(sessionCallback);
+        Session.getCurrentSession().checkAndImplicitOpen(); //자동로그인
 
-        //변수선언함(ID,PW)
+
+
+
+                //변수선언함(ID,PW)
         loginBtn = findViewById(R.id.loginBtn);
         idEditText = findViewById(R.id.idEditText);
         pwEditText = findViewById(R.id.pwEditText);
@@ -52,17 +86,18 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Log.d("lgin", "clicked");
                 String id = idEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
 
                 //ID,PW 정규식체크하는 부분->팝업띄우기
-                ReqSignInUser req = new ReqSignInUser();
+                ReqUserSignIn req = new ReqUserSignIn();
                 req.setType("EMAIL");
                 req.setId(id);
                 req.setPw(pw);
                 serverApi.signInUser(req).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call, Response<Void> response) {
+                    public void onResponse(Call<Void> call,Response<Void> response) {
                         //response.isSuccessful() // 200~399는 성공(true) 400~599는 실패(false)
                         if (response.isSuccessful()) {
                             //로그인을 하면 메인화면으로 간다.
@@ -72,6 +107,9 @@ public class LoginActivity extends AppCompatActivity {
                         }
                         else {
                             Log.d("loginerror", "error code: " + response.code()); //401에러인지 500 에러인지 에러 번호가 뜸
+                            if(response.code() == 400) {
+                                Toast.makeText(LoginActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
+                            }
                             try {
                                 String jsonString = response.errorBody().string();
                                 ServerError serverError = gson.fromJson(jsonString, ServerError.class);
@@ -84,7 +122,7 @@ public class LoginActivity extends AppCompatActivity {
                                         Toast.makeText(LoginActivity.this, "이미 가입된 이메일입니다.", Toast.LENGTH_SHORT).show();
                                         break;
                                     default:
-                                        Toast.makeText(LoginActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                                        //Toast.makeText(LoginActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
                             } catch (Exception ignored) {
 
@@ -93,7 +131,9 @@ public class LoginActivity extends AppCompatActivity {
                     }
 
                     @Override
-                    public void onFailure(Call<Void> call, Throwable t) {}
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.d("loginerror", t.getMessage());
+                    }
                 });
             }
         });
@@ -111,7 +151,66 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent i = new Intent(LoginActivity.this, NameAndNicknameSettingActivity.class);
                 startActivity(i);
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ourdiary.site:8081/test-kakao.html"));
+                startActivity(intent);
             }
         });
     }
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+            super.onActivityResult(requestCode, resultCode, data);
+            return;
+        }
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        Session.getCurrentSession().removeCallback(sessionCallback);
+    }
+
+
+
+    private class SessionCallback implements ISessionCallback {
+        @Override
+        public void onSessionOpened() {
+            Log.d("lglg", "onSessionOpened");
+            UserManagement.getInstance().me(new MeV2ResponseCallback() {
+                @Override
+                public void onFailure(ErrorResult errorResult) {
+                    int result = errorResult.getErrorCode();
+
+                    if(result == ApiErrorCode.CLIENT_ERROR_CODE) {
+                        Toast.makeText(LoginActivity.this, "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        Toast.makeText(LoginActivity.this,"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+
+                @Override
+                public void onSessionClosed(ErrorResult errorResult) {
+                    Toast.makeText(LoginActivity.this,"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                }
+
+                @Override
+                public void onSuccess(MeV2Response result) {
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    intent.putExtra("name", result.getNickname());
+                    intent.putExtra("profile", result.getProfileImagePath());
+                    startActivity(intent);
+                    finish();
+                }
+            });
+        }
+
+        @Override
+        public void onSessionOpenFailed(KakaoException e) {
+            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
+        }
+    }
+
+
+
 }

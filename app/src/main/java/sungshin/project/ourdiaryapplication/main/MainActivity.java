@@ -1,5 +1,6 @@
 package sungshin.project.ourdiaryapplication.main;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -17,6 +18,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import sungshin.project.ourdiaryapplication.Login.NicknameSettingActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.DeligationActivity;
+import sungshin.project.ourdiaryapplication.friendlist.LeaveGroupActivity;
 import sungshin.project.ourdiaryapplication.main.adapter.MainViewPagerAdapter;
 
 @SuppressWarnings("deprecation")
@@ -39,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         Log.d("pwpwpw", p);
 
 
-//        Intent i = new Intent(this, DeligationActivity.class);
+//        Intent i = new Intent(this, NicknameSettingActivity.class);
 //        startActivity(i);
 
 
@@ -71,6 +73,7 @@ public class MainActivity extends AppCompatActivity {
                         return false;
                 }
             }
+
         });
 
     }

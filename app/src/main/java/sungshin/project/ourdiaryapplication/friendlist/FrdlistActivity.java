@@ -3,6 +3,8 @@ package sungshin.project.ourdiaryapplication.friendlist;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import java.util.ArrayList;
@@ -19,6 +21,8 @@ public class FrdlistActivity extends AppCompatActivity {
     private ListView frdaccept_list;
     FrdlistAcceptAdapter frdlistAcceptAdapter;
     ArrayList<FrdlistAcceptItem> frdlist_acceptItem;
+
+    ImageButton back_btn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,5 +52,13 @@ public class FrdlistActivity extends AppCompatActivity {
         frdaccept_list.setAdapter(frdlistAcceptAdapter);
 
         frdlistAcceptAdapter.notifyDataSetChanged();
+
+        back_btn = findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
     }
 }

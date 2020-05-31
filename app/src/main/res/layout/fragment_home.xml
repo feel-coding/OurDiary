@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:background="@color/colorWhite"
     android:layout_height="match_parent"
+    style="@style/AppTheme"
     tools:context=".home.HomeFragment">
 
     <androidx.appcompat.widget.Toolbar
@@ -41,25 +42,13 @@
                 android:id="@+id/btn_home_newpost"
                 android:layout_width="26dp"
                 android:layout_height="26dp"
-                android:layout_marginEnd="22dp"
+                android:layout_marginStart="60dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-               app:layout_constraintEnd_toStartOf="@+id/btn_setting"
+                app:layout_constraintStart_toEndOf="@id/home_title_tv"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.5"
                 app:srcCompat="@drawable/ic_newpost" />
 
-            <ImageView
-                android:id="@+id/btn_setting"
-                android:layout_width="26dp"
-                android:layout_height="26dp"
-                android:layout_marginEnd="21dp"
-                android:layout_marginStart="22dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/btn_newpost"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5"
-                app:srcCompat="@drawable/ic_settings" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
 
@@ -85,6 +74,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintEnd_toEndOf="parent"
+            app:tabIndicatorColor="@color/colorPrimary"
+            app:tabIndicatorHeight="3.5dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 

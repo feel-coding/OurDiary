@@ -8,14 +8,15 @@
     tools:context=".home.fragments.HomeAllFragment">
 
     <LinearLayout
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <Spinner
             android:id="@+id/yearAndMonthSpinner"
             android:layout_width="wrap_content"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"/>
         <ImageButton
+            android:layout_gravity="center_vertical"
             android:id="@+id/filterBtn"
             android:layout_width="20dp"
             android:background="@drawable/filter"
@@ -30,6 +31,7 @@
         android:layout_marginStart="0dp"
         android:layout_marginLeft="0dp"
         android:layout_marginTop="0dp"
+        android:elevation="0dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 

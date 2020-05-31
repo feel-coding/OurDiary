@@ -1,6 +1,8 @@
 package sungshin.project.ourdiaryapplication.home.fragments;
 
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,13 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
+import sungshin.project.ourdiaryapplication.DocumentActivity;
 import sungshin.project.ourdiaryapplication.R;
 
 public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
     private List<Diary> list;
+    private Context mContext;
 
-    public DiaryAdapter(List<Diary> list) {
+    public DiaryAdapter(List<Diary> list, Context mContext) {
         this.list = list;
+        this.mContext = mContext;
     }
 
     @NonNull
@@ -43,6 +48,16 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
         else {
             holder.withWhom.setVisibility(View.GONE);
         }
+        holder.mView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, DocumentActivity.class);
+                intent.putExtra("diary_content", content);
+                intent.putExtra("diary_title", title);
+                intent.putExtra("diary_date", date);
+                mContext.startActivity(intent);
+            }
+        });
     }
 
     @Override
