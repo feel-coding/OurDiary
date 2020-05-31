@@ -42,7 +42,7 @@ public class SplashActivity extends AppCompatActivity {
 //                startActivity(intent);
 
                 if(password.equals("-1")) {
-                    intent = new Intent(SplashActivity.this, FrdsearchActivity.class);
+                    intent = new Intent(SplashActivity.this, MainActivity.class);
                 }
                 else {
                     intent = new Intent(SplashActivity.this, LockActivity.class);
