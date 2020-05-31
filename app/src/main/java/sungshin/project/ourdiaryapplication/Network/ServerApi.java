@@ -26,6 +26,9 @@ public interface ServerApi {
     @POST("/api/v1/users/signup")
     Call<Void> signUpUser(@Body ReqUserSignUp reqUserSignUp);
 
+    @POST("/api/v1/users/signout")
+    Call<Void> signOut();
+
     @POST("/api/v1/friends/requests") //POST의 경우 Body 사용
     Call<Void> createFriendRequest(@Body ReqCreateFriendRequest reqCreateFriendRequest);
 
