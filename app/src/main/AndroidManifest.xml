@@ -2,8 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="sungshin.project.ourdiaryapplication">
 
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar">
-        <activity android:name=".main.LockActivity"></activity>
+        <activity android:name=".newpost.LocClickActivity"></activity>
+
+        <activity android:name=".newpost.MapsActivity" />
+
+        <activity android:name=".main.LockActivity" />
         <activity android:name=".MySettinggroupActivity" />
         <activity android:name=".friendlist.DeligationActivity" />
         <activity android:name=".Login.NameAndNicknameSettingActivity" />
@@ -30,7 +32,7 @@
         <activity android:name=".friendlist.FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
         <activity android:name=".ImageGridActivity" />
-        <activity android:name=".NewPostActivity" />
+        <activity android:name=".newpost.NewPostActivity" />
         <activity
             android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -43,6 +45,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>

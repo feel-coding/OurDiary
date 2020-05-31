@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".NewPostActivity">
+    tools:context=".newpost.NewPostActivity">
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/newpost_tb"
@@ -27,11 +27,12 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:text="취소"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                android:background="@android:color/transparent"/>
 
             <Button
                 android:id="@+id/btn_newpost_finish"
@@ -42,11 +43,12 @@
                 android:minHeight="0dp"
                 android:minWidth="0dp"
                 android:text="완료"
-                android:textSize="15sp"
+                android:textSize="17sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
+                app:layout_constraintVertical_bias="0.5"
+                android:background="@android:color/transparent"/>
 
             <TextView
                 android:id="@+id/newpost_title_tv"
@@ -69,17 +71,222 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/container_newpost_detail"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="150dp"
+        android:layout_marginTop="15dp"
         app:layout_constraintTop_toBottomOf="@id/newpost_tb">
+        <LinearLayout
+            android:id="@+id/subContainer_newpost_date"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/newpost_date_addBtn"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_add"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:id="@+id/newpost_date_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="날짜"
+                android:textSize="14dp"
+                android:layout_gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/newpost_date_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="2020-05-22-SAT"
+                android:textSize="15dp"
+                android:layout_marginStart="14dp"
+                android:layout_gravity="center_vertical"
+                android:minWidth="0dp"
+                android:minHeight="0dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subContainer_newpost_loc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/subContainer_newpost_date"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/newpost_loc_addBtn"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_add"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:id="@+id/newpost_loc_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="위치"
+                android:textSize="14dp"
+                android:layout_gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/newpost_loc_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="서울 송파구 가락동"
+                android:textSize="15dp"
+                android:layout_marginStart="14dp"
+                android:layout_gravity="center_vertical"
+                android:minWidth="0dp"
+                android:minHeight="0dp"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/subContainer_newpost_fTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/subContainer_newpost_loc"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/newpost_fTag_addBtn"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_add"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:id="@+id/newpost_fTag_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="친구태그"
+                android:textSize="14dp"
+                android:layout_gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/newpost_fTag_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="홍길동"
+                android:textSize="15dp"
+                android:layout_marginStart="14dp"
+                android:layout_gravity="center_vertical"
+                android:minWidth="0dp"
+                android:minHeight="0dp"/>
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/subContainer_newpost_gTag"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/subContainer_newpost_fTag"
+            app:layout_constraintStart_toStartOf="parent"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/newpost_gTag_addBtn"
+                android:layout_width="17dp"
+                android:layout_height="17dp"
+                android:layout_marginStart="15dp"
+                android:layout_marginTop="10dp"
+                android:layout_marginBottom="10dp"
+                android:layout_marginEnd="10dp"
+                android:src="@drawable/ic_add"
+                android:background="@android:color/transparent"/>
+            <TextView
+                android:id="@+id/newpost_gTag_title_tv"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="그룹태그"
+                android:textSize="14dp"
+                android:layout_gravity="center_vertical"/>
+
+            <Button
+                android:id="@+id/newpost_gTag_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="아우디"
+                android:textSize="15dp"
+                android:layout_marginStart="14dp"
+                android:layout_gravity="center_vertical"
+                android:minWidth="0dp"
+                android:minHeight="0dp"/>
+
+        </LinearLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/container_newpost_write"
+    <LinearLayout
+        android:id="@+id/container_newpost_edt"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        app:layout_constraintTop_toBottomOf="@+id/container_newpost_detail"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintTop_toBottomOf="@id/container_newpost_detail"
+        android:focusable="true"
+        android:focusableInTouchMode="true">
+
+        <EditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:gravity="top"
+            android:hint="글 작성"
+            android:inputType="textCapSentences|textNoSuggestions|textMultiLine"
+            android:lines="20"
+            android:maxLines="100"
+            android:paddingBottom="13dp"
+            android:paddingHorizontal="16dp"
+            android:paddingTop="17dp"
+            android:scrollbars="vertical" />
+    </LinearLayout>
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/container_newpost_photo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ImageButton
+            android:id="@+id/newpost_photo_btn"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:src="@drawable/ic_photo_camera"
+            android:background="@android:color/transparent"
+            android:layout_margin="12dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <GridView
+            android:id="@+id/newpost_photo_gridview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="17dp"
+            android:layout_marginBottom="10dp"
+            app:layout_constraintStart_toEndOf="@id/newpost_photo_btn"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:columnWidth="50dp"
+            android:horizontalSpacing="10dp"
+            android:verticalSpacing="10dp"
+            android:numColumns="auto_fit" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
