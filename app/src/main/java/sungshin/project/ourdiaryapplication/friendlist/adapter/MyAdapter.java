@@ -29,7 +29,7 @@ import sungshin.project.ourdiaryapplication.friendlist.FrdrequestItem;
 public class MyAdapter extends BaseAdapter {
     Context mContext = null;
     ArrayList<FrdrequestItem> frdrequest;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(mContext);
+    private ServerApi serverApi;
     private Gson gson = new Gson();
 
     public MyAdapter(Context context, ArrayList<FrdrequestItem> data) {
@@ -71,6 +71,7 @@ public class MyAdapter extends BaseAdapter {
                 ReqCreateFriendRequest req = new ReqCreateFriendRequest();
                 Integer frdseq = req.getUserSeq();
                 req.setUserSeq(frdseq);
+                serverApi = RetrofitManager.getInstance().getServerApi(mContext);
                 serverApi.createFriendRequest(req).enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

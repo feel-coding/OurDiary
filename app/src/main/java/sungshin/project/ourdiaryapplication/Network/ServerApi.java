@@ -1,5 +1,7 @@
 package sungshin.project.ourdiaryapplication.Network;
 
+import java.util.List;
+
 import retrofit2.Call;
 import retrofit2.http.Body;
 import retrofit2.http.DELETE;
@@ -36,7 +38,7 @@ public interface ServerApi {
     Call<FriendRequest> getFriendRequestList();
 
     @GET("/api/v1/friends")
-    Call<Friend> getFriendList();
+    Call<List<Friend>> getFriendList();
 
     @PUT("/api/v1/users/me")
     Call<User> updateUserMe(@Body ReqUserUpdateMe reqUserUpdateMe);

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,7 +34,7 @@ public class FrdsearchActivity extends AppCompatActivity {
     ArrayList<FrdsearchItem> frdsearchItem;
     EditText editText_frdsearch;
     private ArrayList<FrdsearchItem> arrayList;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
+    private ServerApi serverApi;
     private Gson gson = new Gson();
 
     @Override
@@ -48,11 +49,17 @@ public class FrdsearchActivity extends AppCompatActivity {
         frdsearchItem.add(new FrdsearchItem("silence99","김범"));
 
         //서버에서 데이터 가져오기
-        serverApi.getFriendList().enqueue(new Callback<Friend>() {
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
+        serverApi.getFriendList().enqueue(new Callback<List<Friend>>() {
             @Override
-            public void onResponse(Call<Friend> call, Response<Friend> response) {
+            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                 if(response.isSuccessful()) {
                     Log.d("frdlist","success");
+                    //todo:print response body in listview
+                    List<Friend> body = response.body();
+                    arrayList = new ArrayList<FrdsearchItem>();
+                    for(Friend friend :)
+
                 }
                 else {
                     Log.d("frdlisterror","error code"+response.code());
@@ -78,8 +85,8 @@ public class FrdsearchActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<Friend> call, Throwable t) {
-                Log.d("정보","frdrequest failure");
+            public void onFailure(Call<List<Friend>> call, Throwable t) {
+                Log.d("정보","frdrequest failure"+t.getMessage());
             }
         });
 

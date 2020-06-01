@@ -28,7 +28,7 @@ public class FrdlistActivity extends AppCompatActivity {
     private ListView frdrequest_list;
     FrdlistRequestAdapter frdlistRequestAdapter;
     ArrayList<FrdlistRequestItem> frdlist_requestItem;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
+    private ServerApi serverApi;
     private Gson gson = new Gson();
 
     private ListView frdaccept_list;
@@ -50,6 +50,7 @@ public class FrdlistActivity extends AppCompatActivity {
         frdlist_requestItem.add(new FrdlistRequestItem("every2","원빈"));
 
         //서버에서 데이터 가져오기
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
         serverApi.getFriendRequestList().enqueue(new Callback<FriendRequest>() {
             @Override
             public void onResponse(Call<FriendRequest> call, Response<FriendRequest> response) {

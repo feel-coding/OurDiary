@@ -102,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         //response.isSuccessful() // 200~399는 성공(true) 400~599는 실패(false)
                         if (response.isSuccessful()) {
                             //로그인을 하면 메인화면으로 간다.
-                            Intent intent = new Intent(LoginActivity.this, FrdsearchActivity.class);//이렇게 해야 로그인으로 감
+                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
                             startActivity(intent);
                             LoginActivity.this.finish();
                         }
