@@ -27,6 +27,7 @@ import com.google.gson.Gson;
 import org.w3c.dom.Text;
 
 import java.io.IOException;
+import java.util.Date;
 import java.util.concurrent.locks.Lock;
 
 import retrofit2.Call;
@@ -55,6 +56,7 @@ public class MyPageFragment extends Fragment {
     private ServerApi serverApi;
     private Gson gson = new Gson();
     String name;
+    String nickname;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -75,6 +77,8 @@ public class MyPageFragment extends Fragment {
                 if(response.isSuccessful()) {
                     name = response.body().getName();
                     myEmailTv.setText(name);
+                    nickname = response.body().getNick();
+                    myNickTv.setText(nickname);
                 }
                 else {
                     Log.d("response", "" + response.code());
