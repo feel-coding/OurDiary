@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.Button;
 import android.widget.TableLayout;
 
 import com.google.android.material.tabs.TabLayout;
@@ -18,10 +19,9 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.widget.ViewPager2;
-
-import sungshin.project.ourdiaryapplication.DocwriteActivity;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.home.adapter.HomeViewPagerAdapter;
+import sungshin.project.ourdiaryapplication.newpost.NewPostActivity;
 
 
 public class HomeFragment extends Fragment {
@@ -30,22 +30,26 @@ public class HomeFragment extends Fragment {
     private ViewPager2 homeViewPager;
     private TabLayout homeTabLayout;
     private String[] homeTabTitles= {"All", "My", "Friend", "Group"};
-    Context mContext;
+    private ImageView newpostBtn;
+    private Context mContext;
     Activity activity;
-    ImageView writeButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_home, container, false);
-        writeButton = v.findViewById(R.id.btn_home_newpost);
-        writeButton.setOnClickListener(new View.OnClickListener() {
+        mContext = v.getContext();
+
+        newpostBtn = v.findViewById(R.id.btn_home_newpost);
+
+        newpostBtn.setOnClickListener(new View.OnClickListener(){
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(activity, DocwriteActivity.class);
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), NewPostActivity.class);
                 startActivity(intent);
             }
         });
+
         return v;
     }
 

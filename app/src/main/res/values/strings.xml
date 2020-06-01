@@ -41,6 +41,9 @@
     <string name="signUpFinish">회원가입이 완료되었습니다.</string>
     <string name="nicknameAlreadyExist">이미 존재하는 닉네임입니다.</string>
 
+    // NewPost
+    <string name="newPostTitle">새 글쓰기</string>
+
     <!--카카오 로그인-->
     <string name="kakao_app_key">e448dba1a22b446f310711cfdd87dc68</string>
 </resources>
