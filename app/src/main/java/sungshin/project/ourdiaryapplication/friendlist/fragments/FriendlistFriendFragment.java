@@ -7,19 +7,30 @@ import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.res.ResourcesCompat;
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import androidx.appcompat.widget.SearchView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.EachUser;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
@@ -33,15 +44,51 @@ public class FriendlistFriendFragment extends Fragment {
     RecyclerView.LayoutManager layoutManager;
     ArrayList<FriendItem> friendList = new ArrayList<FriendItem>();
     ConstraintLayout friend_detail_container;
-
+    SearchView friendSearchView;
+    Context mContext;
+    Activity activity;
+    private ServerApi serverApi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_friendlist_friend, container, false);
+        serverApi = RetrofitManager.getInstance().getServerApi(activity);
+        friendSearchView = v.findViewById(R.id.friend_search);
+        friendSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String s) {
+                return false;
+            }
 
-        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
-        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
-        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
+            @Override
+            public boolean onQueryTextChange(String s) {
+                Log.d("onQueryTextChange", "에 들어옴");
+                serverApi.getAllUsers(1, 15, s).enqueue(new Callback<List<EachUser>>() {
+                    @Override
+                    public void onResponse(Call<List<EachUser>> call, Response<List<EachUser>> response) {
+                        if(response.isSuccessful()) {
+                            Log.d("searchsuccess", "성공");
+                            for (int i = 0; i < response.body().size(); i++) {
+                                addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), response.body().get(i).getNick(), response.body().get(i).getName());
+                            }
+                        }
+                        else {
+                            Log.d("searcherror", "onResponse까지는 성공했지만 " + response.code() + " error");
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<EachUser>> call, Throwable t) {
+                        Log.d("searcherror", t.getMessage());
+                    }
+                });
+                return false;
+            }
+        });
+
+//        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
+//        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
+//        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
 
         initFriendList(v, getActivity());
 
@@ -78,6 +125,13 @@ public class FriendlistFriendFragment extends Fragment {
         item.setfRealname(realname);
 
         friendList.add(item);
+    }
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        mContext = context;
+        if (context instanceof Activity)
+            activity = (Activity) context;
     }
 
 }
