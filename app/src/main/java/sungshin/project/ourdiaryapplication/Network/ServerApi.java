@@ -1,5 +1,6 @@
 package sungshin.project.ourdiaryapplication.Network;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import retrofit2.Call;
@@ -8,6 +9,7 @@ import retrofit2.http.DELETE;
 import retrofit2.http.GET;
 import retrofit2.http.POST;
 import retrofit2.http.PUT;
+import retrofit2.http.Path;
 import retrofit2.http.Query;
 
 public interface ServerApi {
@@ -35,8 +37,11 @@ public interface ServerApi {
     @POST("/api/v1/friends/requests") //POST의 경우 Body 사용
     Call<Void> createFriendRequest(@Body ReqCreateFriendRequest reqCreateFriendRequest);
 
+    @PUT("/api/v1/friends/requests/{seq}")
+    Call<Void> updateFriendRequest(@Body ReqFriendRequestUpdate reqFriendRequestUpdate, @Path("seq") BigInteger seq);
+
     @GET("/api/v1/friends/requests")
-    Call<FriendRequest> getFriendRequestList();
+    Call<List<Friend>> getFriendRequestList(@Query("direction") String direction, @Query("page") Integer page, @Query("page_size") Integer pageSize);
 
     @GET("/api/v1/friends")
     Call<List<Friend>> getFriendList();

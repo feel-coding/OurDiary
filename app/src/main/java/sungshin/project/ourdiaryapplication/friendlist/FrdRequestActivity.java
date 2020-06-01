@@ -105,6 +105,8 @@ public class FrdRequestActivity extends AppCompatActivity {
                             frdItem.add(body.get(i));
                             Log.d("정보", Integer.toString(i) + body.get(i).getName());
                         }
+                        myAdapter.notifyDataSetChanged();
+
 
                     } else {
                         Log.d("정보", "GetAllUsers error code" + response.code());
@@ -135,6 +137,5 @@ public class FrdRequestActivity extends AppCompatActivity {
                 }
             });
         }
-        myAdapter.notifyDataSetChanged();
     }
 }

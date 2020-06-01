@@ -12,10 +12,12 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.Friend;
 import sungshin.project.ourdiaryapplication.Network.FriendRequest;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
@@ -27,13 +29,13 @@ public class FrdlistActivity extends AppCompatActivity {
 
     private ListView frdrequest_list;
     FrdlistRequestAdapter frdlistRequestAdapter;
-    ArrayList<FrdlistRequestItem> frdlist_requestItem;
+    ArrayList<Friend> frdlist_requestItem;
     private ServerApi serverApi;
     private Gson gson = new Gson();
 
     private ListView frdaccept_list;
     FrdlistAcceptAdapter frdlistAcceptAdapter;
-    ArrayList<FrdlistAcceptItem> frdlist_acceptItem;
+    ArrayList<Friend> frdlist_acceptItem;
 
     ImageButton back_btn;
 
@@ -44,18 +46,63 @@ public class FrdlistActivity extends AppCompatActivity {
 
         //친구 신청 listview
         frdrequest_list = (ListView)findViewById(R.id.frdrequest_list);
-        frdlist_requestItem = new ArrayList<FrdlistRequestItem>();
-
-        frdlist_requestItem.add(new FrdlistRequestItem("every1","박기범"));
-        frdlist_requestItem.add(new FrdlistRequestItem("every2","원빈"));
+        frdlist_requestItem = new ArrayList<Friend>();
 
         //서버에서 데이터 가져오기
         serverApi = RetrofitManager.getInstance().getServerApi(this);
-        serverApi.getFriendRequestList().enqueue(new Callback<FriendRequest>() {
+        serverApi.getFriendRequestList("MY_SEND", 1,  15).enqueue(new Callback<List<Friend>>() {
             @Override
-            public void onResponse(Call<FriendRequest> call, Response<FriendRequest> response) {
+            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                 if(response.isSuccessful()) {
-                    Log.d("frdlistrequest","success");
+                    List<Friend> body = response.body();
+                    Log.d("frdlistrequest","success"+body.size());
+                    for(int i = 0; i < body.size(); i++) {
+                        frdlist_requestItem.add(body.get(i));
+                        Log.d("정보", Integer.toString(i) + body.get(i).getUser().getName());
+                    }
+                    frdlistRequestAdapter.notifyDataSetChanged();
+
+                }
+                else {
+                    Log.d("frdlistrequesterror","error code"+response.code());
+                    try {
+                        String jsonString = response.errorBody().string();
+                        ServerError serverError = gson.fromJson(jsonString, ServerError.class);
+
+                        Toast.makeText(FrdlistActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    } catch (Exception ignored) {
+
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Friend>> call, Throwable t) {
+                Log.d("정보","frdrequest failure");
+            }
+        });
+
+        frdlistRequestAdapter = new FrdlistRequestAdapter(this,frdlist_requestItem);
+        frdrequest_list.setAdapter(frdlistRequestAdapter);
+
+
+        //친구 요청 listview
+        frdaccept_list = (ListView)findViewById(R.id.frdaccpet_list);
+        frdlist_acceptItem = new ArrayList<Friend>();
+
+        serverApi.getFriendRequestList("FRIEND_SEND", 1,  15).enqueue(new Callback<List<Friend>>() {
+            @Override
+            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                if(response.isSuccessful()) {
+                    List<Friend> body = response.body();
+                    Log.d("frdlistaccept","success"+body.size());
+                    for(int i = 0; i < body.size(); i++) {
+                        frdlist_acceptItem.add(body.get(i));
+                        Log.d("정보", Integer.toString(i) + body.get(i).getUser().getName());
+                    }
+                    frdlistAcceptAdapter.notifyDataSetChanged();
+
                 }
                 else {
                     Log.d("frdlistrequesterror","error code"+response.code());
@@ -73,22 +120,10 @@ public class FrdlistActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<FriendRequest> call, Throwable t) {
+            public void onFailure(Call<List<Friend>> call, Throwable t) {
                 Log.d("정보","frdrequest failure");
             }
         });
-
-        frdlistRequestAdapter = new FrdlistRequestAdapter(this,frdlist_requestItem);
-        frdrequest_list.setAdapter(frdlistRequestAdapter);
-
-        frdlistRequestAdapter.notifyDataSetChanged();
-
-        //친구 요청 listview
-        frdaccept_list = (ListView)findViewById(R.id.frdaccpet_list);
-        frdlist_acceptItem = new ArrayList<FrdlistAcceptItem>();
-
-        frdlist_acceptItem.add(new FrdlistAcceptItem("happy_eat","신용순"));
-        frdlist_acceptItem.add(new FrdlistAcceptItem("silence99","김범"));
 
         frdlistAcceptAdapter = new FrdlistAcceptAdapter(this,frdlist_acceptItem);
         frdaccept_list.setAdapter(frdlistAcceptAdapter);

@@ -1,6 +1,7 @@
 package sungshin.project.ourdiaryapplication.friendlist;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,13 +10,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import sungshin.project.ourdiaryapplication.Network.Friend;
 import sungshin.project.ourdiaryapplication.R;
 
 public class FrdlistRequestAdapter extends BaseAdapter {
     Context mContext = null;
-    ArrayList<FrdlistRequestItem> frdlist_request;
+    ArrayList<Friend> frdlist_request;
 
-    public FrdlistRequestAdapter(Context context, ArrayList<FrdlistRequestItem> data) {
+    public FrdlistRequestAdapter(Context context, ArrayList<Friend> data) {
         mContext = context;
         frdlist_request = data;
     }
@@ -43,9 +45,9 @@ public class FrdlistRequestAdapter extends BaseAdapter {
         }
         TextView frdlist_request_nick = (TextView)view.findViewById(R.id.frdlist_request_nick);
         TextView frdlist_request_name = view.findViewById(R.id.frdlist_request_name);
-
-        frdlist_request_nick.setText(frdlist_request.get(position).getNickname());
-        frdlist_request_name.setText("("+frdlist_request.get(position).getName()+")");
+        Log.d("frdlist_request",frdlist_request.get(position).toString());
+        frdlist_request_nick.setText(frdlist_request.get(position).getUser().getNick());
+        frdlist_request_name.setText("("+frdlist_request.get(position).getUser().getName()+")");
 
         return view;
     }

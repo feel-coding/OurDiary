@@ -1,6 +1,7 @@
 package sungshin.project.ourdiaryapplication.friendlist.adapter;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,16 +10,28 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+
+import java.math.BigInteger;
 import java.util.ArrayList;
 
-import sungshin.project.ourdiaryapplication.friendlist.FrdlistAcceptItem;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.ReqFriendRequestUpdate;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
+import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
 
 public class FrdlistAcceptAdapter extends BaseAdapter {
     Context mContext = null;
-    ArrayList<FrdlistAcceptItem> frdlist_accept;
+    ArrayList<Friend> frdlist_accept;
+    private ServerApi serverApi;
+    private Gson gson = new Gson();
 
-    public FrdlistAcceptAdapter(Context context, ArrayList<FrdlistAcceptItem> data) {
+    public FrdlistAcceptAdapter(Context context, ArrayList<Friend> data) {
         mContext = context;
         frdlist_accept = data;
     }
@@ -49,20 +62,87 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
         Button frdlist_accept_btn1 = view.findViewById(R.id.frdlist_accept_btn1);
         Button frdlist_accept_btn2 = view.findViewById(R.id.frdlist_accept_btn2);
 
-        frdlist_accept_nick.setText(frdlist_accept.get(position).getNickname());
-        frdlist_accept_name.setText("("+frdlist_accept.get(position).getName()+")");
+        frdlist_accept_nick.setText(frdlist_accept.get(position).getUser().getNick());
+        frdlist_accept_name.setText("("+frdlist_accept.get(position).getUser().getName()+")");
 
+        //수락 클릭
         frdlist_accept_btn1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"수락 Click!",Toast.LENGTH_SHORT).show();
+                serverApi = RetrofitManager.getInstance().getServerApi(mContext);
+                ReqFriendRequestUpdate req = new ReqFriendRequestUpdate();
+                req.setResponse("ACCEPT");
+                BigInteger bi = BigInteger.valueOf(frdlist_accept.get(position).getUser().getSeq());
+                serverApi.updateFriendRequest(req, bi)
+                .enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful()) {
+                            Log.d("frdlistaccept","success");
+                            Toast.makeText(mContext,"수락되었습니다",Toast.LENGTH_SHORT).show();
+
+                        }
+                        else {
+                            Log.d("frdlistaccepterror","error code"+response.code());
+                            try {
+                                String jsonString = response.errorBody().string();
+                                ServerError serverError = gson.fromJson(jsonString, ServerError.class);
+
+                                Toast.makeText(mContext, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+
+                            } catch (Exception ignored) {
+
+                            }
+                        }
+                    }
+
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
             }
 
         });
+
+        //거절 클릭
         frdlist_accept_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext,"거절 Click!",Toast.LENGTH_SHORT).show();
+                ReqFriendRequestUpdate req = new ReqFriendRequestUpdate();
+                req.setResponse("DENY");
+
+                BigInteger bi = BigInteger.valueOf(frdlist_accept.get(position).getUser().getSeq());
+                serverApi.updateFriendRequest(req, bi)
+                        .enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+                                if (response.isSuccessful()) {
+                                    Log.d("frdlistaccept", "success");
+                                    Toast.makeText(mContext, "거절되었습니다", Toast.LENGTH_SHORT).show();
+
+                                } else {
+                                    Log.d("frdlistaccpeterror", "error code" + response.code());
+                                    try {
+                                        String jsonString = response.errorBody().string();
+                                        ServerError serverError = gson.fromJson(jsonString, ServerError.class);
+
+                                        Toast.makeText(mContext, serverError.getMessage()+response.code(), Toast.LENGTH_SHORT).show();
+
+                                    } catch (Exception ignored) {
+
+                                    }
+                                }
+                            }
+
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+
+                            }
+
+                        });
             }
 
         });

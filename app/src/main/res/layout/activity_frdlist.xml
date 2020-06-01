@@ -33,13 +33,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:layout_marginEnd="151dp"
                 android:text="친구 신청 목록"
                 android:textSize="20dp"
                 android:textStyle="bold"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.875"
-                app:layout_constraintStart_toEndOf="@+id/back_btn"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.appcompat.widget.Toolbar>
@@ -48,9 +46,7 @@
         android:id="@+id/layout_frdrequest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="620dp"
         android:background="#A4D7DD"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@id/home_tb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
