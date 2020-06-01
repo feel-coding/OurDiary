@@ -6,7 +6,9 @@ import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -34,6 +36,7 @@ public class FrdRequestActivity extends AppCompatActivity {
     EditText frdSearch;
     private ServerApi serverApi;
     private Gson gson = new Gson();
+    ImageButton backbtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,6 +48,15 @@ public class FrdRequestActivity extends AppCompatActivity {
 
         myAdapter = new MyAdapter(this,frdItem);
         frdList.setAdapter(myAdapter);
+
+        //backbtn 클릭
+        backbtn = findViewById(R.id.back_btn);
+        backbtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                finish();
+            }
+        });
 
 
         //내용 입력시 이벤트
