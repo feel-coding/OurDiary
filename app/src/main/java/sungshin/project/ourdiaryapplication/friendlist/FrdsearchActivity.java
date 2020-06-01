@@ -33,7 +33,7 @@ public class FrdsearchActivity extends AppCompatActivity {
     ArrayList<FrdsearchItem> frdsearchItem;
     EditText editText_frdsearch;
     private ArrayList<FrdsearchItem> arrayList;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
     private Gson gson = new Gson();
 
     @Override

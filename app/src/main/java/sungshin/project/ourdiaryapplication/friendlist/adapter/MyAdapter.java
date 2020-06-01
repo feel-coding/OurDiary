@@ -29,7 +29,7 @@ import sungshin.project.ourdiaryapplication.friendlist.FrdrequestItem;
 public class MyAdapter extends BaseAdapter {
     Context mContext = null;
     ArrayList<FrdrequestItem> frdrequest;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(mContext);
     private Gson gson = new Gson();
 
     public MyAdapter(Context context, ArrayList<FrdrequestItem> data) {

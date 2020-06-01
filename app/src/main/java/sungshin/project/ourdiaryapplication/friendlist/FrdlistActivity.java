@@ -28,7 +28,7 @@ public class FrdlistActivity extends AppCompatActivity {
     private ListView frdrequest_list;
     FrdlistRequestAdapter frdlistRequestAdapter;
     ArrayList<FrdlistRequestItem> frdlist_requestItem;
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi();
+    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
     private Gson gson = new Gson();
 
     private ListView frdaccept_list;
