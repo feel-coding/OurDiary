@@ -26,7 +26,7 @@ import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.MyAdapter;
 import sungshin.project.ourdiaryapplication.R;
 
-public class FrdrequestActivity extends AppCompatActivity {
+public class FrdRequestActivity extends AppCompatActivity {
 
     private ListView frdList;
     MyAdapter myAdapter;
@@ -42,7 +42,6 @@ public class FrdrequestActivity extends AppCompatActivity {
 
         frdList = (ListView)findViewById(R.id.frdList);
         frdItem = new ArrayList<EachUser>();
-
 
         myAdapter = new MyAdapter(this,frdItem);
         frdList.setAdapter(myAdapter);
@@ -104,13 +103,13 @@ public class FrdrequestActivity extends AppCompatActivity {
 
                             switch (serverError.getError()) {
                                 case "INVALID_PAGE":
-                                    Toast.makeText(FrdrequestActivity.this, "Invalid page", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FrdRequestActivity.this, "Invalid page", Toast.LENGTH_SHORT).show();
                                     break;
                                 case "INVALID_PAGE_SIZE":
-                                    Toast.makeText(FrdrequestActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FrdRequestActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
-                                    Toast.makeText(FrdrequestActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                                    Toast.makeText(FrdRequestActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
                             }
                         } catch (Exception ignored) {
 

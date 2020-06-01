@@ -24,8 +24,6 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
-import sungshin.project.ourdiaryapplication.friendlist.FrdrequestActivity;
-import sungshin.project.ourdiaryapplication.friendlist.FrdrequestItem;
 
 public class MyAdapter extends BaseAdapter {
     Context mContext = null;
@@ -34,6 +32,7 @@ public class MyAdapter extends BaseAdapter {
     private Gson gson = new Gson();
 
     public MyAdapter(Context context, ArrayList<EachUser> data) {
+
         mContext = context;
         frdrequest = data;
     }

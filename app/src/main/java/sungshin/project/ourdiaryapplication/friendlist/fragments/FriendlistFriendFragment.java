@@ -34,8 +34,9 @@ import sungshin.project.ourdiaryapplication.Network.EachUser;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.FrdRequestActivity;
 import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
-import sungshin.project.ourdiaryapplication.friendlist.FrdrequestActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdsearchActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
 import sungshin.project.ourdiaryapplication.friendlist.data.FriendItem;
 
@@ -52,12 +53,21 @@ public class FriendlistFriendFragment extends Fragment {
     Activity activity;
     Button friend_req_btn;
     private ServerApi serverApi;
+    Button friendRequestBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_friendlist_friend, container, false);
         serverApi = RetrofitManager.getInstance().getServerApi(activity);
         friendSearchView = v.findViewById(R.id.friend_search);
+        friendRequestBtn = v.findViewById(R.id.friend_req_btn);
+        friendRequestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, FrdsearchActivity.class);
+                startActivity(intent);
+            }
+        });
         friendSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
@@ -112,7 +122,7 @@ public class FriendlistFriendFragment extends Fragment {
         friend_req_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(getActivity(), FrdrequestActivity.class);
+                Intent i = new Intent(getActivity(), FrdRequestActivity.class);
                 startActivity(i);
             }
         });

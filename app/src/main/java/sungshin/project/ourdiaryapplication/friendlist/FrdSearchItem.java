@@ -1,10 +1,10 @@
 package sungshin.project.ourdiaryapplication.friendlist;
 
-public class FrdsearchItem {
+public class FrdSearchItem {
     private String nick;
     private String name;
 
-    public FrdsearchItem(String nick, String name) {
+    public FrdSearchItem(String nick, String name) {
         this.nick = nick;
         this.name = name;
     }

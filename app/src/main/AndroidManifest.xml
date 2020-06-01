@@ -39,7 +39,7 @@
         <activity android:name=".friendlist.FrdsearchActivity" />
         <activity android:name=".CommentActivity" />
         <activity android:name=".friendlist.FrdlistActivity" />
-        <activity android:name=".friendlist.FrdrequestActivity" />
+        <activity android:name=".friendlist.FrdRequestActivity" />
         <activity android:name=".DocumentActivity" />
         <activity android:name=".ImageGridActivity" />
         <activity android:name=".newpost.NewPostActivity" />
