@@ -19,7 +19,6 @@ import android.view.ViewGroup;
 import androidx.appcompat.widget.SearchView;
 
 import android.widget.Button;
-import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +34,7 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
-import sungshin.project.ourdiaryapplication.friendlist.FrdsearchActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdSearchActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
 import sungshin.project.ourdiaryapplication.friendlist.data.FriendItem;
 
@@ -62,7 +61,7 @@ public class FriendlistFriendFragment extends Fragment {
         friendRequestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(activity, FrdsearchActivity.class);
+                Intent intent = new Intent(activity, FrdSearchActivity.class);
                 startActivity(intent);
             }
         });

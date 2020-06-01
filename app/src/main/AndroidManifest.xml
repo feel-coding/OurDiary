@@ -36,7 +36,7 @@
         <activity android:name=".Login.LoginActivity" />
         <activity android:name=".mypage.LockSettingActivity" />
         <activity android:name=".mypage.PasswordSettingActivity" />
-        <activity android:name=".friendlist.FrdsearchActivity" />
+        <activity android:name=".friendlist.FrdSearchActivity" />
         <activity android:name=".CommentActivity" />
         <activity android:name=".friendlist.FrdlistActivity" />
         <activity android:name=".friendlist.FrdRequestActivity" />

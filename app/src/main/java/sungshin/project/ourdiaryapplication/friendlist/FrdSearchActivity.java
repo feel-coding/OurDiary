@@ -20,7 +20,7 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 
-public class FrdsearchActivity extends AppCompatActivity {
+public class FrdSearchActivity extends AppCompatActivity {
 
     private ListView frdsearchList;
     FrdsearchAdapter frdsearchAdapter;
@@ -65,11 +65,12 @@ public class FrdsearchActivity extends AppCompatActivity {
                             for (int i = 0; i < response.body().size(); i++) {
                                 nickname = response.body().get(i).getNick();
                                 name = response.body().get(i).getName();
+                                Integer sequenceNumber = response.body().get(i).getSeq();
                                 if(nickname == null) {
-                                    searchResultList.add(new FrdSearchItem("닉네임 없는 사용자", name));
+                                    searchResultList.add(new FrdSearchItem("닉네임 없는 사용자", name, sequenceNumber));
                                 }
                                 else
-                                    searchResultList.add(new FrdSearchItem(nickname, name));
+                                    searchResultList.add(new FrdSearchItem(nickname, name, sequenceNumber));
                             }
                             frdsearchAdapter.notifyDataSetChanged();
                         }
