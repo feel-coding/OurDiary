@@ -5,11 +5,24 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.Toast;
+
+import com.google.gson.Gson;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.EachUser;
+import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
+import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.MyAdapter;
 import sungshin.project.ourdiaryapplication.R;
 
@@ -17,26 +30,18 @@ public class FrdrequestActivity extends AppCompatActivity {
 
     private ListView frdList;
     MyAdapter myAdapter;
-    ArrayList<FrdrequestItem> frdItem;
+    ArrayList<EachUser> frdItem;
     EditText frdSearch;
-    private ArrayList<FrdrequestItem> arrayList;
+    private ServerApi serverApi;
+    private Gson gson = new Gson();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frdrequest);
 
         frdList = (ListView)findViewById(R.id.frdList);
-        frdItem = new ArrayList<FrdrequestItem>();
-
-
-        frdItem.add(new FrdrequestItem("Hong"));
-        frdItem.add(new FrdrequestItem("Park"));
-        frdItem.add(new FrdrequestItem("Gins"));
-        frdItem.add(new FrdrequestItem("Geen"));
-
-        //frdItem 데이터 arrayList에 복사
-        arrayList = new ArrayList<FrdrequestItem>();
-        arrayList.addAll(frdItem);
+        frdItem = new ArrayList<EachUser>();
 
 
         myAdapter = new MyAdapter(this,frdItem);
@@ -71,16 +76,53 @@ public class FrdrequestActivity extends AppCompatActivity {
 
         //입력 없을경우 데이터 모두 보여주기
         if(text.length()==0) {
-            frdItem.addAll(arrayList);
+            //frdItem.addAll(arrayList);
         }
         else {
-            for(int i=0; i<arrayList.size(); i++) {
-//                Log.d("text",arrayList.get(i).getFriend()+text);
-                if(arrayList.get(i).getFriend().toLowerCase().contains(text.toLowerCase())) {
-                    frdItem.add(arrayList.get(i));
+
+            //서버에서 데이터 가져오기
+            serverApi = RetrofitManager.getInstance().getServerApi(this);
+            serverApi.getAllUsers(1, 15, text).enqueue(new Callback<List<EachUser>>() {
+                @Override
+                public void onResponse(Call<List<EachUser>> call, Response<List<EachUser>> response) {
+                    if (response.isSuccessful()) {
+                        Log.d("정보", "GetAllUsers success");
+                        //todo:print response body in listview
+                        List<EachUser> body = response.body();
+                        Log.d("정보",  Integer.toString(body.size()));
+                        for (int i = 0; i < body.size(); i++) {
+                            frdItem.add(body.get(i));
+                            Log.d("정보", Integer.toString(i) + body.get(i).getName());
+                        }
+
+                    } else {
+                        Log.d("정보", "GetAllUsers error code" + response.code());
+                        try {
+                            String jsonString = response.errorBody().string();
+                            Log.d("jsonString", jsonString);
+                            ServerError serverError = gson.fromJson(jsonString, ServerError.class);
+
+                            switch (serverError.getError()) {
+                                case "INVALID_PAGE":
+                                    Toast.makeText(FrdrequestActivity.this, "Invalid page", Toast.LENGTH_SHORT).show();
+                                    break;
+                                case "INVALID_PAGE_SIZE":
+                                    Toast.makeText(FrdrequestActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
+                                    break;
+                                default:
+                                    Toast.makeText(FrdrequestActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                            }
+                        } catch (Exception ignored) {
+
+                        }
+                    }
 
                 }
-            }
+                @Override
+                public void onFailure(Call<List<EachUser>> call, Throwable t) {
+                    Log.d("정보","GetAllusers failure"+t.getMessage());
+                }
+            });
         }
         myAdapter.notifyDataSetChanged();
     }

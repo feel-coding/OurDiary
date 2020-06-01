@@ -58,7 +58,6 @@ public class FrdsearchActivity extends AppCompatActivity {
                     //todo:print response body in listview
                     List<Friend> body = response.body();
                     arrayList = new ArrayList<FrdsearchItem>();
-                    for(Friend friend :)
 
                 }
                 else {

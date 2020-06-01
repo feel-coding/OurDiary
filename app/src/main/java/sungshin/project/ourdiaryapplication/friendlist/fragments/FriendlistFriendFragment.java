@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.SearchView;
+
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdrequestActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
 import sungshin.project.ourdiaryapplication.friendlist.data.FriendItem;
 
@@ -47,6 +50,7 @@ public class FriendlistFriendFragment extends Fragment {
     SearchView friendSearchView;
     Context mContext;
     Activity activity;
+    Button friend_req_btn;
     private ServerApi serverApi;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -100,6 +104,16 @@ public class FriendlistFriendFragment extends Fragment {
                 Intent i = new Intent(getActivity(), FrdlistActivity.class);
                 startActivity(i);
 
+            }
+        });
+
+        //친구 신청하기 버튼 클릭시
+        friend_req_btn = v.findViewById(R.id.friend_req_btn);
+        friend_req_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), FrdrequestActivity.class);
+                startActivity(i);
             }
         });
         return v;
