@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.ReqCreateFriendRequest;
 import sungshin.project.ourdiaryapplication.Network.ReqFriendRequestCreate;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
@@ -60,7 +61,7 @@ public class FrdsearchAdapter extends BaseAdapter{
         requestBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ReqFriendRequestCreate req = new ReqFriendRequestCreate();
+                ReqCreateFriendRequest req = new ReqCreateFriendRequest();
                 serverApi.getUserMe().enqueue(new Callback<User>() {
                     @Override
                     public void onResponse(Call<User> call, Response<User> response) {

@@ -71,13 +71,13 @@ public class FrdSearchActivity extends AppCompatActivity {
 
                         switch (serverError.getError()) {
                             case "INVALID_PAGE":
-                                Toast.makeText(FrdsearchActivity.this, "Invalid page", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FrdSearchActivity.this, "Invalid page", Toast.LENGTH_SHORT).show();
                                 break;
                             case "INVALID_PAGE_SIZE":
-                                Toast.makeText(FrdsearchActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FrdSearchActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
                                 break;
                             default:
-                                Toast.makeText(FrdsearchActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                                Toast.makeText(FrdSearchActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     } catch (Exception ignored) {
 

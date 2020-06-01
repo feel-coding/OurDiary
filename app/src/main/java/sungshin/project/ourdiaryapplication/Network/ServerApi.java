@@ -33,7 +33,7 @@ public interface ServerApi {
     Call<Void> signOut();
 
     @POST("/api/v1/friends/requests") //POST의 경우 Body 사용
-    Call<Void> createFriendRequest(@Body ReqFriendRequestCreate reqFriendRequestCreate);
+    Call<Void> createFriendRequest(@Body ReqCreateFriendRequest reqCreateFriendRequest);
 
     @GET("/api/v1/friends/requests")
     Call<FriendRequest> getFriendRequestList();
