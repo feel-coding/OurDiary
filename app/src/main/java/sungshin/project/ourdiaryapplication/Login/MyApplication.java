@@ -10,9 +10,8 @@ import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.KakaoAdapter;
 import com.kakao.auth.KakaoSDK;
 
-public class App extends Application {
-
-    private static volatile App instance = null;
+public class MyApplication extends Application {
+    private static volatile MyApplication instance = null;
 
     private static class KakaoSDKAdapter extends KakaoAdapter {
         /**
@@ -26,7 +25,7 @@ public class App extends Application {
             return new ISessionConfig() {
                 @Override
                 public AuthType[] getAuthTypes() {
-                    return new AuthType[] {AuthType.KAKAO_LOGIN_ALL};
+                    return new AuthType[] {AuthType.KAKAO_ACCOUNT};
                     /*로그인을 하는 방식을 지정하는 부분. AuthType로는 다음 네 가지 방식이 있다.
                     KAKAO_TALK: 카카오톡으로 로그인, KAKAO_STORY: 카카오스토리로 로그인, KAKAO_ACCOUNT: 웹뷰를 통한 로그인,
                     KAKAO_TALK_EXCLUDE_NATIVE_LOGIN: 카카오톡으로만 로그인+계정 없으면 계정생성 버튼 제공
@@ -69,13 +68,13 @@ public class App extends Application {
             return new IApplicationConfig() {
                 @Override
                 public Context getApplicationContext() {
-                    return App.getGlobalApplicationContext();
+                    return MyApplication.getGlobalApplicationContext();
                 }
             };
         }
     }
 
-    public static App getGlobalApplicationContext() {
+    public static MyApplication getGlobalApplicationContext() {
         if(instance == null) {
             throw new IllegalStateException("this application does not inherit com.kakao.GlobalApplication");
         }
@@ -96,6 +95,3 @@ public class App extends Application {
         instance = null;
     }
 }
-
-
-

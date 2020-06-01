@@ -1,16 +1,21 @@
 package sungshin.project.ourdiaryapplication.Login;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.net.ConnectivityManager;
 import android.net.Network;
 import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -22,6 +27,10 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -33,13 +42,19 @@ import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
+
+import com.kakao.auth.ApprovalType;
+import com.kakao.auth.AuthType;
 import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.ISessionConfig;
 import com.kakao.auth.Session;
 import com.kakao.network.ErrorResult;
 import com.kakao.usermgmt.ApiErrorCode;
 import com.kakao.usermgmt.UserManagement;
 import com.kakao.usermgmt.callback.MeV2ResponseCallback;
+import com.kakao.usermgmt.callback.UnLinkResponseCallback;
 import com.kakao.usermgmt.response.MeV2Response;
+import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.util.exception.KakaoException;
 
 
@@ -54,29 +69,19 @@ public class LoginActivity extends AppCompatActivity {
     EditText pwEditText;
     TextView signUpTv;
     LinearLayout kakaoTalkSignInBtn;
-    private SessionCallback sessionCallback;
     static final String SHARED_PREF_USER_NAME = "6000";
+    private SessionCallback sessionCallback;
 
 
-
-
-    @Override
-    public Context getApplicationContext() {
-        return super.getApplicationContext();
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        serverApi = RetrofitManager.getInstance().getServerApi(this);
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
-        Session.getCurrentSession().checkAndImplicitOpen(); //자동로그인
+        Session.getCurrentSession().checkAndImplicitOpen();
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
 
-
-
-
-                //변수선언함(ID,PW)
         loginBtn = findViewById(R.id.loginBtn);
         idEditText = findViewById(R.id.idEditText);
         pwEditText = findViewById(R.id.pwEditText);
@@ -156,6 +161,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
     }
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
@@ -170,28 +176,25 @@ public class LoginActivity extends AppCompatActivity {
         Session.getCurrentSession().removeCallback(sessionCallback);
     }
 
-
-
     private class SessionCallback implements ISessionCallback {
         @Override
         public void onSessionOpened() {
-            Log.d("lglg", "onSessionOpened");
             UserManagement.getInstance().me(new MeV2ResponseCallback() {
                 @Override
                 public void onFailure(ErrorResult errorResult) {
                     int result = errorResult.getErrorCode();
 
                     if(result == ApiErrorCode.CLIENT_ERROR_CODE) {
-                        Toast.makeText(LoginActivity.this, "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(LoginActivity.this,"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(),"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onSessionClosed(ErrorResult errorResult) {
-                    Toast.makeText(LoginActivity.this,"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -210,7 +213,5 @@ public class LoginActivity extends AppCompatActivity {
             Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
-
-
 
 }

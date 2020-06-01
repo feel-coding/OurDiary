@@ -52,7 +52,8 @@ dependencies {
     //switch button
     implementation 'com.kyleduo.switchbutton:library:2.0.0'
 
-    implementation 'com.kakao.sdk:usermgmt:1.16.0'
+    implementation 'com.kakao.sdk:usermgmt:1.27.0'
+    implementation 'com.kakao.sdk:kakaotalk:1.27.0'
 
 
 
