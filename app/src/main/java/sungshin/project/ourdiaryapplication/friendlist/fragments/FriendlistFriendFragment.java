@@ -17,6 +17,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import androidx.appcompat.widget.SearchView;
+
+import android.widget.Button;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -33,6 +35,7 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdsearchActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
 import sungshin.project.ourdiaryapplication.friendlist.data.FriendItem;
 
@@ -48,12 +51,21 @@ public class FriendlistFriendFragment extends Fragment {
     Context mContext;
     Activity activity;
     private ServerApi serverApi;
+    Button friendRequestBtn;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View v = inflater.inflate(R.layout.fragment_friendlist_friend, container, false);
         serverApi = RetrofitManager.getInstance().getServerApi(activity);
         friendSearchView = v.findViewById(R.id.friend_search);
+        friendRequestBtn = v.findViewById(R.id.friend_req_btn);
+        friendRequestBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(activity, FrdsearchActivity.class);
+                startActivity(intent);
+            }
+        });
         friendSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {

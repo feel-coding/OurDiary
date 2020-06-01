@@ -3,10 +3,10 @@ package sungshin.project.ourdiaryapplication.friendlist;
         import android.widget.Button;
         import android.widget.ImageButton;
 
-public class FrdrequestItem {
+public class FrdRequestItem {
     private String friend;
 
-    public FrdrequestItem(String friend) {
+    public FrdRequestItem(String friend) {
         this.friend = friend;
     }
 

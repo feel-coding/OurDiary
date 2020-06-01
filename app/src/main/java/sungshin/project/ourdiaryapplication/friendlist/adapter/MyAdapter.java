@@ -11,15 +11,14 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-import sungshin.project.ourdiaryapplication.Network.ReqCreateFriendRequest;
 import sungshin.project.ourdiaryapplication.R;
-import sungshin.project.ourdiaryapplication.friendlist.FrdrequestItem;
+import sungshin.project.ourdiaryapplication.friendlist.FrdRequestItem;
 
 public class MyAdapter extends BaseAdapter {
     Context mContext = null;
-    ArrayList<FrdrequestItem> frdrequest;
+    ArrayList<FrdRequestItem> frdrequest;
 
-    public MyAdapter(Context context, ArrayList<FrdrequestItem> data) {
+    public MyAdapter(Context context, ArrayList<FrdRequestItem> data) {
         mContext = context;
         frdrequest = data;
     }

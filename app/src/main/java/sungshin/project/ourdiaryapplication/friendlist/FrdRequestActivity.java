@@ -13,29 +13,29 @@ import java.util.ArrayList;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.MyAdapter;
 import sungshin.project.ourdiaryapplication.R;
 
-public class FrdrequestActivity extends AppCompatActivity {
+public class FrdRequestActivity extends AppCompatActivity {
 
     private ListView frdList;
     MyAdapter myAdapter;
-    ArrayList<FrdrequestItem> frdItem;
+    ArrayList<FrdRequestItem> frdItem;
     EditText frdSearch;
-    private ArrayList<FrdrequestItem> arrayList;
+    private ArrayList<FrdRequestItem> arrayList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frdrequest);
 
         frdList = (ListView)findViewById(R.id.frdList);
-        frdItem = new ArrayList<FrdrequestItem>();
+        frdItem = new ArrayList<FrdRequestItem>();
 
 
-        frdItem.add(new FrdrequestItem("Hong"));
-        frdItem.add(new FrdrequestItem("Park"));
-        frdItem.add(new FrdrequestItem("Gins"));
-        frdItem.add(new FrdrequestItem("Geen"));
+        frdItem.add(new FrdRequestItem("Hong"));
+        frdItem.add(new FrdRequestItem("Park"));
+        frdItem.add(new FrdRequestItem("Gins"));
+        frdItem.add(new FrdRequestItem("Geen"));
 
         //frdItem 데이터 arrayList에 복사
-        arrayList = new ArrayList<FrdrequestItem>();
+        arrayList = new ArrayList<FrdRequestItem>();
         arrayList.addAll(frdItem);
 
 

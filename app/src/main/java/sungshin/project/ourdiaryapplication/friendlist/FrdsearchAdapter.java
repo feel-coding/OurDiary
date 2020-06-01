@@ -14,9 +14,9 @@ import sungshin.project.ourdiaryapplication.R;
 public class FrdsearchAdapter extends BaseAdapter{
 
     Context mContext = null;
-    ArrayList<FrdsearchItem> frdsearch;
+    ArrayList<FrdSearchItem> frdsearch;
 
-    public FrdsearchAdapter(Context context, ArrayList<FrdsearchItem> data) {
+    public FrdsearchAdapter(Context context, ArrayList<FrdSearchItem> data) {
         mContext = context;
         frdsearch = data;
     }
