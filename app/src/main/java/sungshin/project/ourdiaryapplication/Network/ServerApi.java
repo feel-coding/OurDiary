@@ -35,6 +35,12 @@ public interface ServerApi {
     @POST("/api/v1/friends/requests") //POST의 경우 Body 사용
     Call<Void> createFriendRequest(@Body ReqFriendRequestCreate reqFriendRequestCreate);
 
+    @GET("/api/v1/friends/requests")
+    Call<FriendRequest> getFriendRequestList();
+
+    @GET("/api/v1/friends")
+    Call<List<Friend>> getFriendList();
+
     @PUT("/api/v1/users/me")
     Call<User> updateUserMe(@Body ReqUserUpdateMe reqUserUpdateMe);
 

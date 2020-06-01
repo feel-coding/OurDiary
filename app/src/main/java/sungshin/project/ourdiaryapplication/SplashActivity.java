@@ -13,7 +13,10 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.concurrent.locks.Lock;
 
 import sungshin.project.ourdiaryapplication.Login.LoginActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdsearchActivity;
+
 import sungshin.project.ourdiaryapplication.Login.SignupActivity;
+
 import sungshin.project.ourdiaryapplication.main.LockActivity;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
 

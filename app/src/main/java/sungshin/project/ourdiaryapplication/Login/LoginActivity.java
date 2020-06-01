@@ -41,6 +41,7 @@ import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.FrdsearchActivity;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
 
 import com.kakao.auth.ApprovalType;

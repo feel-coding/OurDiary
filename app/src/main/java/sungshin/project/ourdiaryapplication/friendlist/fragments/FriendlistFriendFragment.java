@@ -33,6 +33,7 @@ import sungshin.project.ourdiaryapplication.Network.EachUser;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.FrdRequestActivity;
 import sungshin.project.ourdiaryapplication.friendlist.FrdlistActivity;
 import sungshin.project.ourdiaryapplication.friendlist.FrdSearchActivity;
 import sungshin.project.ourdiaryapplication.friendlist.adapter.FriendListAdapter;
@@ -49,6 +50,7 @@ public class FriendlistFriendFragment extends Fragment {
     SearchView friendSearchView;
     Context mContext;
     Activity activity;
+    Button friend_req_btn;
     private ServerApi serverApi;
     Button friendRequestBtn;
     @Override
@@ -111,6 +113,16 @@ public class FriendlistFriendFragment extends Fragment {
                 Intent i = new Intent(getActivity(), FrdlistActivity.class);
                 startActivity(i);
 
+            }
+        });
+
+        //친구 신청하기 버튼 클릭시
+        friend_req_btn = v.findViewById(R.id.friend_req_btn);
+        friend_req_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getActivity(), FrdRequestActivity.class);
+                startActivity(i);
             }
         });
         return v;

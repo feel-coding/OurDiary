@@ -6,29 +6,24 @@ import java.util.Date;
 
 public class Friend {
     BigInteger seq;
-    Integer userSeq;
-    Integer friendSeq;
+    String state;
     Date createdAt;
-    Date updatedAt;
+    User user;
 
     public BigInteger getSeq() {
         return seq;
     }
 
-    public Integer getUserSeq() {
-        return userSeq;
-    }
-
-    public Integer getFriendSeq() {
-        return friendSeq;
+    public String getState() {
+        return state;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public Date getUpdatedAt() {
-        return updatedAt;
+    public User getUser() {
+        return user;
     }
 
 
@@ -36,19 +31,15 @@ public class Friend {
         this.seq = seq;
     }
 
-    public void setUserSeq(Integer userSeq) {
-        this.userSeq = userSeq;
-    }
-
-    public void setFriendSeq(Integer friendSeq) {
-        this.friendSeq = friendSeq;
+    public void setState(String state) {
+        this.state = state;
     }
 
     public void setCreatedAt(Date createdAt) {
         this.createdAt = createdAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
