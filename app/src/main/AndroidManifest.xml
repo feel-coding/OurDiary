@@ -20,6 +20,10 @@
             android:value="@string/kakao_app_key" />
         <activity android:name=".friendlist.LeaveGroupActivity"></activity>
         <activity android:name=".main.LockActivity" />
+        <activity android:name=".newpost.LocClickActivity"></activity>
+
+        <activity android:name=".newpost.MapsActivity" />
+
         <activity android:name=".MySettinggroupActivity" />
         <activity android:name=".friendlist.DeligationActivity" />
         <activity android:name=".Login.NameAndNicknameSettingActivity" />
@@ -38,7 +42,7 @@
         <activity android:name=".friendlist.FrdrequestActivity" />
         <activity android:name=".DocumentActivity" />
         <activity android:name=".ImageGridActivity" />
-        <activity android:name=".NewPostActivity" />
+        <activity android:name=".newpost.NewPostActivity" />
         <activity
             android:name=".main.MainActivity"
             android:windowSoftInputMode="adjustPan" />
@@ -51,6 +55,14 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/map_key" />
     </application>
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
 </manifest>
