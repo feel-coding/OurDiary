@@ -3,6 +3,8 @@ package sungshin.project.ourdiaryapplication.newpost;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import sungshin.project.ourdiaryapplication.R;
+import sungshin.project.ourdiaryapplication.friendlist.FrdSearchActivity;
+import sungshin.project.ourdiaryapplication.friendlist.FrdsearchAdapter;
 
 import android.app.DatePickerDialog;
 import android.content.ClipData;
@@ -39,9 +41,12 @@ public class NewPostActivity extends AppCompatActivity {
     private ImageButton photoBtn;
     private GridView gridView;
     ClipData clipData;
+    ImageButton newpost_fTag_addBtn;
+
 
     public static final int PICTURE_REQUEST_CODE = 100;
     public static final int MAP_SEARCH_REQUEST_CODE = 101;
+    public static final int REQUEST_FRIENDTAG = 102;
 
     long now = System.currentTimeMillis();
     Date currentTime = new Date(now);
@@ -73,6 +78,16 @@ public class NewPostActivity extends AppCompatActivity {
 
         initDetailContainerBtn();
         initBtn();
+
+        //친구태그 +버튼 클릭
+        newpost_fTag_addBtn = findViewById(R.id.newpost_fTag_addBtn);
+        newpost_fTag_addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(NewPostActivity.this, FrdSearchActivity.class);
+                startActivityForResult(i, REQUEST_FRIENDTAG);
+            }
+        });
     }
 
     private void initBtn(){
@@ -127,6 +142,14 @@ public class NewPostActivity extends AppCompatActivity {
                 }
             break;
 
+            //todo:FrdSearchActivity에서 넘겨준 친구 데이터 받아 서버 Diary에 친구 리스트 추가, 화면에 이름 추가
+            case REQUEST_FRIENDTAG: {
+                if(resultCode == RESULT_OK) {
+                    Toast.makeText(NewPostActivity.this,data.getStringExtra("Name")
+                            +data.getStringExtra("Nick")+data.getIntExtra("Seq",0),Toast.LENGTH_SHORT).show();
+                }
+            }
+            break;
             default:
                 throw new IllegalStateException("Unexpected value: " + requestCode);
         }

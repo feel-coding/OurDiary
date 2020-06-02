@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.FriendReq;
 import sungshin.project.ourdiaryapplication.Network.ReqFriendRequestUpdate;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
@@ -27,11 +27,11 @@ import sungshin.project.ourdiaryapplication.R;
 
 public class FrdlistAcceptAdapter extends BaseAdapter {
     Context mContext = null;
-    ArrayList<Friend> frdlist_accept;
+    ArrayList<FriendReq> frdlist_accept;
     private ServerApi serverApi;
     private Gson gson = new Gson();
 
-    public FrdlistAcceptAdapter(Context context, ArrayList<Friend> data) {
+    public FrdlistAcceptAdapter(Context context, ArrayList<FriendReq> data) {
         mContext = context;
         frdlist_accept = data;
     }

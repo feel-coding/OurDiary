@@ -17,8 +17,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import sungshin.project.ourdiaryapplication.Network.Friend;
-import sungshin.project.ourdiaryapplication.Network.FriendRequest;
+import sungshin.project.ourdiaryapplication.Network.FriendReq;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
@@ -29,13 +28,13 @@ public class FrdlistActivity extends AppCompatActivity {
 
     private ListView frdrequest_list;
     FrdlistRequestAdapter frdlistRequestAdapter;
-    ArrayList<Friend> frdlist_requestItem;
+    ArrayList<FriendReq> frdlist_requestItem;
     private ServerApi serverApi;
     private Gson gson = new Gson();
 
     private ListView frdaccept_list;
     FrdlistAcceptAdapter frdlistAcceptAdapter;
-    ArrayList<Friend> frdlist_acceptItem;
+    ArrayList<FriendReq> frdlist_acceptItem;
 
     ImageButton back_btn;
 
@@ -46,15 +45,15 @@ public class FrdlistActivity extends AppCompatActivity {
 
         //친구 신청 listview
         frdrequest_list = (ListView)findViewById(R.id.frdrequest_list);
-        frdlist_requestItem = new ArrayList<Friend>();
+        frdlist_requestItem = new ArrayList<FriendReq>();
 
         //서버에서 데이터 가져오기
         serverApi = RetrofitManager.getInstance().getServerApi(this);
-        serverApi.getFriendRequestList("MY_SEND", 1,  15).enqueue(new Callback<List<Friend>>() {
+        serverApi.getFriendRequestList("MY_SEND", 1,  15).enqueue(new Callback<List<FriendReq>>() {
             @Override
-            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+            public void onResponse(Call<List<FriendReq>> call, Response<List<FriendReq>> response) {
                 if(response.isSuccessful()) {
-                    List<Friend> body = response.body();
+                    List<FriendReq> body = response.body();
                     Log.d("frdlistrequest","success"+body.size());
                     for(int i = 0; i < body.size(); i++) {
                         frdlist_requestItem.add(body.get(i));
@@ -78,7 +77,7 @@ public class FrdlistActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Friend>> call, Throwable t) {
+            public void onFailure(Call<List<FriendReq>> call, Throwable t) {
                 Log.d("정보","frdrequest failure");
             }
         });
@@ -89,13 +88,13 @@ public class FrdlistActivity extends AppCompatActivity {
 
         //친구 요청 listview
         frdaccept_list = (ListView)findViewById(R.id.frdaccpet_list);
-        frdlist_acceptItem = new ArrayList<Friend>();
+        frdlist_acceptItem = new ArrayList<FriendReq>();
 
-        serverApi.getFriendRequestList("FRIEND_SEND", 1,  15).enqueue(new Callback<List<Friend>>() {
+        serverApi.getFriendRequestList("FRIEND_SEND", 1,  15).enqueue(new Callback<List<FriendReq>>() {
             @Override
-            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+            public void onResponse(Call<List<FriendReq>> call, Response<List<FriendReq>> response) {
                 if(response.isSuccessful()) {
-                    List<Friend> body = response.body();
+                    List<FriendReq> body = response.body();
                     Log.d("frdlistaccept","success"+body.size());
                     for(int i = 0; i < body.size(); i++) {
                         frdlist_acceptItem.add(body.get(i));
@@ -120,7 +119,7 @@ public class FrdlistActivity extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Friend>> call, Throwable t) {
+            public void onFailure(Call<List<FriendReq>> call, Throwable t) {
                 Log.d("정보","frdrequest failure");
             }
         });

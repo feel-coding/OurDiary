@@ -10,14 +10,14 @@ import android.widget.TextView;
 
 import java.util.ArrayList;
 
-import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.FriendReq;
 import sungshin.project.ourdiaryapplication.R;
 
 public class FrdlistRequestAdapter extends BaseAdapter {
     Context mContext = null;
-    ArrayList<Friend> frdlist_request;
+    ArrayList<FriendReq> frdlist_request;
 
-    public FrdlistRequestAdapter(Context context, ArrayList<Friend> data) {
+    public FrdlistRequestAdapter(Context context, ArrayList<FriendReq> data) {
         mContext = context;
         frdlist_request = data;
     }

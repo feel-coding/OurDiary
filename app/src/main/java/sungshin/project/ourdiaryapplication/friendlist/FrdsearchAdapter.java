@@ -1,6 +1,8 @@
 package sungshin.project.ourdiaryapplication.friendlist;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,27 +10,31 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.FriendReq;
 import sungshin.project.ourdiaryapplication.Network.ReqCreateFriendRequest;
-import sungshin.project.ourdiaryapplication.Network.ReqFriendRequestCreate;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.User;
 import sungshin.project.ourdiaryapplication.R;
 
+import static android.app.Activity.RESULT_OK;
+
 public class FrdsearchAdapter extends BaseAdapter{
 
     Context mContext = null;
-    ArrayList<FrdSearchItem> frdsearch;
+    ArrayList<Friend> frdsearch;
     ServerApi serverApi;
     Integer mySeq;
 
-    public FrdsearchAdapter(Context context, ArrayList<FrdSearchItem> data) {
+    public FrdsearchAdapter(Context context, ArrayList<Friend> data) {
         mContext = context;
         frdsearch = data;
         serverApi = RetrofitManager.getInstance().getServerApi(mContext);
@@ -57,8 +63,8 @@ public class FrdsearchAdapter extends BaseAdapter{
         }
         TextView frdsearch_nick = view.findViewById(R.id.frdsearch_nick);
         TextView frdsearch_name = view.findViewById(R.id.frdsearch_name);
-        Button requestBtn = view.findViewById(R.id.request_btn);
-        requestBtn.setOnClickListener(new View.OnClickListener() {
+        Button addBtn = view.findViewById(R.id.add_btn);
+        addBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ReqCreateFriendRequest req = new ReqCreateFriendRequest();
@@ -97,9 +103,24 @@ public class FrdsearchAdapter extends BaseAdapter{
             }
         });
 
-        frdsearch_nick.setText(frdsearch.get(position).getNickname());
+        frdsearch_nick.setText(frdsearch.get(position).getNick());
         frdsearch_name.setText("("+frdsearch.get(position).getName()+")");
 
+        //추가 버튼 클릭
+        addBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //seq, name, nick NewPostActivity로 넘겨주기
+                Intent intent = new Intent();
+                intent.putExtra("seq",frdsearch.get(position).getSeq());
+                intent.putExtra("Name",frdsearch.get(position).getName());
+                intent.putExtra("Nick",frdsearch.get(position).getNick());
+                ((Activity)mContext).setResult(RESULT_OK, intent);
+
+                Toast.makeText(mContext,"친구를 태그에 추가합니다",Toast.LENGTH_SHORT).show();
+                ((Activity) mContext).finish();
+            }
+        });
         return view;
     }
 }
