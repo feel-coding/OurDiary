@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.ContextThemeWrapper;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,6 +14,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import java.util.concurrent.locks.Lock;
 
 import sungshin.project.ourdiaryapplication.Login.LoginActivity;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.friendlist.FrdSearchActivity;
 
 import sungshin.project.ourdiaryapplication.Login.SignupActivity;

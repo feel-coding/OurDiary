@@ -15,8 +15,10 @@ import android.net.NetworkCapabilities;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.util.Base64;
 import android.util.Log;
+import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -71,6 +73,8 @@ public class LoginActivity extends AppCompatActivity {
     TextView signUpTv;
     LinearLayout kakaoTalkSignInBtn;
     static final String SHARED_PREF_USER_NAME = "6000";
+    public final String SHARED_PREF_EMAIL = "EMAIL";
+    public final String SHARED_PREF_LOGIN_PW = "PASSWORD";
     private SessionCallback sessionCallback;
 
 
@@ -78,10 +82,35 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
+        SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+        String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+        String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+        if(!loginEmail.equals("-1") && !loginPassword.equals("-1")) {
+            ReqUserSignIn req = new ReqUserSignIn();
+            req.setId(loginEmail);
+            req.setPw(loginPassword);
+            req.setType("EMAIL");
+            serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                @Override
+                public void onResponse(Call<Void> call, Response<Void> response) {
+                    if (response.isSuccessful()) {
+                        //로그인을 하면 메인화면으로 간다.
+                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
+                        startActivity(intent);
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Void> call, Throwable t) {
+
+                }
+            });
+        }
         sessionCallback = new SessionCallback();
         Session.getCurrentSession().addCallback(sessionCallback);
         Session.getCurrentSession().checkAndImplicitOpen();
-        serverApi = RetrofitManager.getInstance().getServerApi(this);
 
         loginBtn = findViewById(R.id.loginBtn);
         idEditText = findViewById(R.id.idEditText);
@@ -109,6 +138,11 @@ public class LoginActivity extends AppCompatActivity {
                             //로그인을 하면 메인화면으로 간다.
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
                             startActivity(intent);
+                            SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(SHARED_PREF_EMAIL, id);
+                            editor.putString(SHARED_PREF_LOGIN_PW, pw);
+                            editor.apply();
                             LoginActivity.this.finish();
                         }
                         else {
