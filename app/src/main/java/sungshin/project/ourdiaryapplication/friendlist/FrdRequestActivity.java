@@ -2,6 +2,8 @@ package sungshin.project.ourdiaryapplication.friendlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -21,6 +23,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sungshin.project.ourdiaryapplication.Network.EachUser;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
@@ -36,6 +39,8 @@ public class FrdRequestActivity extends AppCompatActivity {
     private ServerApi serverApi;
     private Gson gson = new Gson();
     ImageButton backbtn;
+    final String SHARED_PREF_EMAIL = "EMAIL";
+    final String SHARED_PREF_LOGIN_PW = "PASSWORD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,7 +49,7 @@ public class FrdRequestActivity extends AppCompatActivity {
 
         serverApi = RetrofitManager.getInstance().getServerApi(this);
 
-        frdList = (ListView)findViewById(R.id.frdList);
+        frdList = findViewById(R.id.frdList);
         frdItem = new ArrayList<EachUser>();
 
         myAdapter = new MyAdapter(this,frdItem);
@@ -99,11 +104,11 @@ public class FrdRequestActivity extends AppCompatActivity {
                     if (response.isSuccessful()) {
                         Log.d("정보", "GetAllUsers success");
                         //todo:print response body in listview
-                        List<EachUser> body = response.body();
-                        Log.d("정보",  Integer.toString(body.size()));
-                        for (int i = 0; i < body.size(); i++) {
-                            frdItem.add(body.get(i));
-                            Log.d("정보", Integer.toString(i) + body.get(i).getName());
+                        List<EachUser> resultList = response.body();
+                        Log.d("정보",  Integer.toString(resultList.size()));
+                        for (int i = 0; i < resultList.size(); i++) {
+                            frdItem.add(resultList.get(i));
+                            Log.d("정보", Integer.toString(i) + resultList.get(i).getName());
                         }
                         myAdapter.notifyDataSetChanged();
 
@@ -123,7 +128,27 @@ public class FrdRequestActivity extends AppCompatActivity {
                                     Toast.makeText(FrdRequestActivity.this, "Invalid page size", Toast.LENGTH_SHORT).show();
                                     break;
                                 default:
-                                    Toast.makeText(FrdRequestActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                                    //Toast.makeText(FrdRequestActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                                    if (response.code() == 401) {
+                                        SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                                        String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                                        String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                                        ReqUserSignIn req = new ReqUserSignIn();
+                                        req.setType("EMAIL");
+                                        req.setId(loginEmail);
+                                        req.setPw(loginPassword);
+                                        serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                                            @Override
+                                            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                                            }
+
+                                            @Override
+                                            public void onFailure(Call<Void> call, Throwable t) {
+
+                                            }
+                                        });
+                                    }
                             }
                         } catch (Exception ignored) {
 
