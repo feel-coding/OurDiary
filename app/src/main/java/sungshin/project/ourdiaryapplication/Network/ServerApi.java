@@ -38,7 +38,7 @@ public interface ServerApi {
     Call<Void> createFriendRequest(@Body ReqCreateFriendRequest reqCreateFriendRequest);
 
     @PUT("/api/v1/friends/requests/{seq}")
-    Call<Void> updateFriendRequest(@Body ReqFriendRequestUpdate reqFriendRequestUpdate, @Path("seq") BigInteger seq);
+    Call<Void> updateFriendRequest(@Body ReqFriendRequestUpdate reqFriendRequestUpdate, @Path("seq")Integer seq);
 
     @GET("/api/v1/friends/requests")
     Call<List<FriendReq>> getFriendRequestList(@Query("direction") String direction, @Query("page") Integer page, @Query("page_size") Integer pageSize);

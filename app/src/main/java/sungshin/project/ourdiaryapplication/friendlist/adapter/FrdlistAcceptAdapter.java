@@ -72,8 +72,7 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                 serverApi = RetrofitManager.getInstance().getServerApi(mContext);
                 ReqFriendRequestUpdate req = new ReqFriendRequestUpdate();
                 req.setResponse("ACCEPT");
-                BigInteger bi = BigInteger.valueOf(frdlist_accept.get(position).getUser().getSeq());
-                serverApi.updateFriendRequest(req, bi)
+                serverApi.updateFriendRequest(req, frdlist_accept.get(position).getUser().getSeq())
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -113,8 +112,7 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                 ReqFriendRequestUpdate req = new ReqFriendRequestUpdate();
                 req.setResponse("DENY");
 
-                BigInteger bi = BigInteger.valueOf(frdlist_accept.get(position).getUser().getSeq());
-                serverApi.updateFriendRequest(req, bi)
+                serverApi.updateFriendRequest(req, frdlist_accept.get(position).getUser().getSeq())
                         .enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
