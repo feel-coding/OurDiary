@@ -1,17 +1,33 @@
 package sungshin.project.ourdiaryapplication.Network;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.math.BigInteger;
 import java.util.Date;
 
 public class Group {
-    private BigInteger seq;
-    private String name;
-    private String nick;
-    private Integer userCount;
+    @SerializedName("created_at")
     private Date createdAt;
+
+    @SerializedName("king_user_seq")
+    private Integer kingUserSeq;
+
+    @SerializedName("name")
+    private String name;
+
+    @SerializedName("nick")
+    private String nick;
+
+    @SerializedName("seq")
+    private Integer seq;
+
+    @SerializedName("updated_at")
     private Date updatedAt;
 
-    public BigInteger getSeq() {
+    @SerializedName("user_count")
+    private Integer userCount;
+
+    public Integer getSeq() {
         return seq;
     }
 
@@ -35,7 +51,7 @@ public class Group {
         return updatedAt;
     }
 
-    public void setSeq(BigInteger seq) {
+    public void setSeq(Integer seq) {
         this.seq = seq;
     }
 

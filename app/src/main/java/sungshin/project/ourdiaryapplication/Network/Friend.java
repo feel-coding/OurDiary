@@ -1,13 +1,26 @@
 package sungshin.project.ourdiaryapplication.Network;
 
+import com.google.gson.annotations.SerializedName;
+
 import java.util.Date;
 
 public class Friend {
+    @SerializedName("created_at")
     private Date createdAt;
+
+    @SerializedName("email")
     private String email;
+
+    @SerializedName("is_friend")
     private Boolean isFriend;
+
+    @SerializedName("name")
     private String name;
+
+    @SerializedName("nick")
     private String nick;
+
+    @SerializedName("seq")
     private Integer seq;
 
     public Date getCreatedAt() {
