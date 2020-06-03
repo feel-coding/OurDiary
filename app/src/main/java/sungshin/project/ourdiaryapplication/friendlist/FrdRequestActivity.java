@@ -42,6 +42,8 @@ public class FrdRequestActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_frdrequest);
 
+        serverApi = RetrofitManager.getInstance().getServerApi(this);
+
         frdList = (ListView)findViewById(R.id.frdList);
         frdItem = new ArrayList<EachUser>();
 
@@ -91,7 +93,6 @@ public class FrdRequestActivity extends AppCompatActivity {
         else {
 
             //서버에서 데이터 가져오기
-            serverApi = RetrofitManager.getInstance().getServerApi(this);
             serverApi.getAllUsers(1, 15, text).enqueue(new Callback<List<EachUser>>() {
                 @Override
                 public void onResponse(Call<List<EachUser>> call, Response<List<EachUser>> response) {

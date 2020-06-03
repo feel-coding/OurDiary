@@ -5,12 +5,12 @@ import java.math.BigInteger;
 import java.util.Date;
 
 public class FriendReq {
-    BigInteger seq;
+    Integer seq;
     String state;
     Date createdAt;
     User user;
 
-    public BigInteger getSeq() {
+    public Integer getSeq() {
         return seq;
     }
 
@@ -27,7 +27,7 @@ public class FriendReq {
     }
 
 
-    public void setSeq(BigInteger seq) {
+    public void setSeq(Integer seq) {
         this.seq = seq;
     }
 

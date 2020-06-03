@@ -72,7 +72,7 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                 serverApi = RetrofitManager.getInstance().getServerApi(mContext);
                 ReqFriendRequestUpdate req = new ReqFriendRequestUpdate();
                 req.setResponse("ACCEPT");
-                serverApi.updateFriendRequest(req, frdlist_accept.get(position).getUser().getSeq())
+                serverApi.updateFriendRequest(req, frdlist_accept.get(position).getSeq())
                 .enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
@@ -87,6 +87,9 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                                 String jsonString = response.errorBody().string();
                                 ServerError serverError = gson.fromJson(jsonString, ServerError.class);
 
+                                if(response.code() == 400) {
+                                    Toast.makeText(mContext,"이미 수락된 친구입니다",Toast.LENGTH_SHORT).show();
+                                }
                                 Toast.makeText(mContext, serverError.getMessage(), Toast.LENGTH_SHORT).show();
 
                             } catch (Exception ignored) {
@@ -112,7 +115,7 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                 ReqFriendRequestUpdate req = new ReqFriendRequestUpdate();
                 req.setResponse("DENY");
 
-                serverApi.updateFriendRequest(req, frdlist_accept.get(position).getUser().getSeq())
+                serverApi.updateFriendRequest(req, frdlist_accept.get(position).getSeq())
                         .enqueue(new Callback<Void>() {
                             @Override
                             public void onResponse(Call<Void> call, Response<Void> response) {
