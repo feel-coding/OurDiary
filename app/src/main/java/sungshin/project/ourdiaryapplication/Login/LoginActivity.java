@@ -3,6 +3,7 @@ package sungshin.project.ourdiaryapplication.Login;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -76,6 +77,7 @@ public class LoginActivity extends AppCompatActivity {
     public final String SHARED_PREF_EMAIL = "EMAIL";
     public final String SHARED_PREF_LOGIN_PW = "PASSWORD";
     private SessionCallback sessionCallback;
+    ProgressDialog progressDialog;
 
 
     @Override
@@ -87,6 +89,7 @@ public class LoginActivity extends AppCompatActivity {
         String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
         String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
         if(!loginEmail.equals("-1") && !loginPassword.equals("-1")) {
+            loading();
             ReqUserSignIn req = new ReqUserSignIn();
             req.setId(loginEmail);
             req.setPw(loginPassword);
@@ -99,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
                         Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
                         startActivity(intent);
                         finish();
+                        loadingEnd();
                     }
                 }
 
@@ -249,4 +253,26 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    public void loading() {
+        //로딩
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    public void run() {
+                        progressDialog = new ProgressDialog(LoginActivity.this);
+                        progressDialog.setIndeterminate(true);
+                        progressDialog.setMessage("자동 로그인 중입니다.");
+                        progressDialog.show();
+                    }
+                }, 100);
+    }
+
+    public void loadingEnd() {
+        new android.os.Handler().postDelayed(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        progressDialog.dismiss();
+                    }
+                }, 0);
+    }
 }
