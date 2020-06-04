@@ -43,6 +43,7 @@ import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
+import sungshin.project.ourdiaryapplication.Network.User;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.friendlist.FrdSearchActivity;
 import sungshin.project.ourdiaryapplication.main.MainActivity;
@@ -84,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+
         serverApi = RetrofitManager.getInstance().getServerApi(this);
         SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
         String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
@@ -99,10 +101,42 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<Void> call, Response<Void> response) {
                     if (response.isSuccessful()) {
                         //로그인을 하면 메인화면으로 간다.
-                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
-                        startActivity(intent);
-                        finish();
-                        loadingEnd();
+                        serverApi.getUserMe().enqueue(new Callback<User>() {
+                            @Override
+                            public void onResponse(Call<User> call, Response<User> response) {
+                                if(response.isSuccessful()) {
+                                    if (response.body().getNick() == null) { //닉네임이 없는 사용자의 경우
+//                                        SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+//                                        SharedPreferences.Editor editor = sharedPref.edit();
+//                                        editor.putString(SHARED_PREF_EMAIL, loginEmail);
+//                                        editor.putString(SHARED_PREF_LOGIN_PW, loginPassword);
+//                                        editor.apply();
+                                        Intent intent = new Intent(LoginActivity.this, NicknameSettingActivity.class);
+                                        startActivity(intent);
+                                        LoginActivity.this.finish();
+                                    } else { //자동 로그인
+                                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+                                        startActivity(intent);
+                                        SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                                        SharedPreferences.Editor editor = sharedPref.edit();
+                                        editor.putString(SHARED_PREF_EMAIL, loginEmail);
+                                        editor.putString(SHARED_PREF_LOGIN_PW, loginPassword);
+                                        editor.apply();
+                                        LoginActivity.this.finish();
+                                        loadingEnd();
+                                    }
+                                }
+                            }
+
+                            @Override
+                            public void onFailure(Call<User> call, Throwable t) {
+
+                            }
+                        });
+//                        Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
+//                        startActivity(intent);
+//                        finish();
+//                        loadingEnd();
                     }
                 }
 
@@ -140,14 +174,39 @@ public class LoginActivity extends AppCompatActivity {
                         //response.isSuccessful() // 200~399는 성공(true) 400~599는 실패(false)
                         if (response.isSuccessful()) {
                             //로그인을 하면 메인화면으로 간다.
-                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
-                            startActivity(intent);
-                            SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
-                            SharedPreferences.Editor editor = sharedPref.edit();
-                            editor.putString(SHARED_PREF_EMAIL, id);
-                            editor.putString(SHARED_PREF_LOGIN_PW, pw);
-                            editor.apply();
-                            LoginActivity.this.finish();
+                            serverApi.getUserMe().enqueue(new Callback<User>() {
+                                @Override
+                                public void onResponse(Call<User> call, Response<User> response) {
+                                    if(response.isSuccessful()) {
+                                        if (response.body().getNick() == null) { //닉네임 설정이 안 된 사용자는 닉네임 설정창으로
+//                                            SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+//                                            SharedPreferences.Editor editor = sharedPref.edit();
+//                                            editor.putString(SHARED_PREF_EMAIL, id);
+//                                            editor.putString(SHARED_PREF_LOGIN_PW, pw);
+//                                            editor.apply();
+                                            Intent intent = new Intent(LoginActivity.this, NicknameSettingActivity.class);
+                                            intent.putExtra("email", idEditText.getText().toString());
+                                            intent.putExtra("password", pwEditText.getText().toString());
+                                            startActivity(intent);
+                                            LoginActivity.this.finish();
+                                        } else {
+                                            Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
+                                            startActivity(intent);
+                                            SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                                            SharedPreferences.Editor editor = sharedPref.edit();
+                                            editor.putString(SHARED_PREF_EMAIL, id);
+                                            editor.putString(SHARED_PREF_LOGIN_PW, pw);
+                                            editor.apply();
+                                            LoginActivity.this.finish();
+                                        }
+                                    }
+                                }
+
+                                @Override
+                                public void onFailure(Call<User> call, Throwable t) {
+
+                                }
+                            });
                         }
                         else {
                             Log.d("loginerror", "error code: " + response.code()); //401에러인지 500 에러인지 에러 번호가 뜸
@@ -263,7 +322,7 @@ public class LoginActivity extends AppCompatActivity {
                         progressDialog.setMessage("자동 로그인 중입니다.");
                         progressDialog.show();
                     }
-                }, 100);
+                }, 0);
     }
 
     public void loadingEnd() {
