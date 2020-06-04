@@ -7,6 +7,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -57,6 +58,8 @@ public class MyPageFragment extends Fragment {
     private Gson gson = new Gson();
     String name;
     String nickname;
+    static final String SHARED_PREF_EMAIL = "EMAIL";
+    static final String SHARED_PREF_LOGIN_PW = "PASSWORD";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -173,8 +176,17 @@ public class MyPageFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.d("logout", "onResponse");
-                        if(response.isSuccessful())
+                        if(response.isSuccessful()) {
                             Log.d("logoutsuccess", "success");
+                            SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(SHARED_PREF_EMAIL, "-1");
+                            editor.putString(SHARED_PREF_LOGIN_PW, "-1");
+                            editor.apply();
+                            activity.finish();
+                            Intent intent = new Intent(activity, LoginActivity.class);
+                            startActivity(intent);
+                        }
                         else {
                             Log.d("logouterror", "" + response.code());
                         }
@@ -185,9 +197,6 @@ public class MyPageFragment extends Fragment {
                         Log.d("logouterror", t.getMessage());
                     }
                 });
-                activity.finish();
-                Intent intent = new Intent(activity, LoginActivity.class);
-                startActivity(intent);
             }
         });
         return v;
