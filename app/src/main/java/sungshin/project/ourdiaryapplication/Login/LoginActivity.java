@@ -63,8 +63,6 @@ import com.kakao.usermgmt.callback.MeV2ResponseCallback;
 import com.kakao.util.exception.KakaoException;
 
 
-
-
 public class LoginActivity extends AppCompatActivity {
 
     private ServerApi serverApi;
@@ -73,7 +71,7 @@ public class LoginActivity extends AppCompatActivity {
     EditText idEditText;
     EditText pwEditText;
     TextView signUpTv;
-    LinearLayout kakaoTalkSignInBtn;
+    //    LinearLayout kakaoTalkSignInBtn;
     static final String SHARED_PREF_USER_NAME = "6000";
     public final String SHARED_PREF_EMAIL = "EMAIL";
     public final String SHARED_PREF_LOGIN_PW = "PASSWORD";
@@ -85,13 +83,17 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-
+        SharedPreferences sharedPre = getSharedPreferences("login", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPre.edit();
+        editor.putString(SHARED_PREF_EMAIL, "-1");
+        editor.putString(SHARED_PREF_LOGIN_PW, "-1");
+        editor.apply();
         serverApi = RetrofitManager.getInstance().getServerApi(this);
         SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
         String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
         String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
-        if(!loginEmail.equals("-1") && !loginPassword.equals("-1")) {
-            loading();
+        if (!loginEmail.equals("-1") && !loginPassword.equals("-1")) {
+            loading("자동 로그인 중입니다.");
             ReqUserSignIn req = new ReqUserSignIn();
             req.setId(loginEmail);
             req.setPw(loginPassword);
@@ -104,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
                         serverApi.getUserMe().enqueue(new Callback<User>() {
                             @Override
                             public void onResponse(Call<User> call, Response<User> response) {
-                                if(response.isSuccessful()) {
+                                if (response.isSuccessful()) {
                                     if (response.body().getNick() == null) { //닉네임이 없는 사용자의 경우
 //                                        SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
 //                                        SharedPreferences.Editor editor = sharedPref.edit();
@@ -154,11 +156,12 @@ public class LoginActivity extends AppCompatActivity {
         idEditText = findViewById(R.id.idEditText);
         pwEditText = findViewById(R.id.pwEditText);
         signUpTv = findViewById(R.id.signUpTv);
-        kakaoTalkSignInBtn = findViewById(R.id.kakaoTalkSignInBtn);
+//        kakaoTalkSignInBtn = findViewById(R.id.kakaoTalkSignInBtn);
 
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                loading("로그인 중입니다.");
                 Log.d("lgin", "clicked");
                 String id = idEditText.getText().toString();
                 String pw = pwEditText.getText().toString();
@@ -170,14 +173,14 @@ public class LoginActivity extends AppCompatActivity {
                 req.setPw(pw);
                 serverApi.signInUser(req).enqueue(new Callback<Void>() {
                     @Override
-                    public void onResponse(Call<Void> call,Response<Void> response) {
+                    public void onResponse(Call<Void> call, Response<Void> response) {
                         //response.isSuccessful() // 200~399는 성공(true) 400~599는 실패(false)
                         if (response.isSuccessful()) {
                             //로그인을 하면 메인화면으로 간다.
                             serverApi.getUserMe().enqueue(new Callback<User>() {
                                 @Override
                                 public void onResponse(Call<User> call, Response<User> response) {
-                                    if(response.isSuccessful()) {
+                                    if (response.isSuccessful()) {
                                         if (response.body().getNick() == null) { //닉네임 설정이 안 된 사용자는 닉네임 설정창으로
 //                                            SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
 //                                            SharedPreferences.Editor editor = sharedPref.edit();
@@ -189,6 +192,7 @@ public class LoginActivity extends AppCompatActivity {
                                             intent.putExtra("password", pwEditText.getText().toString());
                                             startActivity(intent);
                                             LoginActivity.this.finish();
+                                            loadingEnd();
                                         } else {
                                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);//이렇게 해야 로그인으로 감
                                             startActivity(intent);
@@ -198,6 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                                             editor.putString(SHARED_PREF_LOGIN_PW, pw);
                                             editor.apply();
                                             LoginActivity.this.finish();
+                                            loadingEnd();
                                         }
                                     }
                                 }
@@ -207,10 +212,9 @@ public class LoginActivity extends AppCompatActivity {
 
                                 }
                             });
-                        }
-                        else {
+                        } else {
                             Log.d("loginerror", "error code: " + response.code()); //401에러인지 500 에러인지 에러 번호가 뜸
-                            if(response.code() == 400) {
+                            if (response.code() == 400) {
                                 Toast.makeText(LoginActivity.this, "비밀번호가 일치하지 않습니다.", Toast.LENGTH_SHORT).show();
                             }
                             try {
@@ -249,20 +253,20 @@ public class LoginActivity extends AppCompatActivity {
                 LoginActivity.this.finish();
             }
         });
-        kakaoTalkSignInBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(LoginActivity.this, NameAndNicknameSettingActivity.class);
-                startActivity(i);
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ourdiary.site:8081/test-kakao.html"));
-                startActivity(intent);
-            }
-        });
+//        kakaoTalkSignInBtn.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Intent i = new Intent(LoginActivity.this, NameAndNicknameSettingActivity.class);
+//                startActivity(i);
+//                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.ourdiary.site:8081/test-kakao.html"));
+//                startActivity(intent);
+//            }
+//        });
     }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if(Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
+        if (Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data)) {
             super.onActivityResult(requestCode, resultCode, data);
             return;
         }
@@ -282,17 +286,17 @@ public class LoginActivity extends AppCompatActivity {
                 public void onFailure(ErrorResult errorResult) {
                     int result = errorResult.getErrorCode();
 
-                    if(result == ApiErrorCode.CLIENT_ERROR_CODE) {
+                    if (result == ApiErrorCode.CLIENT_ERROR_CODE) {
                         Toast.makeText(getApplicationContext(), "네트워크 연결이 불안정합니다. 다시 시도해 주세요.", Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        Toast.makeText(getApplicationContext(),"로그인 도중 오류가 발생했습니다: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다: " + errorResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }
 
                 @Override
                 public void onSessionClosed(ErrorResult errorResult) {
-                    Toast.makeText(getApplicationContext(),"세션이 닫혔습니다. 다시 시도해 주세요: "+errorResult.getErrorMessage(),Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "세션이 닫혔습니다. 다시 시도해 주세요: " + errorResult.getErrorMessage(), Toast.LENGTH_SHORT).show();
                 }
 
                 @Override
@@ -308,18 +312,18 @@ public class LoginActivity extends AppCompatActivity {
 
         @Override
         public void onSessionOpenFailed(KakaoException e) {
-            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: "+e.toString(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "로그인 도중 오류가 발생했습니다. 인터넷 연결을 확인해주세요: " + e.toString(), Toast.LENGTH_SHORT).show();
         }
     }
 
-    public void loading() {
+    public void loading(String message) {
         //로딩
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
                         progressDialog = new ProgressDialog(LoginActivity.this);
                         progressDialog.setIndeterminate(true);
-                        progressDialog.setMessage("자동 로그인 중입니다.");
+                        progressDialog.setMessage(message);
                         progressDialog.show();
                     }
                 }, 0);

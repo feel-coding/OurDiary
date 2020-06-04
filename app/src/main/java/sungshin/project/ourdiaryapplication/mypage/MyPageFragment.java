@@ -36,6 +36,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sungshin.project.ourdiaryapplication.DocwriteActivity;
 import sungshin.project.ourdiaryapplication.Login.LoginActivity;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.ReqUserUpdateMe;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
@@ -60,6 +61,7 @@ public class MyPageFragment extends Fragment {
     String nickname;
     static final String SHARED_PREF_EMAIL = "EMAIL";
     static final String SHARED_PREF_LOGIN_PW = "PASSWORD";
+    Button withdrawalBtn;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -73,23 +75,42 @@ public class MyPageFragment extends Fragment {
         myNickTv = v.findViewById(R.id.mypage_nick_tv);
         logoutBtn = v.findViewById(R.id.btn_mypage_logout);
         writeButton = v.findViewById(R.id.btn_mypage_newpost);
+        withdrawalBtn = v.findViewById(R.id.btn_mypage_withdrawal);
         serverApi.getUserMe().enqueue(new Callback<User>() {
             @Override
             public void onResponse(Call<User> call, Response<User> response) {
                 Log.d("response", "onResponse안에는 들어옴");
-                if(response.isSuccessful()) {
+                if (response.isSuccessful()) {
                     name = response.body().getName();
                     myEmailTv.setText(name);
                     nickname = response.body().getNick();
                     myNickTv.setText(nickname);
-                }
-                else {
+                } else {
+                    if (response.code() == 401) {
+                        SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+                        String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                        String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                        ReqUserSignIn req = new ReqUserSignIn();
+                        req.setType("EMAIL");
+                        req.setId(loginEmail);
+                        req.setPw(loginPassword);
+                        serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+
+                            }
+                        });
+                    }
                     Log.d("response", "" + response.code());
                     String jsonString = "";
                     try {
                         jsonString = response.errorBody().string();
-                    }
-                    catch (IOException e) {
+                    } catch (IOException e) {
 
                     }
                     ServerError serverError = gson.fromJson(jsonString, ServerError.class);
@@ -116,6 +137,32 @@ public class MyPageFragment extends Fragment {
                 startActivity(i);
             }
         });
+        withdrawalBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                serverApi.deleteMyAccount().enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if (response.isSuccessful()) {
+                            SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+                            SharedPreferences.Editor editor = sharedPref.edit();
+                            editor.putString(SHARED_PREF_EMAIL, "-1");
+                            editor.putString(SHARED_PREF_LOGIN_PW, "-1");
+                            editor.apply();
+                            Toast.makeText(activity, "탈퇴가 완료되었습니다.", Toast.LENGTH_SHORT).show();
+                            Intent intent = new Intent(activity, LoginActivity.class);
+                            startActivity(intent);
+                            activity.finish();
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
         changeNicknameBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -131,23 +178,20 @@ public class MyPageFragment extends Fragment {
                                 String nickname = nicknameEdit.getText().toString();
                                 if (nickname.equals("")) {
                                     Toast.makeText(activity, "닉네임을 입력해주세요", Toast.LENGTH_SHORT).show();
-                                }
-                                else {
+                                } else {
                                     ReqUserUpdateMe req = new ReqUserUpdateMe();
                                     req.setName(name);
                                     req.setNick(nickname);
                                     serverApi.updateUserMe(req).enqueue(new Callback<User>() {
                                         @Override
                                         public void onResponse(Call<User> call, Response<User> response) {
-                                            if(response.isSuccessful()) {
+                                            if (response.isSuccessful()) {
                                                 Toast.makeText(activity, "닉네임 변경이 완료되었습니다.", Toast.LENGTH_SHORT).show();
                                                 myNickTv.setText(response.body().getNick());
 
-                                            }
-                                            else if (response.code() == 400){
+                                            } else if (response.code() == 400) {
                                                 Toast.makeText(activity, "이미 존재하는 닉네임입니다.", Toast.LENGTH_SHORT).show();
-                                            }
-                                            else {
+                                            } else {
                                                 Toast.makeText(activity, "error " + response.code(), Toast.LENGTH_SHORT).show();
                                             }
                                         }
@@ -176,7 +220,7 @@ public class MyPageFragment extends Fragment {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {
                         Log.d("logout", "onResponse");
-                        if(response.isSuccessful()) {
+                        if (response.isSuccessful()) {
                             Log.d("logoutsuccess", "success");
                             SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
                             SharedPreferences.Editor editor = sharedPref.edit();
@@ -186,8 +230,7 @@ public class MyPageFragment extends Fragment {
                             activity.finish();
                             Intent intent = new Intent(activity, LoginActivity.class);
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             Log.d("logouterror", "" + response.code());
                         }
                     }

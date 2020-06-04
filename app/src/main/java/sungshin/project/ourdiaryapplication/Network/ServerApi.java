@@ -57,4 +57,7 @@ public interface ServerApi {
 
     @GET("/api/v1/diaries")
     Call<List<Diary>> getDiaries(@Query("filterType") String filterType);
+
+    @DELETE("/api/v1/users/me")
+    Call<Void> deleteMyAccount();
 }

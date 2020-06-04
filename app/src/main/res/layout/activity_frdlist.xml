@@ -46,7 +46,7 @@
         android:id="@+id/layout_frdrequest"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:background="#A4D7DD"
+        android:background="@color/colorPrimary"
         app:layout_constraintTop_toBottomOf="@id/home_tb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -58,8 +58,8 @@
             android:layout_marginLeft="20dp"
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
-            android:text="친구 신청 현황 (대기중)"
-            android:textColor="#0F7DD3"
+            android:text="내가 한 친구 신청 (대기중)"
+            android:textColor="@color/colorWhite"
             android:textSize="18dp"
             android:textStyle="bold" />
     </LinearLayout>
@@ -80,7 +80,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginBottom="579dp"
-        android:background="#A4D7DD"
+        android:background="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
@@ -95,7 +95,7 @@
             android:layout_marginTop="15dp"
             android:layout_marginBottom="15dp"
             android:text="친구 요청 받음"
-            android:textColor="#0F7DD3"
+            android:textColor="@color/colorWhite"
             android:textSize="18dp"
             android:textStyle="bold" />
     </LinearLayout>

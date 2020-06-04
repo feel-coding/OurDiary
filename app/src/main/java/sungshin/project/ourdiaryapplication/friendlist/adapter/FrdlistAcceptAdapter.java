@@ -79,7 +79,7 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                         if(response.isSuccessful()) {
                             Log.d("frdlistaccept","success");
                             Toast.makeText(mContext,"수락되었습니다",Toast.LENGTH_SHORT).show();
-
+                            frdlist_accept.remove(position);
                         }
                         else {
                             Log.d("frdlistaccepterror","error code"+response.code());

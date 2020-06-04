@@ -2,6 +2,8 @@ package sungshin.project.ourdiaryapplication.friendlist;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,6 +20,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sungshin.project.ourdiaryapplication.Network.FriendReq;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.Network.ServerError;
@@ -35,6 +38,8 @@ public class FrdlistActivity extends AppCompatActivity {
     private ListView frdaccept_list;
     FrdlistAcceptAdapter frdlistAcceptAdapter;
     ArrayList<FriendReq> frdlist_acceptItem;
+    static final String SHARED_PREF_EMAIL = "EMAIL";
+    static final String SHARED_PREF_LOGIN_PW = "PASSWORD";
 
     ImageButton back_btn;
 
@@ -64,11 +69,31 @@ public class FrdlistActivity extends AppCompatActivity {
                 }
                 else {
                     Log.d("frdlistrequesterror","error code"+response.code());
+                    if (response.code() == 401) {
+                        SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                        String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                        String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                        ReqUserSignIn req = new ReqUserSignIn();
+                        req.setType("EMAIL");
+                        req.setId(loginEmail);
+                        req.setPw(loginPassword);
+                        serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+
+                            }
+                        });
+                    }
                     try {
                         String jsonString = response.errorBody().string();
                         ServerError serverError = gson.fromJson(jsonString, ServerError.class);
 
-                        Toast.makeText(FrdlistActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                        //Toast.makeText(FrdlistActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
 
                     } catch (Exception ignored) {
 

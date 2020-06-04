@@ -4,6 +4,7 @@ package sungshin.project.ourdiaryapplication.home.fragments;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -26,6 +27,7 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
@@ -44,6 +46,8 @@ public class HomeAllFragment extends Fragment {
     Context mContext;
     Activity activity;
     ServerApi serverApi;
+    public final String SHARED_PREF_EMAIL = "EMAIL";
+    public final String SHARED_PREF_LOGIN_PW = "PASSWORD";
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -53,7 +57,7 @@ public class HomeAllFragment extends Fragment {
         recyclerView = v.findViewById(R.id.diaryBook);
         filterBtn = v.findViewById(R.id.filterBtn);
         spinner = v.findViewById(R.id.yearAndMonthSpinner);
-        yearAndMonth = new String[]{"2020년 3월", "2020년 4월", "2020년 5월"};
+        yearAndMonth = new String[]{"전체", "2020년 3월", "2020년 4월", "2020년 5월"};
         yearAndMonthAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, yearAndMonth);
         spinner.setAdapter(yearAndMonthAdapter);
 
@@ -73,6 +77,28 @@ public class HomeAllFragment extends Fragment {
                         diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
                     }
                     adapter.notifyDataSetChanged();
+                }
+                else {
+                    if (response.code() == 401) {
+                        SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+                        String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                        String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                        ReqUserSignIn req = new ReqUserSignIn();
+                        req.setType("EMAIL");
+                        req.setId(loginEmail);
+                        req.setPw(loginPassword);
+                        serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                            @Override
+                            public void onResponse(Call<Void> call, Response<Void> response) {
+
+                            }
+
+                            @Override
+                            public void onFailure(Call<Void> call, Throwable t) {
+
+                            }
+                        });
+                    }
                 }
             }
 

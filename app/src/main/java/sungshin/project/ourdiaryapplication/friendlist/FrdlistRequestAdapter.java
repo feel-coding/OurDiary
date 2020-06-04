@@ -44,10 +44,11 @@ public class FrdlistRequestAdapter extends BaseAdapter {
             view = mInflator.inflate(R.layout.frdlist_request_item, viewGroup,false);
         }
         TextView frdlist_request_nick = (TextView)view.findViewById(R.id.frdlist_request_nick);
+
         TextView frdlist_request_name = view.findViewById(R.id.frdlist_request_name);
         Log.d("frdlist_request",frdlist_request.get(position).toString());
-        frdlist_request_nick.setText(frdlist_request.get(position).getUser().getNick());
-        frdlist_request_name.setText("("+frdlist_request.get(position).getUser().getName()+")");
+        frdlist_request_nick.setText(((frdlist_request.get(position).getUser().getNick() == null)?"닉네임이 없는 사용자":frdlist_request.get(position).getUser().getNick()) + " ("+frdlist_request.get(position).getUser().getName()+")");
+        //frdlist_request_name.setText("("+frdlist_request.get(position).getUser().getName()+")");
 
         return view;
     }
