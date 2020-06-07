@@ -62,7 +62,12 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
         Button frdlist_accept_btn1 = view.findViewById(R.id.frdlist_accept_btn1);
         Button frdlist_accept_btn2 = view.findViewById(R.id.frdlist_accept_btn2);
 
-        frdlist_accept_nick.setText(frdlist_accept.get(position).getUser().getNick());
+        if (frdlist_accept.get(position).getUser().getNick() == null)
+            frdlist_accept_nick.setText("닉네임이 없는 사용자");
+        else
+            frdlist_accept_nick.setText(frdlist_accept.get(position).getUser().getNick());
+
+
         frdlist_accept_name.setText("("+frdlist_accept.get(position).getUser().getName()+")");
 
         //수락 클릭
@@ -79,6 +84,8 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                         if(response.isSuccessful()) {
                             Log.d("frdlistaccept","success");
                             Toast.makeText(mContext,"수락되었습니다",Toast.LENGTH_SHORT).show();
+                            //친구 수락시 요청 받음 목록에서 삭제
+                            frdlist_accept.remove(frdlist_accept.get(position));
 
                         }
                         else {
@@ -89,9 +96,9 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
 
                                 if(response.code() == 400) {
                                     Toast.makeText(mContext,"이미 수락된 친구입니다",Toast.LENGTH_SHORT).show();
+                                } else {
+                                    Toast.makeText(mContext, serverError.getMessage(), Toast.LENGTH_SHORT).show();
                                 }
-                                Toast.makeText(mContext, serverError.getMessage(), Toast.LENGTH_SHORT).show();
-
                             } catch (Exception ignored) {
 
                             }
@@ -128,9 +135,11 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                                     try {
                                         String jsonString = response.errorBody().string();
                                         ServerError serverError = gson.fromJson(jsonString, ServerError.class);
-
-                                        Toast.makeText(mContext, serverError.getMessage()+response.code(), Toast.LENGTH_SHORT).show();
-
+                                        if(response.code() == 400) {
+                                            Toast.makeText(mContext,"이미 수락된 친구입니다",Toast.LENGTH_SHORT).show();
+                                        } else {
+                                            Toast.makeText(mContext, serverError.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
                                     } catch (Exception ignored) {
 
                                     }

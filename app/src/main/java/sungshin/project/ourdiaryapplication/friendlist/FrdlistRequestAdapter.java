@@ -46,9 +46,12 @@ public class FrdlistRequestAdapter extends BaseAdapter {
         TextView frdlist_request_nick = (TextView)view.findViewById(R.id.frdlist_request_nick);
         TextView frdlist_request_name = view.findViewById(R.id.frdlist_request_name);
         Log.d("frdlist_request",frdlist_request.get(position).toString());
-        frdlist_request_nick.setText(frdlist_request.get(position).getUser().getNick());
+        if(frdlist_request.get(position).getUser().getNick() == null) {
+            frdlist_request_nick.setText("닉네임이 없는 사용자");
+        } else {
+            frdlist_request_nick.setText(frdlist_request.get(position).getUser().getNick());
+        }
         frdlist_request_name.setText("("+frdlist_request.get(position).getUser().getName()+")");
-
         return view;
     }
 }

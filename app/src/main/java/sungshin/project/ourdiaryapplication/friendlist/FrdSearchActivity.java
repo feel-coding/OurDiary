@@ -112,6 +112,8 @@ public class FrdSearchActivity extends AppCompatActivity {
                     @Override
                     public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                         if(response.isSuccessful()) {
+                            arrayList.clear();
+
                             Log.d("searchsuccess", "성공");
                             List<Friend> body = response.body();
                             for (int i = 0; i < body.size(); i++) {

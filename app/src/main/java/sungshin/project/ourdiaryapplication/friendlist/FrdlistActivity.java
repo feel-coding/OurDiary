@@ -56,7 +56,9 @@ public class FrdlistActivity extends AppCompatActivity {
                     List<FriendReq> body = response.body();
                     Log.d("frdlistrequest","success"+body.size());
                     for(int i = 0; i < body.size(); i++) {
-                        frdlist_requestItem.add(body.get(i));
+                        //친구 수락시 신청 현황에서 삭제
+                        if(!body.get(i).getState().equals("ACCEPTED"))
+                            frdlist_requestItem.add(body.get(i));
                         Log.d("정보", Integer.toString(i) + body.get(i).getUser().getName());
                     }
                     frdlistRequestAdapter.notifyDataSetChanged();
@@ -95,9 +97,14 @@ public class FrdlistActivity extends AppCompatActivity {
             public void onResponse(Call<List<FriendReq>> call, Response<List<FriendReq>> response) {
                 if(response.isSuccessful()) {
                     List<FriendReq> body = response.body();
-                    Log.d("frdlistaccept","success"+body.size());
+                    Log.d("정보","success"+body.size());
                     for(int i = 0; i < body.size(); i++) {
-                        frdlist_acceptItem.add(body.get(i));
+                        Log.d("정보","getState:"+body.get(i).getState());
+                        if(!body.get(i).getState().equals("ACCEPTED")) {
+                            frdlist_acceptItem.add(body.get(i));
+                            Log.d("정보","getState: TRUE "+body.get(i).getState());
+
+                        }
                         Log.d("정보", Integer.toString(i) + body.get(i).getUser().getName());
                     }
                     frdlistAcceptAdapter.notifyDataSetChanged();

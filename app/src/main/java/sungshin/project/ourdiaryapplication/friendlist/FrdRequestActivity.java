@@ -88,8 +88,6 @@ public class FrdRequestActivity extends AppCompatActivity {
 
     //검색 수행
     public void search(String text) {
-        //입력시 리스트 지우기
-        frdItem.clear();
 
         //입력 없을경우 데이터 모두 보여주기
         if(text.length()==0) {
@@ -102,6 +100,11 @@ public class FrdRequestActivity extends AppCompatActivity {
                 @Override
                 public void onResponse(Call<List<EachUser>> call, Response<List<EachUser>> response) {
                     if (response.isSuccessful()) {
+                        //입력시 리스트 지우기
+                        frdItem.clear();
+                        Log.d("정보", "search clear : " + text);
+
+
                         Log.d("정보", "GetAllUsers success");
                         //todo:print response body in listview
                         List<EachUser> resultList = response.body();
@@ -129,7 +132,7 @@ public class FrdRequestActivity extends AppCompatActivity {
                                     break;
                                 default:
                                     //Toast.makeText(FrdRequestActivity.this, serverError.getMessage(), Toast.LENGTH_SHORT).show();
-                                    if (response.code() == 401) {
+                                    if ( response.code() == 401 || response.code() == 500) {
                                         SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
                                         String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
                                         String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
