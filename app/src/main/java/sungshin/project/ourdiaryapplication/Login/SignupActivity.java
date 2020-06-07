@@ -29,7 +29,7 @@ import sungshin.project.ourdiaryapplication.R;
 
 public class SignupActivity extends AppCompatActivity {
 
-    private ServerApi serverApi = RetrofitManager.getInstance().getServerApi(this);
+    private ServerApi serverApi;
     private Gson gson = new Gson();
     Button emailCheckBtn;
     TextView alreadyExistTv;
@@ -44,7 +44,7 @@ public class SignupActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup);
-
+        serverApi  = RetrofitManager.getInstance().getServerApi(this);
         //뒤로가기 버튼 만들기
         Toolbar toolbar = findViewById(R.id.lock_toolbar);
         setSupportActionBar(toolbar);

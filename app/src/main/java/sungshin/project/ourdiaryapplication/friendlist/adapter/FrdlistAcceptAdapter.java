@@ -84,8 +84,9 @@ public class FrdlistAcceptAdapter extends BaseAdapter {
                         if(response.isSuccessful()) {
                             Log.d("frdlistaccept","success");
                             Toast.makeText(mContext,"수락되었습니다",Toast.LENGTH_SHORT).show();
+
                             //친구 수락시 요청 받음 목록에서 삭제
-                            frdlist_accept.remove(frdlist_accept.get(position));
+                            frdlist_accept.remove(position);
 
                         }
                         else {

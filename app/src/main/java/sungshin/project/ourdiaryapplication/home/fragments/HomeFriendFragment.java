@@ -19,7 +19,13 @@ import android.widget.ImageButton;
 import android.widget.Spinner;
 
 import java.util.ArrayList;
+import java.util.List;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.home.FilterActivity;
 
@@ -34,12 +40,14 @@ public class HomeFriendFragment extends Fragment {
     ArrayAdapter<String> yearAndMonthAdapter;
     String[] yearAndMonth;
     Spinner spinner;
+    ServerApi serverApi;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View v = inflater.inflate(R.layout.fragment_home_all, container, false);
+        serverApi = RetrofitManager.getInstance().getServerApi(activity);
         recyclerView = v.findViewById(R.id.diaryBook);
         filterBtn = v.findViewById(R.id.filterBtn);
         spinner = v.findViewById(R.id.yearAndMonthSpinner);
@@ -54,9 +62,25 @@ public class HomeFriendFragment extends Fragment {
             }
         });
         diaryList = new ArrayList<>();
-        diaryList.add(new Diary("김효은", "홍대 간 날", "2020-05-07","오늘은 오랜만에 홍대를 갔다. 패션피플들이 정말 많았다. 맛있는 것도 먹고 정말 재미있게 놀았다."));
-        diaryList.add(new Diary("박수영", "효은이와 홍대 간 날", "2020-05-07","어쩌구 저쩌구"));
-        diaryList.add(new Diary("김효은", "버스 놓친 날", "2020-05-07","집 가다가 버스를 놓쳤는데 그게 막차였다. 그래서 집까지 걸어갔다"));
+        serverApi.getDiaries("FRIEND").enqueue(new Callback<List<sungshin.project.ourdiaryapplication.Network.Diary>>() {
+            @Override
+            public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
+                if (response.isSuccessful()) {
+                    for (int i = 0; i < response.body().size(); i++) {
+                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Throwable t) {
+
+            }
+        });
+//        diaryList.add(new Diary("김효은", "홍대 간 날", "2020-05-07","오늘은 오랜만에 홍대를 갔다. 패션피플들이 정말 많았다. 맛있는 것도 먹고 정말 재미있게 놀았다."));
+//        diaryList.add(new Diary("박수영", "효은이와 홍대 간 날", "2020-05-07","어쩌구 저쩌구"));
+//        diaryList.add(new Diary("김효은", "버스 놓친 날", "2020-05-07","집 가다가 버스를 놓쳤는데 그게 막차였다. 그래서 집까지 걸어갔다"));
 
         recyclerView.setLayoutManager(new LinearLayoutManager(v.getContext()));
         adapter = new DiaryAdapter(diaryList, activity);

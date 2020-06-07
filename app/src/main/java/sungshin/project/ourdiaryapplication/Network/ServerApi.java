@@ -54,4 +54,10 @@ public interface ServerApi {
 
     @GET("/api/v1/users")
     Call<List<EachUser>> getAllUsers(@Query("page") Integer page, @Query("page_size") Integer pageSize, @Query("query") String query);
+
+    @GET("/api/v1/diaries")
+    Call<List<Diary>> getDiaries(@Query("filterType") String filterType);
+
+    @DELETE("/api/v1/users/me")
+    Call<Void> deleteMyAccount();
 }
