@@ -5,6 +5,9 @@ import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.ActionMode;
@@ -25,8 +28,8 @@ import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import retrofit2.Retrofit;
-import sungshin.project.ourdiaryapplication.Network.Friend;
+import sungshin.project.ourdiaryapplication.Network.FriendReq;
+import sungshin.project.ourdiaryapplication.Network.ReqUserSignIn;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
@@ -36,10 +39,14 @@ public class FilterActivity extends AppCompatActivity {
     ListView listView;
     Toolbar toolbar;
     ArrayAdapter<String> adapter;
-    ArrayList<String> friends = new ArrayList<>();
+    ArrayList<String> friendsList = new ArrayList<>();
+    ArrayList<Integer> seqList = new ArrayList<>();
     int count = 0;
     Button filterApplyBtn;
     ServerApi serverApi;
+    ArrayList<Integer> selectedPosition = new ArrayList<>();
+    public final String SHARED_PREF_EMAIL = "EMAIL";
+    public final String SHARED_PREF_LOGIN_PW = "PASSWORD";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,39 +60,125 @@ public class FilterActivity extends AppCompatActivity {
         actionBar.setDisplayShowTitleEnabled(false);
         actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
         actionBar.setHomeAsUpIndicator(R.drawable.close_black);
+
+        ContextThemeWrapper themeWrapper = new ContextThemeWrapper(this, R.style.AdapterTheme);
+        adapter = new ArrayAdapter<>(themeWrapper, android.R.layout.simple_list_item_multiple_choice, friendsList);
         filterApplyBtn = findViewById(R.id.apply_filter_btn);
-        serverApi.getFriendList(1, 15, null).enqueue(new Callback<List<Friend>>() {
+//        serverApi.getFriendList(1, 15, null).enqueue(new Callback<List<Friend>>() {
+//            @Override
+//            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+//                if (response.isSuccessful()) {
+//                    Log.d("친구 목록 가져오기", "성공");
+//                    for (int i = 0; i < response.body().size(); i++) {
+//                        friendsList.add(response.body().get(i).getName() + " (" + response.body().get(i).getNick() + ")");
+//                    }
+//                }
+//            }
+//
+//            @Override
+//            public void onFailure(Call<List<Friend>> call, Throwable t) {
+//
+//            }
+//        });
+        serverApi.getFriendRequestList("MY_SEND", 1, 15).enqueue(new Callback<List<FriendReq>>() {
             @Override
-            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+            public void onResponse(Call<List<FriendReq>> call, Response<List<FriendReq>> response) {
                 if (response.isSuccessful()) {
-                    Log.d("친구 목록 가져오기", "성공");
-                    for (int i = 0; i < response.body().size(); i++) {
-                        friends.add(response.body().get(i).getName() + " (" + response.body().get(i).getNick() + ")");
+                    for (FriendReq friendReq : response.body()) {
+                        if(friendReq.getState().equals("ACCEPTED")) {
+                            friendsList.add(friendReq.getUser().getName() + " (" + friendReq.getUser().getNick() + ")");
+                            seqList.add(friendReq.getUser().getSeq());
+                            adapter.notifyDataSetChanged();
+                        }
                     }
+                }
+                else if (response.code() == 401) {
+                    SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                    String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                    String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                    ReqUserSignIn req = new ReqUserSignIn();
+                    req.setType("EMAIL");
+                    req.setId(loginEmail);
+                    req.setPw(loginPassword);
+                    serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
                 }
             }
 
             @Override
-            public void onFailure(Call<List<Friend>> call, Throwable t) {
+            public void onFailure(Call<List<FriendReq>> call, Throwable t) {
 
             }
         });
-        friends.add("김효은");
-        friends.add("박소영");
-        friends.add("이주연");
-        friends.add("윤여경");
-        friends.add("박설");
-        ContextThemeWrapper themeWrapper = new ContextThemeWrapper(this, R.style.AdapterTheme);
-        adapter = new ArrayAdapter<>(themeWrapper, android.R.layout.simple_list_item_multiple_choice, friends);
+        serverApi.getFriendRequestList("FRIEND_SEND", 1, 15).enqueue(new Callback<List<FriendReq>>() {
+            @Override
+            public void onResponse(Call<List<FriendReq>> call, Response<List<FriendReq>> response) {
+                if (response.isSuccessful()) {
+                    for (FriendReq friendReq : response.body()) {
+                        if(friendReq.getState().equals("ACCEPTED")) {
+                            friendsList.add(friendReq.getUser().getName() + " (" + friendReq.getUser().getNick() + ")");
+                            seqList.add(friendReq.getUser().getSeq());
+                            adapter.notifyDataSetChanged();
+                        }
+                    }
+                }
+                if (response.code() == 401) {
+                    SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
+                    String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                    String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                    ReqUserSignIn req = new ReqUserSignIn();
+                    req.setType("EMAIL");
+                    req.setId(loginEmail);
+                    req.setPw(loginPassword);
+                    serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                        @Override
+                        public void onResponse(Call<Void> call, Response<Void> response) {
+
+                        }
+
+                        @Override
+                        public void onFailure(Call<Void> call, Throwable t) {
+
+                        }
+                    });
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<FriendReq>> call, Throwable t) {
+
+            }
+        });
+        adapter.notifyDataSetChanged();
+//        friendsList.add("김효은");
+//        friendsList.add("박소영");
+//        friendsList.add("이주연");
+//        friendsList.add("윤여경");
+//        friendsList.add("박설");
         listView = findViewById(R.id.friendSelectLv);
         listView.setAdapter(adapter);
         filterApplyBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent();
+                ArrayList<Integer> selectedSeq = new ArrayList<>();
+                for(int index : selectedPosition) {
+                    selectedSeq.add(seqList.get(index));
+                }
+                intent.putIntegerArrayListExtra("selectedSeq", selectedSeq);
+                setResult(RESULT_OK, intent);
                 finish();
             }
         });
-        ArrayList<Integer> selectedPosition = new ArrayList<>();
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {

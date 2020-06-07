@@ -8,10 +8,12 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -33,11 +35,13 @@ import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 import sungshin.project.ourdiaryapplication.home.FilterActivity;
 
+import static android.app.Activity.RESULT_OK;
+
 
 public class HomeAllFragment extends Fragment {
 
     RecyclerView recyclerView;
-    ArrayList<Diary> diaryList;
+    ArrayList<Diary> diaryList = new ArrayList<>();
     DiaryAdapter adapter;
     ImageButton filterBtn;
     ArrayAdapter<String> yearAndMonthAdapter;
@@ -60,15 +64,13 @@ public class HomeAllFragment extends Fragment {
         yearAndMonth = new String[]{"전체", "2020년 3월", "2020년 4월", "2020년 5월"};
         yearAndMonthAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, yearAndMonth);
         spinner.setAdapter(yearAndMonthAdapter);
-
         filterBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getActivity(), FilterActivity.class);
-                startActivity(intent);
+                startActivityForResult(intent, 100);
             }
         });
-        diaryList = new ArrayList<>();
         serverApi.getDiaries("ALL").enqueue(new Callback<List<sungshin.project.ourdiaryapplication.Network.Diary>>() {
             @Override
             public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
@@ -128,5 +130,100 @@ public class HomeAllFragment extends Fragment {
         mContext = context;
         if (context instanceof Activity)
             activity = (Activity) context;
+    }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Log.d("seqseq", "onActivityResult 들어옴");
+        if(requestCode == 100 && resultCode == RESULT_OK) {
+            //diaryList.clear();
+            ArrayList<Integer> selectedSeqList = data.getIntegerArrayListExtra("selectedSeq");
+            for(Integer seq : selectedSeqList) {
+                Log.d("seqseq", "" + seq + "번");
+            }
+            diaryList.clear();
+            serverApi.getDiaries("ALL").enqueue(new Callback<List<sungshin.project.ourdiaryapplication.Network.Diary>>() {
+                @Override
+                public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
+                    if (response.isSuccessful()) {
+                        for (int i = 0; i < response.body().size(); i++) {
+                            if(selectedSeqList.contains(response.body().get(i).getSeq())) {
+                                diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    else {
+                        if (response.code() == 401) {
+                            SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+                            String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                            String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                            ReqUserSignIn req = new ReqUserSignIn();
+                            req.setType("EMAIL");
+                            req.setId(loginEmail);
+                            req.setPw(loginPassword);
+                            serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Throwable t) {
+
+                }
+            });
+        }
+        else {
+            diaryList.clear();
+            serverApi.getDiaries("ALL").enqueue(new Callback<List<sungshin.project.ourdiaryapplication.Network.Diary>>() {
+                @Override
+                public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
+                    if (response.isSuccessful()) {
+                        for (int i = 0; i < response.body().size(); i++) {
+                            diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+                    else {
+                        if (response.code() == 401) {
+                            SharedPreferences sharedPref = activity.getSharedPreferences("login", Context.MODE_PRIVATE);
+                            String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
+                            String loginPassword = sharedPref.getString(SHARED_PREF_LOGIN_PW, "-1");
+                            ReqUserSignIn req = new ReqUserSignIn();
+                            req.setType("EMAIL");
+                            req.setId(loginEmail);
+                            req.setPw(loginPassword);
+                            serverApi.signInUser(req).enqueue(new Callback<Void>() {
+                                @Override
+                                public void onResponse(Call<Void> call, Response<Void> response) {
+
+                                }
+
+                                @Override
+                                public void onFailure(Call<Void> call, Throwable t) {
+
+                                }
+                            });
+                        }
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Throwable t) {
+
+                }
+            });
+        }
     }
 }

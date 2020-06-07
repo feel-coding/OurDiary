@@ -83,11 +83,11 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        SharedPreferences sharedPre = getSharedPreferences("login", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sharedPre.edit();
-        editor.putString(SHARED_PREF_EMAIL, "-1");
-        editor.putString(SHARED_PREF_LOGIN_PW, "-1");
-        editor.apply();
+//        SharedPreferences sharedPre = getSharedPreferences("login", Context.MODE_PRIVATE);
+//        SharedPreferences.Editor editor = sharedPre.edit();
+//        editor.putString(SHARED_PREF_EMAIL, "-1");
+//        editor.putString(SHARED_PREF_LOGIN_PW, "-1");
+//        editor.apply();
         serverApi = RetrofitManager.getInstance().getServerApi(this);
         SharedPreferences sharedPref = getSharedPreferences("login", Context.MODE_PRIVATE);
         String loginEmail = sharedPref.getString(SHARED_PREF_EMAIL, "-1");
