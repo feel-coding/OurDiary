@@ -158,10 +158,14 @@
        android:id="@+id/doc_img"
        android:layout_width="390dp"
        android:layout_height="196dp"
+       android:layout_gravity="center"
+       android:columnWidth="100dp"
+       android:numColumns="3"
        android:layout_marginStart="13dp"
        android:layout_marginTop="5dp"
        android:layout_marginEnd="13dp"
-       android:layout_marginBottom="16dp"/>
+       android:layout_marginBottom="16dp">
+    </GridView>
 
     <!--View
         android:id="@+id/view1"
