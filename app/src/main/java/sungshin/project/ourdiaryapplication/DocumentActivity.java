@@ -23,6 +23,9 @@ import android.widget.Toast;
 
 import org.w3c.dom.Document;
 
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
+
 public class DocumentActivity extends AppCompatActivity {
 
     //ImageButton settingBtn;
@@ -36,6 +39,7 @@ public class DocumentActivity extends AppCompatActivity {
     TextView toolbarTitleTv;
     Intent intent;
     TextView diaryTitleTv;
+    private ServerApi serverApi;
 
     //GridView 이미지 배열
     private int[] imageIDs = new int[] { R.drawable.docimg, R.drawable.docimg, R.drawable.docimg, R.drawable.docimg, R.drawable.docimg};
@@ -136,6 +140,9 @@ public class DocumentActivity extends AppCompatActivity {
                         builder.setPositiveButton("예", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
+                                //글 삭제 서버연동
+//                                serverApi = RetrofitManager.getInstance().getServerApi(DocumentActivity.this);
+//                                serverApi.deleteDiary(Di)
                                 Toast.makeText(DocumentActivity.this,"글이 삭제되었습니다",Toast.LENGTH_LONG).show();
                             }
                         });

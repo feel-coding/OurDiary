@@ -119,6 +119,7 @@ public class CalendarFragment extends Fragment {
             }
 
             //점찍기
+            calendarDays.remove(CalendarDay.today());
             materialCalendarView.addDecorator(new EventDecorator(Color.RED,
                     calendarDays, getActivity()));
         }

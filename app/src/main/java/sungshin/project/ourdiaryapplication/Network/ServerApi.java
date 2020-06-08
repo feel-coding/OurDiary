@@ -58,6 +58,9 @@ public interface ServerApi {
     @GET("/api/v1/diaries")
     Call<List<Diary>> getDiaries(@Query("filterType") String filterType);
 
+    @DELETE("/api/v1/diaries/{diarySeq}")
+    Call<Void> deleteDiary(@Path("diarySeq")Integer diarySeq);
+
     @DELETE("/api/v1/users/me")
     Call<Void> deleteMyAccount();
 }
