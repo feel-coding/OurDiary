@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.math.BigInteger;
 import java.util.List;
 
 import sungshin.project.ourdiaryapplication.DocumentActivity;
@@ -38,6 +39,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
         String date = list.get(position).date;
         String content = list.get(position).content;
         String withWhom = list.get(position).withWhom;
+        BigInteger seq = list.get(position).seq;
         holder.title.setText(title);
         holder.writer.setText(writer);
         holder.date.setText(date);
@@ -55,6 +57,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("diary_content", content);
                 intent.putExtra("diary_title", title);
                 intent.putExtra("diary_date", date);
+                intent.putExtra("diary_seq", seq);
                 mContext.startActivity(intent);
             }
         });

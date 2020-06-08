@@ -59,7 +59,7 @@ public interface ServerApi {
     Call<List<Diary>> getDiaries(@Query("filterType") String filterType);
 
     @DELETE("/api/v1/diaries/{diarySeq}")
-    Call<Void> deleteDiary(@Path("diarySeq")Integer diarySeq);
+    Call<Void> deleteDiary(@Path("diarySeq")BigInteger diarySeq);
 
     @DELETE("/api/v1/users/me")
     Call<Void> deleteMyAccount();

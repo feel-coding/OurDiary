@@ -23,6 +23,13 @@ import android.widget.Toast;
 
 import org.w3c.dom.Document;
 
+import java.math.BigInteger;
+import java.util.ArrayList;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sungshin.project.ourdiaryapplication.Network.Diary;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 
@@ -141,9 +148,20 @@ public class DocumentActivity extends AppCompatActivity {
                             @Override
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //글 삭제 서버연동
-//                                serverApi = RetrofitManager.getInstance().getServerApi(DocumentActivity.this);
-//                                serverApi.deleteDiary(Di)
-                                Toast.makeText(DocumentActivity.this,"글이 삭제되었습니다",Toast.LENGTH_LONG).show();
+                                serverApi = RetrofitManager.getInstance().getServerApi(DocumentActivity.this);
+                                BigInteger seq = new BigInteger(getIntent().getExtras().getString("diary_seq"));
+                                serverApi.deleteDiary(seq).enqueue(new Callback<Void>() {
+                                    @Override
+                                    public void onResponse(Call<Void> call, Response<Void> response) {
+                                        Toast.makeText(DocumentActivity.this,"글이 삭제되었습니다",Toast.LENGTH_LONG).show();
+                                        finish();
+                                    }
+
+                                    @Override
+                                    public void onFailure(Call<Void> call, Throwable t) {
+
+                                    }
+                                });
                             }
                         });
                         builder.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
@@ -154,7 +172,6 @@ public class DocumentActivity extends AppCompatActivity {
                         });
                         AlertDialog alertDialog = builder.create();
                         alertDialog.show();
-                        //todo:데이터베이스에서 해당 글 삭제
                         break;
                 }
                 return true;

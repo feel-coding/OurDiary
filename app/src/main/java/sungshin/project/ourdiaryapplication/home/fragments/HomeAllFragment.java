@@ -76,7 +76,7 @@ public class HomeAllFragment extends Fragment {
             public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
-                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
+                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(),response.body().get(i).getSeq()));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -149,7 +149,7 @@ public class HomeAllFragment extends Fragment {
                     if (response.isSuccessful()) {
                         for (int i = 0; i < response.body().size(); i++) {
                             if(selectedSeqList.contains(response.body().get(i).getSeq())) {
-                                diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
+                                diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(), response.body().get(i).getSeq()));
                             }
                         }
                         adapter.notifyDataSetChanged();
@@ -191,7 +191,7 @@ public class HomeAllFragment extends Fragment {
                 public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
                     if (response.isSuccessful()) {
                         for (int i = 0; i < response.body().size(); i++) {
-                            diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText()));
+                            diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(), response.body().get(i).getSeq()));
                         }
                         adapter.notifyDataSetChanged();
                     }
