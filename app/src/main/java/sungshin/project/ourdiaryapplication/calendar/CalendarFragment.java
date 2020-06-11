@@ -18,15 +18,23 @@ import android.widget.ListView;
 import com.prolificinteractive.materialcalendarview.CalendarDay;
 import com.prolificinteractive.materialcalendarview.CalendarMode;
 import com.prolificinteractive.materialcalendarview.MaterialCalendarView;
+import com.prolificinteractive.materialcalendarview.OnDateSelectedListener;
 
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.Executors;
 
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 import sungshin.project.ourdiaryapplication.DiaryTitle;
 import sungshin.project.ourdiaryapplication.DiaryTitleAdapter;
 import sungshin.project.ourdiaryapplication.EventDecorator;
+import sungshin.project.ourdiaryapplication.Network.Diary;
+import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
+import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
 
 
@@ -35,20 +43,22 @@ public class CalendarFragment extends Fragment {
     MaterialCalendarView materialCalendarView;
     ListView titleListView;
     DiaryTitleAdapter adapter;
-    ArrayList<DiaryTitle> titleList;
+    ArrayList<DiaryTitle> titleList = new ArrayList<>();
     Context mContext;
     Activity activity;
+    ServerApi serverApi;
+    ArrayList<String> diaryExistDates = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_calendar, container, false);
+        serverApi = RetrofitManager.getInstance().getServerApi(activity);
         materialCalendarView = view.findViewById(R.id.calendarView);
         titleListView = view.findViewById(R.id.titleList);
-        titleList = new ArrayList<>();
-        titleList.add(new DiaryTitle("김효은", "프로젝트 수업 팀플한 날"));
-        titleList.add(new DiaryTitle("박설", "효은이와 떡볶이 먹은 날"));
-        titleList.add(new DiaryTitle("김효은", "집 가다가 버스 놓침--"));
+//        titleList.add(new DiaryTitle("김효은", "프로젝트 수업 팀플한 날"));
+//        titleList.add(new DiaryTitle("박설", "효은이와 떡볶이 먹은 날"));
+//        titleList.add(new DiaryTitle("김효은", "집 가다가 버스 놓침--"));
         adapter = new DiaryTitleAdapter(view.getContext(), titleList, R.layout.title_row);
         titleListView.setAdapter(adapter);
 
@@ -67,8 +77,50 @@ public class CalendarFragment extends Fragment {
                 new SundayDecorator(),
                 new SaturdayDecorator(),
                 new oneDayDecorator());
+        serverApi.getDiaries("ALL").enqueue(new Callback<List<Diary>>() {
+            @Override
+            public void onResponse(Call<List<Diary>> call, Response<List<Diary>> response) {
+                for (Diary d : response.body()) {
+                    if (d.getWantedDate() != null) {
+                        Date date = d.getWantedDate();
+                        diaryExistDates.add(date.getYear() + "." + date.getMonth() + 1 + "." + date.getDate());
+                    }
+                }
+            }
 
-        String[] result = {"2020.3.5","2020.4.25","2020.4.27","0.0.0"};
+            @Override
+            public void onFailure(Call<List<Diary>> call, Throwable t) {
+
+            }
+        });
+        materialCalendarView.setOnDateChangedListener(new OnDateSelectedListener() {
+            @Override
+            public void onDateSelected(@NonNull MaterialCalendarView widget, @NonNull CalendarDay date, boolean selected) {
+                titleList.clear();
+                int month = date.getMonth() + 1;
+                int year = date.getYear();
+                int day = date.getDay();
+                Log.d("calendardate", year + "년 " + month + "월 " + day + "일");
+                serverApi.getDiaries("ALL").enqueue(new Callback<List<Diary>>() {
+                    @Override
+                    public void onResponse(Call<List<Diary>> call, Response<List<Diary>> response) {
+                        List<Diary> diaries = response.body();
+                        for (Diary d : diaries) {
+                            if(d.getWantedDate() != null && d.getWantedDate().getYear() == year && d.getWantedDate().getMonth() + 1 == month && d.getWantedDate().getDate() == day) {
+                                titleList.add(new DiaryTitle(d.getUser().getName() + " (" + d.getUser().getNick() + ")", d.getTitle()));
+                            }
+                        }
+                        adapter.notifyDataSetChanged();
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Diary>> call, Throwable t) {
+
+                    }
+                });
+            }
+        });
+        String[] result = diaryExistDates.toArray(new String[diaryExistDates.size()]);//{"2020.3.5","2020.4.25","2020.4.27","0.0.0"};
         new ApiSimulator(result).executeOnExecutor(Executors.newSingleThreadExecutor());
 
         return view;

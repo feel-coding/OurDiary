@@ -155,17 +155,58 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/location_img" /-->
     <GridView
-       android:id="@+id/doc_img"
-       android:layout_width="390dp"
-       android:layout_height="196dp"
-       android:layout_gravity="center"
-       android:columnWidth="100dp"
-       android:numColumns="3"
-       android:layout_marginStart="13dp"
-       android:layout_marginTop="5dp"
-       android:layout_marginEnd="13dp"
-       android:layout_marginBottom="16dp">
-    </GridView>
+        android:id="@+id/doc_img"
+        android:layout_width="390dp"
+        android:layout_height="196dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="13dp"
+        android:visibility="gone"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="13dp"
+        android:layout_marginBottom="16dp"
+        android:columnWidth="100dp"
+        android:numColumns="3"></GridView>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="300dp">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+            <ImageView
+                android:id="@+id/image1_imageview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:layout_width="0dp"
+                android:id="@+id/image2_imageview"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/image3_imageview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_weight="1"
+            android:layout_height="0dp">
+            <ImageView
+                android:id="@+id/image4_imageview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+            <ImageView
+                android:id="@+id/image5_imageview"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent" />
+        </LinearLayout>
+    </LinearLayout>
 
     <!--View
         android:id="@+id/view1"

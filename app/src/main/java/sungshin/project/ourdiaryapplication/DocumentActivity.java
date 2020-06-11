@@ -21,6 +21,8 @@ import android.widget.PopupMenu;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+
 import org.w3c.dom.Document;
 
 import java.math.BigInteger;
@@ -47,6 +49,10 @@ public class DocumentActivity extends AppCompatActivity {
     Intent intent;
     TextView diaryTitleTv;
     private ServerApi serverApi;
+    ImageView image1;
+    ImageView image2;
+    ImageView image3;
+    ImageView image4;
 
     //GridView 이미지 배열
     private int[] imageIDs = new int[] { R.drawable.docimg, R.drawable.docimg, R.drawable.docimg, R.drawable.docimg, R.drawable.docimg};
@@ -65,6 +71,10 @@ public class DocumentActivity extends AppCompatActivity {
 //        actionBar.setDisplayHomeAsUpEnabled(true); // 뒤로가기 버튼, 디폴트로 true만 해도 백버튼이 생김
 //        actionBar.setHomeAsUpIndicator(R.drawable.ic_chevron_left_black_24dp);
         chat_img = findViewById(R.id.chat_img);
+        image1 = findViewById(R.id.image1_imageview);
+        image2 = findViewById(R.id.image2_imageview);
+        image3 = findViewById(R.id.image3_imageview);
+        image4 = findViewById(R.id.image4_imageview);
         backBtn = findViewById(R.id.back_btn);
         toolbarTitleTv = findViewById(R.id.toolbar_title);
         diaryTitleTv = findViewById(R.id.diary_title);
@@ -80,7 +90,8 @@ public class DocumentActivity extends AppCompatActivity {
         });
         String content = intent.getStringExtra("diary_content");
         diaryContentEt.setText(content);
-
+        Glide.with(this).load("http://blogfiles.naver.net/MjAxODA0MDJfMTY2/MDAxNTIyNjEzODAzNTU2.qc9dBd0xqz8zvfwsUFBYX87tqf5iUSS7VZXxhdLOb5Ig.mqOQJ2SD3sFyXufe6lxAVhGdh30Fn_5lavWPdIf-dtEg.JPEG.wjd9286/P20170408_180850930_F6F3D0B8-C35A-4489-BEDD-638E8DDB257C.JPG").into(image1);
+        Glide.with(this).load("http://blogfiles.naver.net/20140611_220/naddong2_1402496765245xLFER_JPEG/%28%BF%A9%C7%E0%29%C7%C1%B6%FB%BD%BA-%C6%C4%B8%AE-2014-06-02-16-22-09.jpg").into(image2);
         //GridView Adapter
         GridView doc_img = findViewById(R.id.doc_img);
         ImageGridAdapter imageGridAdapter = new ImageGridAdapter(this, imageIDs);
