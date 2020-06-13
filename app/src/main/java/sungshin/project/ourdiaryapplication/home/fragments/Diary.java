@@ -14,26 +14,29 @@ public class Diary {
     String withWhom;
     BigInteger seq;
     String location;
+    Integer likeCount;
     ArrayList<String> photoList = new ArrayList<>();
 
     public Diary() {
 
     }
 
-    public Diary(String writer, String title, String date, String content, BigInteger seq) {
+    public Diary(String writer, String title, String date, String content, BigInteger seq, Integer likeCount) {
         this.writer = writer;
         this.title = title;
         this.date = date;
         this.content = content;
         this.seq = seq;
+        this.likeCount = likeCount;
         withWhom = "";
     }
-    public Diary(String writer, String title, String date, String content, String withWhom, BigInteger seq) {
+    public Diary(String writer, String title, String date, String content, String withWhom, BigInteger seq, Integer likeCount) {
         this.writer = writer;
         this.title = title;
         this.date = date;
         this.content = content;
         this.seq = seq;
+        this.likeCount = likeCount;
         this.withWhom = withWhom;
     }
 
@@ -59,6 +62,10 @@ public class Diary {
 
     public BigInteger getSeq() {
         return seq;
+    }
+
+    public Integer getLikeCount() {
+        return likeCount;
     }
 
     public String getLocation() {
@@ -91,6 +98,10 @@ public class Diary {
 
     public void setSeq(BigInteger seq) {
         this.seq = seq;
+    }
+
+    public void setLikeCount(Integer likeCount) {
+        this.likeCount = likeCount;
     }
 
     public void setLocation(String location) {
