@@ -24,6 +24,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.google.gson.Gson;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
 
 import org.w3c.dom.Text;
 
@@ -61,6 +63,7 @@ public class MyPageFragment extends Fragment {
     String nickname;
     static final String SHARED_PREF_EMAIL = "EMAIL";
     static final String SHARED_PREF_LOGIN_PW = "PASSWORD";
+    static final String SHARED_PREF_LOGIN_TYPE = "TYPE";
     Button withdrawalBtn;
 
     @Override
@@ -216,6 +219,16 @@ public class MyPageFragment extends Fragment {
         logoutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                SharedPreferences sharedPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+                String loginType = sharedPref.getString(SHARED_PREF_LOGIN_TYPE, "-1");
+                if (loginType.equals("KAKAO")) {
+                    UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                        @Override
+                        public void onCompleteLogout() {
+
+                        }
+                    });
+                }
                 serverApi.signOut().enqueue(new Callback<Void>() {
                     @Override
                     public void onResponse(Call<Void> call, Response<Void> response) {

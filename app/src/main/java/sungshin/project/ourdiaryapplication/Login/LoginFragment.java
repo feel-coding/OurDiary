@@ -51,6 +51,7 @@ public class LoginFragment extends Fragment {
     static final String SHARED_PREF_USER_NAME = "6000";
     public final String SHARED_PREF_EMAIL = "EMAIL";
     public final String SHARED_PREF_LOGIN_PW = "PASSWORD";
+    public final String SHARED_PREF_LOGIN_TYPE = "TYPE";
     private SessionCallback sessionCallback;
     ProgressDialog progressDialog;
 
@@ -89,13 +90,17 @@ public class LoginFragment extends Fragment {
 //                                        editor.putString(SHARED_PREF_LOGIN_PW, loginPassword);
 //                                        editor.apply();
                                         Intent intent = new Intent(getActivity(), NicknameSettingActivity.class);
+                                        Log.d("자동로그인", "92번째 줄");
                                         startActivity(intent);
                                         getActivity().finish();
                                     } else { //자동 로그인
                                         Intent intent = new Intent(getActivity(), MainActivity.class);
+                                        Log.d("자동로그인", "96번째 줄");
                                         startActivity(intent);
                                         SharedPreferences sharedPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
                                         SharedPreferences.Editor editor = sharedPref.edit();
+                                        Log.d("자동로그인 이메일", loginEmail);
+                                        Log.d("자동로그인 비밀번호", loginPassword);
                                         editor.putString(SHARED_PREF_EMAIL, loginEmail);
                                         editor.putString(SHARED_PREF_LOGIN_PW, loginPassword);
                                         editor.apply();
@@ -171,11 +176,13 @@ public class LoginFragment extends Fragment {
                                             Intent intent = new Intent(getActivity(), NicknameSettingActivity.class);
                                             intent.putExtra("email", idEditText.getText().toString());
                                             intent.putExtra("password", pwEditText.getText().toString());
+                                            Log.d("자동로그인", "176번째 줄");
                                             startActivity(intent);
                                             getActivity().finish();
                                             loadingEnd();
                                         } else {
                                             Intent intent = new Intent(getActivity(), MainActivity.class);//이렇게 해야 로그인으로 감
+                                            Log.d("자동로그인", "181번째 줄");
                                             startActivity(intent);
                                             SharedPreferences sharedPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
                                             SharedPreferences.Editor editor = sharedPref.edit();
@@ -230,6 +237,7 @@ public class LoginFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getActivity(), SignupActivity.class);//이렇게 해야 로그인으로 감
+                Log.d("자동로그인", "235번째 줄");
                 startActivity(intent);
                 getActivity().finish();
             }
@@ -302,12 +310,18 @@ public class LoginFragment extends Fragment {
                                             if(response.body().getNick() == null) {
                                                 Intent i = new Intent(getContext(), NicknameSettingActivity.class);
                                                 i.putExtra("name", result.getNickname());
+                                                Log.d("자동로그인", "307번째 줄");
                                                 startActivity(i);
                                                 getActivity().finish();
                                             }
                                             else {
                                                 Intent i = new Intent(getContext(), MainActivity.class);
 //                                                i.putExtra("name", result.getNickname());
+                                                SharedPreferences sharedPref = getActivity().getSharedPreferences("login", Context.MODE_PRIVATE);
+                                                SharedPreferences.Editor editor = sharedPref.edit();
+                                                editor.putString(SHARED_PREF_LOGIN_TYPE, "KAKAO");
+                                                editor.apply();
+                                                Log.d("자동로그인", "313번째 줄");
                                                 startActivity(i);
                                                 getActivity().finish();
                                             }
