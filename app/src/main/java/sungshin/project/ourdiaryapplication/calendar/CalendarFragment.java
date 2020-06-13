@@ -80,10 +80,12 @@ public class CalendarFragment extends Fragment {
         serverApi.getDiaries("ALL").enqueue(new Callback<List<Diary>>() {
             @Override
             public void onResponse(Call<List<Diary>> call, Response<List<Diary>> response) {
-                for (Diary d : response.body()) {
-                    if (d.getWantedDate() != null) {
-                        Date date = d.getWantedDate();
-                        diaryExistDates.add(date.getYear() + "." + date.getMonth() + 1 + "." + date.getDate());
+                if (response.body() != null) {
+                    for (Diary d : response.body()) {
+                        if (d.getWantedDate() != null) {
+                            Date date = d.getWantedDate();
+                            diaryExistDates.add(date.getYear() + "." + date.getMonth() + 1 + "." + date.getDate());
+                        }
                     }
                 }
             }

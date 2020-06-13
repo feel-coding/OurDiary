@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:theme="@style/AppTheme"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".Login.LoginActivity">
+    tools:context=".Login.LoginFragment">
 
     <TextView
         android:layout_width="wrap_content"
@@ -50,7 +49,7 @@
         android:layout_marginTop="15dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="회원이 아니십니까? 회원가입"/-->
+        android:text="회원이 아니십니까? 회원가입"/>
 
     <!--LinearLayout
         android:layout_marginTop="10dp"
@@ -70,7 +69,7 @@
             android:text="카카오톡으로 로그인하기"
             android:layout_height="wrap_content" />
     </LinearLayout-->
-    <!--com.kakao.usermgmt.LoginButton
+    <com.kakao.usermgmt.LoginButton
         android:layout_marginTop="20dp"
         android:id="@+id/login_button"
         android:layout_width="match_parent"
@@ -78,11 +77,5 @@
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:layout_marginBottom="30dp" />
-</LinearLayout-->
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/frame_layout"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:theme="@style/AppTheme"
-    tools:context=".Login.LoginActivity"/>
+
+</LinearLayout>

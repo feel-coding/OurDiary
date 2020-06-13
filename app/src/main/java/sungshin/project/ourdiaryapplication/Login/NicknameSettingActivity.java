@@ -60,6 +60,8 @@ public class NicknameSettingActivity extends AppCompatActivity {
             public void onResponse(Call<User> call, Response<User> response) {
                 if (response.isSuccessful()) {
                     name = response.body().getName();
+                    if (name == null)
+                        name = getIntent().getStringExtra("name");
                 }
             }
 
