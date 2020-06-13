@@ -76,7 +76,7 @@ public class HomeAllFragment extends Fragment {
             public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
-                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(),response.body().get(i).getSeq()));
+                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(),response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -207,7 +207,7 @@ public class HomeAllFragment extends Fragment {
                 public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
                     if (response.isSuccessful()) {
                         for (int i = 0; i < response.body().size(); i++) {
-                            diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(), response.body().get(i).getSeq()));
+                            diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(), response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
                         }
                         adapter.notifyDataSetChanged();
                     }

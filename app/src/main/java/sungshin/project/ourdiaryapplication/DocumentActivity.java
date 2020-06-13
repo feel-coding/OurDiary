@@ -53,6 +53,10 @@ public class DocumentActivity extends AppCompatActivity {
     ImageView image2;
     ImageView image3;
     ImageView image4;
+    ImageView like_img;
+    BigInteger seq;
+    Integer likeCount;
+    TextView like_textView;
 
     //GridView 이미지 배열
     private int[] imageIDs = new int[] { R.drawable.docimg, R.drawable.docimg, R.drawable.docimg, R.drawable.docimg, R.drawable.docimg};
@@ -80,6 +84,8 @@ public class DocumentActivity extends AppCompatActivity {
         diaryTitleTv = findViewById(R.id.diary_title);
         diaryContentEt = findViewById(R.id.diaryContentEt);
         changesave_btn1 = findViewById(R.id.changesave_btn1);
+        like_img = findViewById(R.id.like_img);
+        like_textView = findViewById(R.id.like_textView);
         toolbarTitleTv.setText(intent.getStringExtra("diary_date"));
         diaryTitleTv.setText(intent.getStringExtra("diary_title"));
         backBtn.setOnClickListener(new View.OnClickListener() {
@@ -89,6 +95,11 @@ public class DocumentActivity extends AppCompatActivity {
             }
         });
         String content = intent.getStringExtra("diary_content");
+        likeCount = new Integer(getIntent().getExtras().getString("diary_likecount"));
+        Log.d("정보", ">>>" + likeCount.toString());
+
+        //좋아요 수
+        like_textView.setText(likeCount.toString());
         diaryContentEt.setText(content);
         Glide.with(this).load("http://blogfiles.naver.net/MjAxODA0MDJfMTY2/MDAxNTIyNjEzODAzNTU2.qc9dBd0xqz8zvfwsUFBYX87tqf5iUSS7VZXxhdLOb5Ig.mqOQJ2SD3sFyXufe6lxAVhGdh30Fn_5lavWPdIf-dtEg.JPEG.wjd9286/P20170408_180850930_F6F3D0B8-C35A-4489-BEDD-638E8DDB257C.JPG").into(image1);
         Glide.with(this).load("http://blogfiles.naver.net/20140611_220/naddong2_1402496765245xLFER_JPEG/%28%BF%A9%C7%E0%29%C7%C1%B6%FB%BD%BA-%C6%C4%B8%AE-2014-06-02-16-22-09.jpg").into(image2);
@@ -122,6 +133,34 @@ public class DocumentActivity extends AppCompatActivity {
 //
 //            }
 //        });
+
+        //좋아요 클릭
+        like_img.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                serverApi = RetrofitManager.getInstance().getServerApi(DocumentActivity.this);
+                seq = new BigInteger(getIntent().getExtras().getString("diary_seq"));
+                Log.d("정보", "Seq=" + seq.toString());
+
+                serverApi.likesDiary(seq).enqueue(new Callback<Void>() {
+                    @Override
+                    public void onResponse(Call<Void> call, Response<Void> response) {
+                        if(response.isSuccessful()) {
+                            likeCount++;
+                            like_textView.setText(likeCount);
+                            Toast.makeText(DocumentActivity.this, "좋아요를 클릭하셨습니다", Toast.LENGTH_SHORT).show();
+                        } else {
+                            Log.d("정보", "LikesDiary Server Error" + response.errorBody().toString() + ":" + response.code());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<Void> call, Throwable t) {
+                        Log.d("정보", "LikesDiary Server Failure");
+                    }
+                });
+            }
+        });
     }
 
 
@@ -160,14 +199,18 @@ public class DocumentActivity extends AppCompatActivity {
                             public void onClick(DialogInterface dialogInterface, int i) {
                                 //글 삭제 서버연동
                                 serverApi = RetrofitManager.getInstance().getServerApi(DocumentActivity.this);
-                                BigInteger seq = new BigInteger(getIntent().getExtras().getString("diary_seq"));
+                                seq = new BigInteger(getIntent().getExtras().getString("diary_seq"));
                                 serverApi.deleteDiary(seq).enqueue(new Callback<Void>() {
                                     @Override
                                     public void onResponse(Call<Void> call, Response<Void> response) {
-                                        Toast.makeText(DocumentActivity.this,"글이 삭제되었습니다",Toast.LENGTH_LONG).show();
-                                        finish();
-                                    }
+                                        if (response.isSuccessful()) {
 
+                                            Toast.makeText(DocumentActivity.this, "글이 삭제되었습니다", Toast.LENGTH_LONG).show();
+                                            finish();
+                                        } else {
+
+                                        }
+                                    }
                                     @Override
                                     public void onFailure(Call<Void> call, Throwable t) {
 
