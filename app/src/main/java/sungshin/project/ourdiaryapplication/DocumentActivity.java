@@ -34,6 +34,7 @@ import retrofit2.Response;
 import sungshin.project.ourdiaryapplication.Network.Diary;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
+import sungshin.project.ourdiaryapplication.home.ImageShowActivity;
 
 public class DocumentActivity extends AppCompatActivity {
 
@@ -90,7 +91,16 @@ public class DocumentActivity extends AppCompatActivity {
         });
         String content = intent.getStringExtra("diary_content");
         diaryContentEt.setText(content);
+
         Glide.with(this).load("http://blogfiles.naver.net/MjAxODA0MDJfMTY2/MDAxNTIyNjEzODAzNTU2.qc9dBd0xqz8zvfwsUFBYX87tqf5iUSS7VZXxhdLOb5Ig.mqOQJ2SD3sFyXufe6lxAVhGdh30Fn_5lavWPdIf-dtEg.JPEG.wjd9286/P20170408_180850930_F6F3D0B8-C35A-4489-BEDD-638E8DDB257C.JPG").into(image1);
+        image1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(DocumentActivity.this, ImageShowActivity.class);
+                intent.putExtra("url", "http://blogfiles.naver.net/MjAxODA0MDJfMTY2/MDAxNTIyNjEzODAzNTU2.qc9dBd0xqz8zvfwsUFBYX87tqf5iUSS7VZXxhdLOb5Ig.mqOQJ2SD3sFyXufe6lxAVhGdh30Fn_5lavWPdIf-dtEg.JPEG.wjd9286/P20170408_180850930_F6F3D0B8-C35A-4489-BEDD-638E8DDB257C.JPG");
+                startActivity(intent);
+            }
+        });
         Glide.with(this).load("http://blogfiles.naver.net/20140611_220/naddong2_1402496765245xLFER_JPEG/%28%BF%A9%C7%E0%29%C7%C1%B6%FB%BD%BA-%C6%C4%B8%AE-2014-06-02-16-22-09.jpg").into(image2);
         //GridView Adapter
         GridView doc_img = findViewById(R.id.doc_img);

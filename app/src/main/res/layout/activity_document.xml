@@ -178,10 +178,12 @@
             <ImageView
                 android:id="@+id/image1_imageview"
                 android:layout_width="0dp"
+                android:scaleType="centerCrop"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
             <ImageView
                 android:layout_width="0dp"
+                android:scaleType="centerCrop"
                 android:id="@+id/image2_imageview"
                 android:layout_weight="1"
                 android:layout_height="match_parent" />
