@@ -1,6 +1,6 @@
 package sungshin.project.ourdiaryapplication.Network;
 
-public class ReqDeleteFriend {
+public class ReqFriendDelete {
     private Integer friend_seq;
 
     public Integer getFriend_seq() {

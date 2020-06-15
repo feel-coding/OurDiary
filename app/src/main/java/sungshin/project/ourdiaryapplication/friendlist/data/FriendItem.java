@@ -6,6 +6,7 @@ public class FriendItem {
     private Drawable fProfileImg;
     private String fNickname;
     private String fRealname;
+    private Integer fSeq;
 
     public Drawable getfProfileImg() {
         return fProfileImg;
@@ -29,5 +30,13 @@ public class FriendItem {
 
     public void setfRealname(String fRealname) {
         this.fRealname = fRealname;
+    }
+
+    public Integer getfSeq() {
+        return fSeq;
+    }
+
+    public void setfSeq(Integer fSeq) {
+        this.fSeq = fSeq;
     }
 }

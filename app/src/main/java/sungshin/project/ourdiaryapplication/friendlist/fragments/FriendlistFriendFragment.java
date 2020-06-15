@@ -76,7 +76,7 @@ public class FriendlistFriendFragment extends Fragment {
                     public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                         friendList.clear();
                         for (Friend friend : response.body()) {
-                            addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), friend.getNick(), friend.getName());
+                            addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), friend.getNick(), friend.getName(), friend.getSeq());
                         }
                     }
 
@@ -97,7 +97,7 @@ public class FriendlistFriendFragment extends Fragment {
                         if(response.isSuccessful()) {
                             Log.d("searchsuccess", "성공");
                             for (int i = 0; i < response.body().size(); i++) {
-                                addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), response.body().get(i).getNick(), response.body().get(i).getName());
+                                addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), response.body().get(i).getNick(), response.body().get(i).getName(), response.body().get(i).getSeq());
                             }
                         }
                         else {
@@ -119,7 +119,7 @@ public class FriendlistFriendFragment extends Fragment {
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                 if (response.isSuccessful()) {
                     for (Friend friend : response.body()) {
-                        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), friend.getNick(), friend.getName());
+                        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), friend.getNick(), friend.getName(), friend.getSeq());
                     }
                 }
             }
@@ -170,12 +170,13 @@ public class FriendlistFriendFragment extends Fragment {
 
     }
 
-    private void addItem(Drawable profileImg, String nickname, String realname){
+    private void addItem(Drawable profileImg, String nickname, String realname, Integer seq){
         FriendItem item = new FriendItem();
 
         item.setfProfileImg(profileImg);
         item.setfNickname(nickname);
         item.setfRealname(realname);
+        item.setfSeq(seq);
 
         friendList.add(item);
     }
