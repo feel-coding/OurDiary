@@ -48,7 +48,7 @@ public class FrdSearchActivity extends AppCompatActivity {
 
         //서버에서 데이터 가져오기(친구 리스트 모두)
         serverApi = RetrofitManager.getInstance().getServerApi(this);
-        serverApi.getFriendList(1,15,"").enqueue(new Callback<List<Friend>>() {
+        serverApi.getFriendList("").enqueue(new Callback<List<Friend>>() {
             @Override
             public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                 if(response.isSuccessful()) {
@@ -58,7 +58,7 @@ public class FrdSearchActivity extends AppCompatActivity {
                     for(int i = 0; i < body.size(); i++) {
                         arrayList.add(body.get(i));
                         Log.d("정보","friend :"+body.get(i).getName());
-                  }
+                    }
 //                    Friend frd = new Friend();
 //                    frd.setName("김");
 //                    frd.setNick("박");
@@ -112,7 +112,7 @@ public class FrdSearchActivity extends AppCompatActivity {
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                 //입력한 경우에만 clear하기
                 arrayList.clear();
-                serverApi.getFriendList(1, 15, charSequence.toString()).enqueue(new Callback<List<Friend>>() {
+                serverApi.getFriendList(charSequence.toString()).enqueue(new Callback<List<Friend>>() {
                     @Override
                     public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
                         if(response.isSuccessful()) {

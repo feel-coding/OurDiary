@@ -138,8 +138,8 @@ public class NewPostActivity extends AppCompatActivity {
                     String loc = data.getExtras().getString("location");
                     locResult.setVisibility(View.VISIBLE);
                     locResult.setText(loc);
-                    }
                 }
+            }
             break;
 
             //todo:FrdSearchActivity에서 넘겨준 친구 데이터 받아 서버 Diary에 친구 리스트 추가, 화면에 이름 추가
@@ -173,11 +173,11 @@ public class NewPostActivity extends AppCompatActivity {
                 String date = year + "-" + (month+1) + "-" + dayOfMonth;
                 String day = "";
 
-                        try{
-                            day = getDateDay(date, "yyyy-MM-dd");
-                        } catch (Exception e){
+                try{
+                    day = getDateDay(date, "yyyy-MM-dd");
+                } catch (Exception e){
 
-                        }
+                }
 
                 dateResult.setText(date + "-" +day);
             }
@@ -276,9 +276,7 @@ public class NewPostActivity extends AppCompatActivity {
             imageView.setImageURI(clipData.getItemAt(position).getUri());
             Log.d("newpost", "그리드뷰 아이템 uri");
             return imageView;
-          }
-
         }
+
+    }
 }
-
-

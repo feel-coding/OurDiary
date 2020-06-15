@@ -61,7 +61,7 @@ public class HomeAllFragment extends Fragment {
         recyclerView = v.findViewById(R.id.diaryBook);
         filterBtn = v.findViewById(R.id.filterBtn);
         spinner = v.findViewById(R.id.yearAndMonthSpinner);
-        yearAndMonth = new String[]{"전체", "2020년 3월", "2020년 4월", "2020년 5월"};
+        yearAndMonth = new String[]{"전체", "2020년 3월", "2020년 4월", "2020년 5월", "2020년 6월"};
         yearAndMonthAdapter = new ArrayAdapter<>(activity, android.R.layout.simple_spinner_dropdown_item, yearAndMonth);
         spinner.setAdapter(yearAndMonthAdapter);
         filterBtn.setOnClickListener(new View.OnClickListener() {
@@ -76,7 +76,8 @@ public class HomeAllFragment extends Fragment {
             public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
-                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(),response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
+                        Diary d = new Diary();
+                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), response.body().get(i).getWantedDate() == null ? "" : response.body().get(i).getWantedDate().toString(), response.body().get(i).getContent().getText(),response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
                     }
                     adapter.notifyDataSetChanged();
                 }

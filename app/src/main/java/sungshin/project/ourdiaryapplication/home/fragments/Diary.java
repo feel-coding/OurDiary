@@ -15,7 +15,7 @@ public class Diary {
     BigInteger seq;
     String location;
     Integer likeCount;
-    ArrayList<String> photoList = new ArrayList<>();
+    List<String> photoList = new ArrayList<>();
 
     public Diary() {
 
