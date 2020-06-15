@@ -44,7 +44,10 @@ public interface ServerApi {
     Call<List<FriendReq>> getFriendRequestList(@Query("direction") String direction, @Query("page") Integer page, @Query("page_size") Integer pageSize);
 
     @GET("/api/v1/friends")
-    Call<List<Friend>> getFriendList(@Query("page") Integer page, @Query("page_size") Integer pageSize, @Query("query") String query);
+    Call<List<Friend>> getFriendList();
+
+    @GET("/api/v1/friends")
+    Call<List<Friend>> getFriendList(@Query("query") String query);
 
     @PUT("/api/v1/users/me")
     Call<User> updateUserMe(@Body ReqUserUpdateMe reqUserUpdateMe);

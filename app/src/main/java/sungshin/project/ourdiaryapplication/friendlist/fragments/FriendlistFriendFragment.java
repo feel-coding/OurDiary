@@ -30,6 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import sungshin.project.ourdiaryapplication.Network.EachUser;
+import sungshin.project.ourdiaryapplication.Network.Friend;
 import sungshin.project.ourdiaryapplication.Network.RetrofitManager;
 import sungshin.project.ourdiaryapplication.Network.ServerApi;
 import sungshin.project.ourdiaryapplication.R;
@@ -70,6 +71,20 @@ public class FriendlistFriendFragment extends Fragment {
         friendSearchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String s) {
+                serverApi.getFriendList(s).enqueue(new Callback<List<Friend>>() {
+                    @Override
+                    public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                        friendList.clear();
+                        for (Friend friend : response.body()) {
+                            addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), friend.getNick(), friend.getName());
+                        }
+                    }
+
+                    @Override
+                    public void onFailure(Call<List<Friend>> call, Throwable t) {
+
+                    }
+                });
                 return false;
             }
 
@@ -99,6 +114,21 @@ public class FriendlistFriendFragment extends Fragment {
             }
         });
 
+        serverApi.getFriendList().enqueue(new Callback<List<Friend>>() {
+            @Override
+            public void onResponse(Call<List<Friend>> call, Response<List<Friend>> response) {
+                if (response.isSuccessful()) {
+                    for (Friend friend : response.body()) {
+                        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), friend.getNick(), friend.getName());
+                    }
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Friend>> call, Throwable t) {
+
+            }
+        });
 //        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
 //        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
 //        addItem(ResourcesCompat.getDrawable(getActivity().getResources(), R.drawable.profile_image, null), "닉네임", "본명");
