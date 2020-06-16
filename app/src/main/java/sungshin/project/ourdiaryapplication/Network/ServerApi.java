@@ -62,6 +62,9 @@ public interface ServerApi {
     @DELETE("/api/v1/diaries/{diarySeq}")
     Call<Void> deleteDiary(@Path("diarySeq")BigInteger diarySeq);
 
+    @HTTP(method = "DELETE", path = "/api/v1/friends", hasBody = true)
+    Call<Void> deleteFriend(@Body ReqFriendDelete reqFriendDelete);
+    
     @POST("/api/v1/diaries/{diarySeq}/likes")
     Call<Void> likesDiary(@Path("diarySeq")BigInteger diarySeq);
 

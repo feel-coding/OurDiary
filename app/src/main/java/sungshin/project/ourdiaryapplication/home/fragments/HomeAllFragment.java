@@ -77,7 +77,7 @@ public class HomeAllFragment extends Fragment {
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
                         Diary d = new Diary();
-                        diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), response.body().get(i).getWantedDate() == null ? "" : response.body().get(i).getWantedDate().toString(), response.body().get(i).getContent().getText(),response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
+                        diaryList.add(new Diary(response.body().get(i).getUser().getName()+ " (" + response.body().get(i).getUser().getNick() + ")", response.body().get(i).getTitle(), response.body().get(i).getWantedDate() == null ? "" : response.body().get(i).getWantedDate().toString(), response.body().get(i).getContent().getText(),response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -139,9 +139,9 @@ public class HomeAllFragment extends Fragment {
         Log.d("seqseq", "onActivityResult 들어옴");
         if(requestCode == 100 && resultCode == RESULT_OK) {
             //diaryList.clear();
-            ArrayList<Integer> selectedSeqList = data.getIntegerArrayListExtra("selectedSeq");
-            for(Integer seq : selectedSeqList) {
-                Log.d("seqseq", "" + seq + "번");
+            ArrayList<String> selectedNicknameList = data.getStringArrayListExtra("selectedNickname");
+            for(String ni : selectedNicknameList) {
+                Log.d("nickname", ni);
             }
             diaryList.clear();
             serverApi.getDiaries("ALL").enqueue(new Callback<List<sungshin.project.ourdiaryapplication.Network.Diary>>() {
@@ -150,7 +150,7 @@ public class HomeAllFragment extends Fragment {
                     if (response.isSuccessful()) {
                         List<sungshin.project.ourdiaryapplication.Network.Diary> diaries = response.body();
                         for (sungshin.project.ourdiaryapplication.Network.Diary diary : diaries) {
-                            if(selectedSeqList.contains(diary.getSeq())) {
+                            if(selectedNicknameList.contains(diary.getUser().getNick())) {
                                 Diary d = new Diary();
                                 d.setWriter(diary.getUser().getName() + " (" + diary.getUser().getNick() + ")");
                                 if(diary.getWantedDate() != null)
@@ -158,6 +158,7 @@ public class HomeAllFragment extends Fragment {
                                 else
                                     d.setDate("");
                                 d.setContent(diary.getContent().getText());
+                                d.setTitle(diary.getTitle());
                                 d.setSeq(diary.getSeq());
                                 if(diary.getPictureUrlList() != null) {
                                     ArrayList<String> urls = new ArrayList<>();
@@ -208,7 +209,7 @@ public class HomeAllFragment extends Fragment {
                 public void onResponse(Call<List<sungshin.project.ourdiaryapplication.Network.Diary>> call, Response<List<sungshin.project.ourdiaryapplication.Network.Diary>> response) {
                     if (response.isSuccessful()) {
                         for (int i = 0; i < response.body().size(); i++) {
-                            diaryList.add(new Diary(response.body().get(i).getUser().getName(), response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(), response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
+                            diaryList.add(new Diary(response.body().get(i).getUser().getName() + " (" + response.body().get(i).getUser().getNick() + ")", response.body().get(i).getTitle(), "", response.body().get(i).getContent().getText(), response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
                         }
                         adapter.notifyDataSetChanged();
                     }

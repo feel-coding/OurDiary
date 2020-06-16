@@ -96,11 +96,11 @@ public class DocumentActivity extends AppCompatActivity {
             }
         });
         String content = intent.getStringExtra("diary_content");
-        likeCount = new Integer(getIntent().getExtras().getString("diary_likecount"));
-        Log.d("정보", ">>>" + likeCount.toString());
+//        likeCount = new Integer(getIntent().getExtras().getString("diary_likecount"));
+//        Log.d("정보", ">>>" + likeCount.toString());
 
         //좋아요 수
-        like_textView.setText(likeCount.toString());
+//        like_textView.setText(likeCount.toString());
         diaryContentEt.setText(content);
 
         Glide.with(this).load("http://blogfiles.naver.net/MjAxODA0MDJfMTY2/MDAxNTIyNjEzODAzNTU2.qc9dBd0xqz8zvfwsUFBYX87tqf5iUSS7VZXxhdLOb5Ig.mqOQJ2SD3sFyXufe6lxAVhGdh30Fn_5lavWPdIf-dtEg.JPEG.wjd9286/P20170408_180850930_F6F3D0B8-C35A-4489-BEDD-638E8DDB257C.JPG").into(image1);

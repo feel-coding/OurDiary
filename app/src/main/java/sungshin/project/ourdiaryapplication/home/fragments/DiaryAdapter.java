@@ -45,7 +45,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
         holder.writer.setText(writer);
         holder.date.setText(date);
         holder.content.setText(content);
-        if(!withWhom.equals("")) {
+        if(withWhom == null) {
             holder.withWhom.setText("함께 하는 친구: " + withWhom);
         }
         else {
@@ -59,8 +59,8 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("diary_title", title);
                 intent.putExtra("diary_date", date);
                 intent.putExtra("diary_seq", seq.toString());
-                intent.putExtra("diary_likecount", likeCount.toString());
-                intent.putStringArrayListExtra("diary_photo_url", list.get(position).photoList);
+//                intent.putExtra("diary_likecount", likeCount.toString());
+//                intent.putStringArrayListExtra("diary_photo_url", list.get(position).photoList);
                 mContext.startActivity(intent);
             }
         });
