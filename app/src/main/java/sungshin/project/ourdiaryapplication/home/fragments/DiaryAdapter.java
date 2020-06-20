@@ -59,7 +59,7 @@ public class DiaryAdapter extends RecyclerView.Adapter<MyViewHolder> {
                 intent.putExtra("diary_title", title);
                 intent.putExtra("diary_date", date);
                 intent.putExtra("diary_seq", seq.toString());
-//                intent.putExtra("diary_likecount", likeCount.toString());
+                intent.putExtra("diary_likecount", likeCount.toString());
 //                intent.putStringArrayListExtra("diary_photo_url", list.get(position).photoList);
                 mContext.startActivity(intent);
             }

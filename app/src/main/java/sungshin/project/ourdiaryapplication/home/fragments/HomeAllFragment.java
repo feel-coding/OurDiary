@@ -77,6 +77,8 @@ public class HomeAllFragment extends Fragment {
                 if (response.isSuccessful()) {
                     for (int i = 0; i < response.body().size(); i++) {
                         Diary d = new Diary();
+                   //     Log.d("정보", "장소:" + response.body().get(i).getPlaceList().size());
+                   //     Log.d("정보", "사진:" + response.body().get(i).getPictureUrlList().size());
                         diaryList.add(new Diary(response.body().get(i).getUser().getName()+ " (" + response.body().get(i).getUser().getNick() + ")", response.body().get(i).getTitle(), response.body().get(i).getWantedDate() == null ? "" : response.body().get(i).getWantedDate().toString(), response.body().get(i).getContent().getText(),response.body().get(i).getSeq(),response.body().get(i).getLikeCount()));
                     }
                     adapter.notifyDataSetChanged();
